@@ -25,17 +25,19 @@ battles = dict()
 g_map = None
 hashes = 20
 ats = 20
-
+logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
 def load_game(game_file):
     '''
     this function opens a player that has a saved game
     '''
+    logging.info('Found load_game')
     with open(game_file) as f:
+
         xml_file = f.read()
     #call player map here because we are not altering most of the file.
     success, p_map = game.obj_wrapper(xml_file)
     if not success:
-        print "Failure to wrap object."
+        logging.warning('From Q2API - Obj_wrapper failed when loading game')
         exit()
     global player #only need player from file
     global stops #grab dict from main file so that we can call current stop from nomen attribute
@@ -46,13 +48,19 @@ def load_game(game_file):
 
     for itm in player.item: #constructs finds dict from loaded player.
         if itm.attrs["finds"]=='true':
+
             boss_kw = itm.attrs["boss_kw"]
+            logging.info('User has item:'+boss_kw)
             ats = str(itm.value).split(',')[0].strip() #returns ats from unicode
             hashes = str(itm.value).split(',')[1].strip() #returns hashes from unicode
             finds[boss_kw] = ats,hashes
+        else:
+            logging.info('No item found')
+    logging.info('Leaving load_game')
     return stop
 
 def load_ats_hashes(game_file):
+    logging.info('Found load_ats_hashes')
     global ats
     global hashes
     with open('../save/'+game_file) as f:
@@ -67,23 +75,25 @@ def load_ats_hashes(game_file):
     player = p_map.player[0]
     ats = player.attrs["ats"] #grab stop from player's xml file and return for game play
     hashes = player.attrs["hashes"]
+    logging.info('Leaving load_ats_hashes')
     return ats,hashes
 
 def main():
+    logging.info('entering main loop')
     global g_map
     # load game map
-    with open("..//levels//game.xml") as f:
+    with open("game.xml") as f:
         xml_file = f.read()
     success, g_map = game.obj_wrapper(xml_file) #turn into python object via Q2API
     if not success:
-        print "Failure to wrap object. Try running mk_class again."
+        logging.warning('obj_wrapper failed in main() before stops')
         exit()
-    # construct global dicts: stops, battles and
-    global stops
+    # construct global dicts: stops and battles
+    global stops # possible positions
     for stop in g_map.stop:
         nomen = stop.attrs["nomen"]
         stops[nomen] = stop
-    global battles
+    global battles # info based on the results of a battle
     for scenario in g_map.scenario: # load scenarios in to dict with ats, hashes
         ats = scenario.attrs['ats']
         hashes = scenario.attrs['hashes']
@@ -94,12 +104,15 @@ def main():
 
     # give initial stop
     stop = g_map.stop[0]
-
+    logging.info('Entering main() game loop')
     # enter game loop
     while True:
+
         describe(stop)
         command = raw_input(">")
         stop = process_command(stop, command)
+        logging.info('Command Processed')
+        logging.info(str(type(stop))) #make sure that we're passing in variable into loop!
 
 def image_to_ascii(stop):
     '''
@@ -110,14 +123,14 @@ def image_to_ascii(stop):
     '''
     global hashes
     global ats
-    image_folder = os.listdir('../ascii/')
+    image_folder = os.listdir('images/')
     img= str(stop.attrs["im"]).strip(string.whitespace)
     img_txt = img[:-4]+'.txt'
 
     play_music(stop)
     boss_kw = str(stop.attrs["nomen"]).strip(string.whitespace)
     if img_txt in image_folder:
-        with open('../ascii/'+img_txt) as f:
+        with open('images/'+img_txt) as f:
             lines = f.read()
             print "Guess ascii by pressing enter!"
 
@@ -143,9 +156,9 @@ def image_to_ascii(stop):
                         break
     else:
         #try:
-        ascii_string = ASC.image_diff('../ascii/'+img)
+        ascii_string = ASC.image_diff('images/'+img)
         print type(ascii_string)
-        fin = open('../ascii/'+img_txt,'w')
+        fin = open('../images/'+img_txt,'w')
         print "file opened"
         for i in range(len(ascii_string)):
             fin.write(ascii_string[i]+'\t')

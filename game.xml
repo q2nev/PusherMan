@@ -5,29 +5,21 @@
     </player>
     <stop nomen="intro" sd="good_ass_intro.ogg" im="chance-the-rapper.jpg">
         <desc nomen="intro">
-            Welcome to Twitter Rap Battle Warriors!!!
+                                Pusher Man
+
+
+              You have recently been forced into being a drug mule.
+
+
+            For every person you come across in the
+
+
             To learn more about game play type "how" and press enter.
             For now, I'll assume you've played this before!
             Start the game (start) or load (load) a previous game?
         </desc>
-        <desc2>
-            Raps just make me anxious and acid made me crazy
-            Them squares just made me looser and that wax just made me lazy
-            And I still make this song, and I'mma make another
-            If you ever actually hit me, better watch out for my brother
-            Better bet I'd take that deal, gotta watch out for my mother
-            Get a watch with all that glitters, come in clutters, different colors
-            Been a baller, benford, butlers, chauffeurs, hit a stain-er, did I stutter?
-            Did a ton of drugs and did better than all my Alma mater
-            Motherfucker money dance, hundreds zan, gallon lean
-            Make a joke bout Leno's hair then piggy back on Fallon's spleen
-            Balancing on sporadicity and fucking pure joy
-            Nightly searches for a bed and I just came off tour with Troy
-            But I can't complain I got some motherfucking business
-            How many lab partners have I fucked since I got suspended?
-            Mr. Bennett, you done did it, you did it, you did it
-            You did a good ass job, you did a good ass job
-            And I'm good
+        <desc2 nomen="intro">
+
         </desc2>
 
         <place nomen="start" dir="s" link="parkchester" fight="false" im="" sd="">
@@ -74,6 +66,7 @@
             <desc2></desc2>
         </item>
     </stop>
+
     <stop nomen="parkchester" link="local" im="dmx.jpg" sd="">
         <desc nomen="parkchester">
             This is our first subway station. Welcome to the Bronx! bitch.
@@ -114,9 +107,10 @@
         </place>
         <place nomen="bum" dir="left" link="bum" fight="true" im="bearded_bum.jpg" sd="">
             <desc nomen="bum" dir="left" link="bum" fight="true" im="bearded_bum.jpg" sd="">
-                There's a smelly bum.
+                       There's a smelly bum.
             </desc>
             <desc2>
+                Best way to lose your dope is a smelly ass bum.
 
             </desc2>
         </place>
@@ -125,7 +119,9 @@
                 Kennedy's Fried Chicken.
             </desc>
             <desc2>
-
+                    Chirp, chirp mother fucker.
+                You think this is food poisoning?
+                          Take a bite!
             </desc2>
         </item>
         <item nomen="pigeon" dir="up" fight="true" im="" sd="">
@@ -159,15 +155,23 @@
 
         </item>
     </stop>
+
     <stop nomen="outside" link="outside" im="" sd="">
         <desc nomen="endgame">
                 Death by driveby.
         </desc>
+        <rapper nomen="">
+
+        </rapper>
     </stop>
+
     <stop nomen="death" im="grimreaper.jpg" sd="">
         <desc nomen="death">
             I don't think I've ever had death taste this good. Oh my god, the fucking chicken!
         </desc>
+        <desc2 nomen="death">
+
+        </desc2>
         <place nomen="hell" dir="d" fight="true">
             <desc nomen="hell" dir="d" fight="true">
 
@@ -178,20 +182,26 @@
 
             </desc>
         </place>
-    </stop>
-    <stop nomen="3av" dir="off" link="express" im="">
-        <desc nomen="3av" dir="off">
+        <rapper nomen="" im="" sd="">
+            <desc nomen="">
 
+            </desc>
+        </rapper>
+    </stop>
+
+    <stop nomen="3av" dir="off" link="express" im="" sd="">
+        <desc nomen="3av" dir="off">
+            You're at the 3rd Avenue Station.
         </desc>
         <desc2 nomen="3av" dir="off">
-
+            You can get back on the
         </desc2>
         <place nomen="tracks" dir="now" link="tracks" fight="true" im="bearded_bum.jpg" sd="green_eyes.ogg">
             <desc nomen="tracks" dir="now" fight="true">
                 It's dangerous down on the tracks. Dead bodies. Rats.
             </desc>
             <desc2>
-
+                You can always
             </desc2>
         </place>
         <place nomen="local" dir="ahead" link="local" fight="true" im="" sd="">
@@ -199,17 +209,26 @@
                 The Local six train is here!
             </desc>
             <desc2>
+                You need at least 20 @s to get back on the train.
 
+                There's a cop on this train! If you have more than 20 hashes he's gonna waste you!
             </desc2>
         </place>
         <place nomen="express" dir="behind" link="express"  fight="true" im="" sd="">
             <desc nomen="express" dir="behind" fight="true">
                 The Express Six Train is here!
             </desc>
-            <desc2></desc2>
+            <desc2>
+                You need at least 25 @s to get on the train.
+            </desc2>
         </place>
+        <rapper nomen="dmx" im="" sd="">
+            <desc>
+
+            </desc>
+        </rapper>
     </stop>
-    <stop nomen="125th St." dir="off" link="express" im="harlem.jpg">
+    <stop nomen="125th St." dir="off" link="express" im="harlem.jpg" territory="latin kings">
         <desc nomen="125th St." dir="off" link="express" im="harlem.jpg">
 
         </desc>
@@ -240,6 +259,7 @@
 
             </desc2>
         </place>
+        <item ></item>
     </stop>
     <stop nomen="union square" im="needle.jpg" sd="">
         <desc nomen="alive">YOU WIN! Hop up in your hipster palace!</desc>
