@@ -55,11 +55,7 @@ def main():
     global player
     player = g_map.player[0]
     global extras
-    extras = {
-        'stop_desc':True,
-        'stop_name':True,
-        'sound':True,
-    }
+    extras = ['stop_desc','stop_name','sound']
     print extras
     logging.info('Entering main() game loop')
     # enter game loop
@@ -82,15 +78,15 @@ def describe(stop,extras):
     '''
     global desc_ct
     if len(extras)>0:
-        if 'stop_name' in extras.keys():
+        if 'stop_name' in extras:
             print stop.attrs["nomen"].upper(), "STATION"
-        if 'stop_desc' in extras.keys():
+        if 'stop_desc' in extras:
             print stop.desc[desc_ct].value
-        if 'ascii' in extras.keys():
+        if 'ascii' in extras:
             image_to_ascii(stop,False)
-        if 'ascii_w_sound' in extras.keys():
+        if 'ascii_w_sound' in extras:
             image_to_ascii(stop,True)
-        if 'sound' in extras.keys():
+        if 'sound' in extras:
             play_music(stop)
     else:
         print stop.attrs["nomen"].upper(), "STATION"
@@ -109,7 +105,7 @@ def process_command(stop, command): #can also pass stop!
     global hashes
     global ats
     global extras
-    extras = {}
+    extras = []
 
     places, items, fights, descs = get_data(stop)
     logging.info(descs)
@@ -122,14 +118,14 @@ def process_command(stop, command): #can also pass stop!
         verb, noun = parse(command)
 
         if verb == "go":
-            go_command(stop,items,places,noun)
-            return stop
+            return go_command(stop,places,noun)
 
         elif verb == "describe":
-            describe_command(stop,items,places,noun)
+            return describe_command(stop,items,places,noun)
 
         elif verb == "load": #loads game from save directory
             load_command()
+            return stop
 
         elif verb == "score": #score board functionality
             games = os.listdir("../save/")
@@ -323,10 +319,10 @@ def enter_command(stop,descs):
         desc_ct = 0
     else: # the beginning of the descs
         desc_ct=0
-    extras = {'stop_desc':True}
+    extras = ['stop_desc']
     return stop
 
-def go_command(stop,items,places,noun):
+def go_command(stop,places,noun):
     global desc_ct
     global extras
     pl = places.get(noun)
@@ -334,13 +330,11 @@ def go_command(stop,items,places,noun):
         desc_ct = 0
         link = pl.attrs["link"]
         stop = stops[link]
+        extras =['stop_name','stop_desc']
         return stop
     else:
         print "You can't go there."
-        extras ={
-            'stop_name':True,
-            'stop_desc':True,
-        }
+        extras =['stop_name','stop_desc']
         return stop
 
 def describe_command(stop,items,places,noun):
@@ -471,15 +465,15 @@ def get_data(stop): #can also pass stop and will have same result!
 
     for pl in stop.place:
         nomen = pl.attrs["nomen"]
-        dirs = pl.attrs["dir"]
-        fight = pl.attrs["fight"]
+        dirs = pl.attrs.get("dir")
+        fight = pl.attrs.get("fight", "False")
         places[nomen] = pl
         places[dirs] = pl
         fights[nomen] = fight
 
     for itm in stop.item:
         nomen = itm.attrs["nomen"]
-        fight = itm.attrs["fight"]
+        fight = itm.attrs.get("fight", "False")
         items[nomen] = itm
         fights[nomen] = fight
 
