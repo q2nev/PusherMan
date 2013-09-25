@@ -258,7 +258,6 @@ def process_command(stop, command): #can also pass stop!
             print "What?! (Exit Prompt Error)"
             process_command(stop,'exit')
 
-
     elif verb =="get":
         pass
 
@@ -273,14 +272,17 @@ def image_to_ascii(stop,mutesound):
     img:
     img_txt: possible text string that would've already been generated
     '''
+    logging.debug('image_to_ascii function entered.')
     global hashes
     global ats
     image_folder = os.listdir('images/')
+    logging.debug('Image folder found.')
     img= str(stop.attrs["im"]).strip(string.whitespace)
     img_txt = img[:-4]+'.txt'
-
+    logging.info(img_txt)
     play_music(stop)
     boss_kw = str(stop.attrs["nomen"]).strip(string.whitespace)
+    #shorten this in game_play2
     if img_txt in image_folder:
         with open('images/'+img_txt) as f:
             lines = f.read()
@@ -381,7 +383,7 @@ def get_data(stop): #can also pass stop and will have same result!
         d_ct = int(d.attrs["descnum"])
         descs[d_ct] = d.value
 
-    return places, items, fights
+    return places, items, fights, descs
 
 def load_game(game_file):
     '''

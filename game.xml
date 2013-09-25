@@ -4,7 +4,7 @@
         <item boss_kw="pocket sand" finds="false">pocket sand</item>
         <item boss_kw="chicken" finds="false">chicken</item>
     </player>
-    <stop nomen="intro" sd="good_ass_intro.ogg" im="chance-the-rapper.jpg">
+    <stop nomen="intro" sd="pusherman.ogg" im="chance-the-rapper.jpg">
         <desc nomen="intro" descnum="1">
  *******                  **                            ****     ****
 /**////**                /**                            /**/**   **/**
