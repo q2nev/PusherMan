@@ -53,12 +53,12 @@
 
         </place>
         <place nomen="start" dir="s" link="start" fight="false" im="" sd="">
-            <desc nomen="next" dir="s">
+            <desc nomen="next" dir="s" descnum="1">
                 Get on down on the train! We have a journey to make!
             </desc>
-            <desc2>
-
-            </desc2>
+            <desc nomen="start" dir="s" descnum="2">
+                The time's clicking!
+            </desc>
         </place>
         <item nomen="how to" dir="how to" link="" fight="false" im="" sd="">
             <desc nomen="how to" dir="how to" link="" false="">
@@ -86,15 +86,22 @@
                 Are you a chump or player?! If you're not a bitch, twitter battle your way to BK.
                 But if you gamble away all your stash, you'll be screwed!
             </desc>
-            <desc2></desc2>
+            <desc descnum="2">
+
+            </desc>
         </item>
         <item nomen="call" dir="sky" link="" fight="false" im="" sd="">
-            <desc nomen="call" dir="sky" link="" fight="false" im="" sd="">
+            <desc nomen="call" dir="sky" link="" fight="false" descnum="1" im="" sd="">
                 You've got a cell phone to reup your stash if you lose yours,
                 But be careful, it could be your lifeline...
             </desc>
-        </item>
+            <desc descnum="2">
 
+            </desc>
+            <desc descnum="3" nomen="call" dir="sky" link="" fight="false">
+
+            </desc>
+        </item>
     </stop>
 
     <stop nomen="parkchester" im="dmx.jpg" sd="">

@@ -7,11 +7,11 @@ import time
 import logging
 import pygame.mixer as mix
 import string
-import Q2API.xml.mk_class as MK
+import Q2logging
 import sys
 logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
 
-sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/Twitter_Warriors')
+sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/PusherMan')
 
 stops = dict()
 fights = dict()
