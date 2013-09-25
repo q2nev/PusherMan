@@ -5,7 +5,7 @@
     <ignored path="PusherMan.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/../RapBattle/strip.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380038777868" ignored="false" />
-    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380129518141" ignored="false" />
+    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380130586569" ignored="false" />
     <file path="/a.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380040219281" ignored="false" />
     <file path="/game.xml" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380127274481" ignored="false" />
     <file path="/ascii.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380125800319" ignored="false" />
@@ -43,7 +43,7 @@
       <file leaf-file-name="game_play.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game_play.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="41" selection-start="4192" selection-end="4192" vertical-scroll-proportion="0.29882812">
+            <state line="77" column="52" selection-start="2172" selection-end="2172" vertical-scroll-proportion="0.36523438">
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -369,7 +369,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1357" y="-9" width="1698" height="1020" extended-state="1" />
+    <frame x="1357" y="-9" width="1698" height="1020" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -380,7 +380,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32978722" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32978722" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -567,7 +567,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/game_play.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="41" selection-start="4192" selection-end="4192" vertical-scroll-proportion="0.29882812">
+        <state line="77" column="52" selection-start="2172" selection-end="2172" vertical-scroll-proportion="0.36523438">
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

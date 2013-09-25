@@ -25,8 +25,7 @@ battles = dict()
 g_map = None
 hashes = 20
 ats = 20
-
-
+desc_ct = 0
 
 def main():
     logging.info('entering main loop')
@@ -66,72 +65,6 @@ def main():
         logging.info('Command Processed')
         logging.info(str(type(stop))) #make sure that we're passing in variable into loop!
 
-def image_to_ascii(stop):
-    '''
-    separate image_to_ascii function to have guessing game.
-    image_folder: where the images are stored
-    img:
-    img_txt: possible text string that would've already been generated
-    '''
-    global hashes
-    global ats
-    image_folder = os.listdir('images/')
-    img= str(stop.attrs["im"]).strip(string.whitespace)
-    img_txt = img[:-4]+'.txt'
-
-    play_music(stop)
-    boss_kw = str(stop.attrs["nomen"]).strip(string.whitespace)
-    if img_txt in image_folder:
-        with open('images/'+img_txt) as f:
-            lines = f.read()
-            print "Guess ascii by pressing enter!"
-
-            for l in lines.split('\t'):
-
-                while not msvcrt.kbhit():
-                    time.sleep(1.5)
-                    break
-                print l
-
-                while msvcrt.kbhit():
-                    msvcrt.getch()
-                    play_music(stop,False)
-                    print "-----------------------------------------------"
-                    print "What's your guess?"
-                    boss_guess = raw_input(">>")
-
-                    if boss_guess == boss_kw:
-                        print "You guessed right! Here are 5 hashes and ats for your prowess!"
-                        hashes += 5
-                        ats += 5
-
-                        break
-    else:
-        #try:
-        ascii_string = ASC.image_diff('images/'+img)
-        print type(ascii_string)
-        fin = open('../images/'+img_txt,'w')
-        print "file opened"
-        for i in range(len(ascii_string)):
-            fin.write(ascii_string[i]+'\t')
-        fin.close()
-        #except:
-        #    print "Problem with current image."
-
-def play_music(stop, start=True):
-    #sound_delay = str(stop.attrs["delay"]).strip(string.whitespace)
-    mix.init()
-    sound_file = str(stop.attrs["sd"]).strip(string.whitespace)
-    if sounds.get(sound_file,False) == True:
-        return
-    else:
-        sounds[sound_file] = True
-        sound = mix.Sound(sound_file)
-        if start:
-            sound.play()
-        else:
-            sound.stop()
-
 def describe(stop,mutename=False,muteascii=False, mutesound=False, descnum=1):
     '''
     stop: current stop
@@ -139,18 +72,14 @@ def describe(stop,mutename=False,muteascii=False, mutesound=False, descnum=1):
     muteascii: don't print the ascii
     mutesound: don't play the song
     descnum: current description
-    print the name of the current station
     '''
-
+    global desc_ct
     if mutename == False:
         print stop.attrs["nomen"].upper(), "STATION"
         print stop.desc[descnum].value
 
     if muteascii == False:
-        image_to_ascii(stop)
-
-    if mutesound == False:
-        pass
+        image_to_ascii(stop,mutesound=False)
 
     return stop,mutename,muteascii,mutesound,descnum
 
@@ -162,6 +91,7 @@ def process_command(stop, command): #can also pass stop!
     - Twitter Game play : if desc or stop, or item contains name in fight dict.
 
     '''
+    global desc_ct
     global finds
     global hashes
     global ats
@@ -335,23 +265,83 @@ def process_command(stop, command): #can also pass stop!
         print "unrecognized command"
     return stop
 
+def image_to_ascii(stop,mutesound):
+    '''
+    separate image_to_ascii function to have guessing game.
+    image_folder: where the images are stored
+    img:
+    img_txt: possible text string that would've already been generated
+    '''
+    global hashes
+    global ats
+    image_folder = os.listdir('images/')
+    img= str(stop.attrs["im"]).strip(string.whitespace)
+    img_txt = img[:-4]+'.txt'
+
+    play_music(stop)
+    boss_kw = str(stop.attrs["nomen"]).strip(string.whitespace)
+    if img_txt in image_folder:
+        with open('images/'+img_txt) as f:
+            lines = f.read()
+            print "Guess ascii by pressing enter!"
+
+            for l in lines.split('\t'):
+
+                while not msvcrt.kbhit():
+                    time.sleep(1.5)
+                    break
+                print l
+
+                while msvcrt.kbhit():
+                    msvcrt.getch()
+                    play_music(stop,False)
+                    print "-----------------------------------------------"
+                    print "What's your guess?"
+                    boss_guess = raw_input(">>")
+
+                    if boss_guess == boss_kw:
+                        print "You guessed right! Here are 5 hashes and ats for your prowess!"
+                        hashes += 5
+                        ats += 5
+
+                        break
+    else:
+        #try:
+        ascii_string = ASC.image_diff('images/'+img)
+        print type(ascii_string)
+        fin = open('../images/'+img_txt,'w')
+        print "file opened"
+        for i in range(len(ascii_string)):
+            fin.write(ascii_string[i]+'\t')
+        fin.close()
+        #except:
+        #    print "Problem with current image."
+
+def play_music(stop, start=True):
+    #sound_delay = str(stop.attrs["delay"]).strip(string.whitespace)
+    mix.init()
+    sound_file = str(stop.attrs["sd"]).strip(string.whitespace)
+    if sounds.get(sound_file,False) == True:
+        return
+    else:
+        sounds[sound_file] = True
+        sound = mix.Sound(sound_file)
+        if start:
+            sound.play()
+        else:
+            sound.stop()
+
 def twitter_data(boss_kw):
     global hashes
     global ats
-
     print "It's a glare from", boss_kw
     call_prompt = raw_input("What's your call against this mean muggin?!")
-
     #start twitter game here
     hash_diff, at_diff = battle(boss_kw,call_prompt)
-
-
     finds[boss_kw] = hash_diff,at_diff
     #maybe use get function here to define
-
     hashes += hash_diff
     ats += at_diff
-
     if hashes <0 or ats<0: #breaks if either returns zero
         print "You're as dead as a doornail."
         print "Would you like to restart?"
