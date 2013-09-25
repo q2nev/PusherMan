@@ -13,10 +13,10 @@ logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
 
 sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/Twitter_Warriors')
 
-stops = dict()
-fights = dict()
-items = dict()
-finds = dict()
+#fights, places and items made in get_data function
+
+stops = dict() #key: nomen value: stop
+finds = dict() #items the player has found
 sounds= dict() #keep track of which sounds have been played
 asciis = dict()
 battles = dict()
@@ -26,7 +26,60 @@ g_map = None
 hashes = 20
 ats = 20
 
+def load_game(game_file):
+    '''
+    this function opens a player that has a saved game
+    '''
+    logging.info('Found load_game')
+    with open(game_file) as f:
+        xml_file = f.read()
+    #call player map here because we are not altering most of the file.
+    success, p_map = game.obj_wrapper(xml_file)
+    if not success:
+        logging.warning('From Q2API - Obj_wrapper failed when loading game')
+        exit()
+    global player #only need player from file
+    global stops #grab dict from main file so that we can call current stop from nomen attribute
 
+    player = p_map.player[0] #assign player via Q2API.xml.mk_class syntax
+    nomen = player.attrs["stop"] #grab stop from player's xml file and return for game play
+    stop = stops[nomen]
+
+    for itm in player.item: #constructs finds dict from loaded player.
+        if itm.attrs["finds"]=='true':
+
+            boss_kw = itm.attrs["boss_kw"]
+            logging.info('User has item:'+boss_kw)
+            ats = str(itm.value).split(',')[0].strip() #returns ats from unicode
+            hashes = str(itm.value).split(',')[1].strip() #returns hashes from unicode
+            finds[boss_kw] = ats,hashes
+        else:
+            logging.info('No item found')
+    logging.info('Leaving load_game')
+    return stop
+
+def load_ats_hashes(game_file):
+    '''
+    Loads ats and hashes from player given profile.
+
+    '''
+    logging.info('Found load_ats_hashes')
+    global ats
+    global hashes
+    with open('../save/'+game_file) as f:
+        xml_file = f.read()
+
+    success, p_map = game.obj_wrapper(xml_file)
+    #call player map here because we are not altering most of the file.
+    if not success:
+        print "Failure to wrap object."
+        exit()
+    global player #only need player from file
+    player = p_map.player[0]
+    ats = player.attrs["ats"] #grab stop from player's xml file and return for game play
+    hashes = player.attrs["hashes"]
+    logging.info('Leaving load_ats_hashes')
+    return ats,hashes
 
 def main():
     logging.info('entering main loop')
@@ -132,27 +185,14 @@ def play_music(stop, start=True):
         else:
             sound.stop()
 
-def describe(stop,mutename=False,muteascii=False, mutesound=False, descnum=1):
-    '''
-    stop: current stop
-    mutename: don't print the name of the current station
-    muteascii: don't print the ascii
-    mutesound: don't play the song
-    descnum: current description
-    print the name of the current station
-    '''
-
-    if mutename == False:
+def describe(stop,mute=False,desc_num=0):
+    # print the name of the current station
+    if mute == False:
         print stop.attrs["nomen"].upper(), "STATION"
-        print stop.desc[descnum].value
+        print stop.desc[desc_num].value
 
-    if muteascii == False:
-        image_to_ascii(stop)
-
-    if mutesound == False:
-        pass
-
-    return stop,mutename,muteascii,mutesound,descnum
+    image_to_ascii(stop)
+    return stop
 
 def process_command(stop, command): #can also pass stop!
     '''
@@ -165,11 +205,11 @@ def process_command(stop, command): #can also pass stop!
     global finds
     global hashes
     global ats
+
     places, items, fights = get_data(stop)
     verb, noun = parse(command)
-    if verb =="":
-        describe(stop,mutename=True)
-    elif verb == "go":
+
+    if verb == "go":
         pl = places.get(noun)
         if pl:
             link = pl.attrs["link"]
@@ -386,101 +426,6 @@ def get_data(stop): #can also pass stop and will have same result!
 
     return places, items, fights
 
-def load_game(game_file):
-    '''
-    this function opens a player that has a saved game
-    '''
-    logging.info('Found load_game')
-    with open(game_file) as f:
-        xml_file = f.read()
-
-    #call player map here
-    success, p_map = game.obj_wrapper(xml_file)
-    if not success:
-        logging.warning('From Q2API - Obj_wrapper failed when loading game')
-        exit()
-    global player #only need player from file
-    global stops #grab dict from main file so that we can call current stop from nomen attribute
-
-    player = p_map.player[0] #assign player via Q2API.xml.mk_class syntax
-    nomen = player.attrs["stop"] #grab stop from player's xml file and return for game play
-    stop = stops[nomen]
-
-    for itm in player.item: #constructs finds dict from loaded player.
-        if itm.attrs["finds"]=='true':
-
-            boss_kw = itm.attrs["boss_kw"]
-            logging.info('User has item:'+boss_kw)
-            ats = str(itm.value).split(',')[0].strip() #returns ats from unicode
-            hashes = str(itm.value).split(',')[1].strip() #returns hashes from unicode
-            finds[boss_kw] = ats,hashes
-        else:
-            logging.info('No item found')
-    logging.info('Leaving load_game')
-    return stop
-
-def load_ats_hashes(game_file):
-    '''
-    Loads ats and hashes from player given profile.
-
-    '''
-    logging.info('Found load_ats_hashes')
-    global ats
-    global hashes
-    with open('../save/'+game_file) as f:
-        xml_file = f.read()
-
-    success, p_map = game.obj_wrapper(xml_file)
-    #call player map here because we are not altering most of the file.
-    if not success:
-        print "Failure to wrap object."
-        exit()
-    global player #only need player from file
-    player = p_map.player[0]
-    ats = player.attrs["ats"] #grab stop from player's xml file and return for game play
-    hashes = player.attrs["hashes"]
-    logging.info('Leaving load_ats_hashes')
-    return ats,hashes
-
-def parse(cmd):
-    cmd = one_word_cmds.get(cmd, cmd)
-    print cmd
-    words = cmd.split()
-    verb = words[0]
-    verb = translate_verb.get(verb, "BAD_VERB")
-    noun = " ".join(words[1:])
-    noun = translate_noun.get(noun, noun)
-    return verb, noun
-
-def battle(boss_kw, call_prompt):
-    '''
-    Input: boss_kw and prompt for 'call' or 'gang call'
-    Output: hashes_diff, ats_diff
-    '''
-    boss_ats = TW.retweets()[1]
-    boss_hashes = TW.retweets()[2]
-    player_ats = TW.recent_tweets([call_prompt],1)[1]
-    player_hashes = TW.recent_tweets([call_prompt],1)[2]
-    ats_diff = player_ats - boss_ats
-    hashes_diff = player_hashes - boss_hashes
-    print "Hash from battle:", hashes_diff
-    print "Holler-Ats from battle:",ats_diff
-    if ats_diff > 0:
-        ats_winner = 'player'
-    elif ats_diff == 0:
-        ats_winner = 'equal'
-    else:
-        ats_winner = 'boss'
-
-    if hashes_diff >0:
-        hashes_winner = 'player'
-    elif hashes_diff ==0:
-        hashes_winner = 'equal'
-    else:
-        hashes_winner = 'boss'
-    print battles[(ats_winner,hashes_winner)].desc[0].value
-    return hashes_diff, ats_diff
-
 translate_verb = {"g" : "go","go" : "go","walk" : "go","get" : "go","jump" : "go",
                   "t" : "take", "take" : "take","grab" : "take",
                   "l":"describe","look":"describe","describe" : "describe","desc":"describe",
@@ -516,6 +461,47 @@ one_word_cmds = {"n" : "describe n","s" : "describe s","e" : "describe e","w" : 
                  "commands":"commands",
                  }
 
+def parse(cmd):
+    cmd = one_word_cmds.get(cmd, cmd)
+    print cmd
+    words = cmd.split()
+    verb = words[0]
+    verb = translate_verb.get(verb, "BAD_VERB")
+    noun = " ".join(words[1:])
+    noun = translate_noun.get(noun, noun)
+    return verb, noun
 
+def retweets(): #returns ats and hashes of most recent retweet
+    tweets, ats, hashes= TW.recent_tweets(['RT'], 1)
+    return tweets, ats, hashes
+
+def battle(boss_kw, call_prompt):
+    '''
+    Input: boss_kw and prompt for 'call' or 'gang call'
+    Output:
+    '''
+    boss_ats = retweets()[1]
+    boss_hashes = retweets()[2]
+    player_ats = TW.recent_tweets([call_prompt],1)[1]
+    player_hashes = TW.recent_tweets([call_prompt],1)[2]
+    ats_diff = player_ats - boss_ats
+    hashes_diff = player_hashes - boss_hashes
+    print "Hash from battle:", hashes_diff
+    print "Holler-Ats from battle:",ats_diff
+    if ats_diff > 0:
+        ats_winner = 'player'
+    elif ats_diff == 0:
+        ats_winner = 'equal'
+    else:
+        ats_winner = 'boss'
+
+    if hashes_diff >0:
+        hashes_winner = 'player'
+    elif hashes_diff ==0:
+        hashes_winner = 'equal'
+    else:
+        hashes_winner = 'boss'
+    print battles[(ats_winner,hashes_winner)].desc[0].value
+    return hashes_diff, ats_diff
 
 main()

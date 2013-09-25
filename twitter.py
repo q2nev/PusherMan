@@ -54,3 +54,7 @@ def recent_tweets(term,amt):
     except TwitterSearchException as e: # take care of all those ugly errors if there are some
         #print(e)
         print "Over-exerting Twittter!! Come back in a few, you bad, bad warrior."
+
+def retweets(): #returns ats and hashes of most recent retweet
+    tweets, ats, hashes= recent_tweets(['RT'], 1)
+    return tweets, ats, hashes
