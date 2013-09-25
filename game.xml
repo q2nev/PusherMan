@@ -4,37 +4,35 @@
         <item boss_kw="pocket sand" finds="false">pocket sand</item>
         <item boss_kw="chicken" finds="false">chicken</item>
     </player>
-    <stop nomen="intro" sd="pusherman.ogg" im="chance-the-rapper.jpg">
-        <desc nomen="intro" descnum="1">
- *******                  **                            ****     ****
-/**////**                /**                            /**/**   **/**
-/**   /** **   **  ******/**       *****  ******        /**//** ** /**  ******   *******
-/******* /**  /** **//// /******  **///**//**//*        /** //***  /** //////** //**///**
-/**////  /**  /**//***** /**///**/******* /** /         /**  //*   /**  *******  /**  /**
-/**      /**  /** /////**/**  /**/**////  /**           /**   /    /** **////**  /**  /**
-/**      //****** ****** /**  /**//******/***           /**        /**//******** ***  /**
-//        ////// //////  //   //  ////// ///            //         //  //////// ///   //
+    <stop nomen="intro" sd="pusherman.ogg" im="chicken.jpg">
+        <desc nomen="intro" >
+     *******                  **                            ****     ****
+    /**////**                /**                            /**/**   **/**
+    /**   /** **   **  ******/**       *****  ******        /**//** ** /**  ******   *******
+    /******* /**  /** **//// /******  **///**//**//*        /** //***  /** //////** //**///**
+    /**////  /**  /**//***** /**///**/******* /** /         /**  //*   /**  *******  /**  /**
+    /**      /**  /** /////**/**  /**/**////  /**           /**   /    /** **////**  /**  /**
+    /**      //****** ****** /**  /**//******/***           /**        /**//******** ***  /**
+    //        ////// //////  //   //  ////// ///            //         //  //////// ///   //
 
                   By Nevin Watkins and the Q2 Project R Crew
         </desc>
-        <desc nomen="intro" descnum="2">
+        <desc nomen="intro" >
             You have recently been forced into being a drug mule
 
         by the youngest gang in your neighborhood: the Domenech Brothers.
 
-            To learn more about game play type at any point type "how" and press enter.
+  To learn more about game play type at any point type "how" and press enter.
 
-            For more info type enter at any point to reveal
+       For more info just press enter while being prompted type enter.
 
-                If you've saved your game previously, you can "load" your game.
+       If you've saved your game previously, you can "load" your game.
 
                             Otherwise type "start"!
 
             Start the game (start) or load (load) a previous game?
-
-
         </desc>
-        <desc nomen="intro" descnum="3">
+        <desc nomen="intro" >
             In order to work your way up the ranks, you have to make it to
 
                         Brooklyn on the 4,5,6 train unscathed.
@@ -47,19 +45,20 @@
 
             And with all your hashes (or hashtags) and reputation in place.
         </desc>
+        <place nomen="start" dir="s" link="start" fight="false" im="" sd="">
+            <desc nomen="next" dir="s" >
+                Get on down on the train! We have a journey to make!
+            </desc>
+            <desc nomen="start" dir="s" >
+                The time's clicking!
+            </desc>
+        </place>
     </stop>
     <stop nomen="start">
         <place nomen="subway" link="parkchester">
 
         </place>
-        <place nomen="start" dir="s" link="start" fight="false" im="" sd="">
-            <desc nomen="next" dir="s" descnum="1">
-                Get on down on the train! We have a journey to make!
-            </desc>
-            <desc nomen="start" dir="s" descnum="2">
-                The time's clicking!
-            </desc>
-        </place>
+
         <item nomen="how to" dir="how to" link="" fight="false" im="" sd="">
             <desc nomen="how to" dir="how to" link="" false="">
                 Welcome to this sweet-ass game!

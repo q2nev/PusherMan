@@ -9,6 +9,7 @@ import pygame.mixer as mix
 import string
 import Q2logging
 import sys
+
 logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
 
 sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/PusherMan')
@@ -55,34 +56,46 @@ def main():
 
     # give initial stop
     stop = g_map.stop[0]
+    extras = dict()
     logging.info('Entering main() game loop')
 
     # enter game loop
     while True:
-        describe(stop)
+
+        describe(stop, extras)
         command = raw_input(">")
         stop = process_command(stop, command) #stop here is a tuple
         logging.info('Command Processed')
         logging.info(str(type(stop))) #make sure that we're passing in variable into loop!
 
-def describe(stop,mute_name=False,mute_ascii=False, mute_sound=False, descnum=1):
+def describe(stop,extras):
     '''
     stop: current stop
-    mutename: don't print the name of the current station
-    muteascii: don't print the ascii
-    mute_sound: don't play the song
+    stop_name: don't print the name of the current station
+    stop_desc: don't print out the stops name
+    ascii: don't print the ascii
+    sound: don't play the song
     descnum: current description
     '''
-    global desc_ct
-    if mute_name == False:
+    if len(extras)>0:
+        global desc_ct
+        if 'stop_desc' in extras.keys():
+            pass
+        if 'stop_name' in extras.keys():
+            pass
+        if 'ascii' in extras.keys():
+            pass
+        if 'sound' in extras.keys():
+            pass
+        
+    else:
         print stop.attrs["nomen"].upper(), "STATION"
-        print stop.desc[descnum].value
-        desc_ct+=1
+        print stop.desc[0]
 
-    if mute_ascii == False:
-        image_to_ascii(stop,mute_sound=False)
+    if desc_ct:
+        print stop.desc[desc_ct].value
 
-    return stop,mute_name,mute_ascii,mute_sound,descnum
+    return stop
 
 def process_command(stop, command): #can also pass stop!
     '''
@@ -98,16 +111,19 @@ def process_command(stop, command): #can also pass stop!
     global ats
 
     places, items, fights, descs = get_data(stop)
+    logging.info(descs)
     verb, noun = parse(command)
     if verb =="":
-        desc_ct +=1
         max_desc = descs.values().max()
         if max_desc > desc_ct:
             print descs[desc_ct]
         else:
             desc_ct=1
+            print "You've seen all the descriptions!"
             print descs[desc_ct]
-        return stop,True
+        desc_ct +=1
+        return stop,desc_ct
+
     elif verb == "go":
         pl = places.get(noun)
         if pl:
@@ -216,9 +232,7 @@ def process_command(stop, command): #can also pass stop!
         for itm in player.item:
             if itm.attrs["boss_kw"] in finds.keys():
                 itm.attrs["finds"] = 'true'
-
         save_file = raw_input("enter a name for the save file>")
-
         game_data = g_map.flatten_self()
         with open("..\\save\\" + save_file + ".xml", "w+") as f:
             f.write(game_data)
@@ -300,13 +314,13 @@ def image_to_ascii(stop,mute_sound=False):
             for l in lines.split('\t'):
 
                 while not msvcrt.kbhit():
-                    time.sleep(1.5)
+                    time.sleep(.2)
                     break
                 print l
 
                 while msvcrt.kbhit():
                     msvcrt.getch()
-                    play_music(stop,True)
+                    play_music(stop,mute_sound=True)
                     print "-----------------------------------------------"
                     print "What's your guess?"
                     boss_guess = raw_input(">>")
@@ -321,7 +335,7 @@ def image_to_ascii(stop,mute_sound=False):
         #try:
         ascii_string = ASC.image_diff('images/'+img)
         print type(ascii_string)
-        fin = open('../images/'+img_txt,'w')
+        fin = open('images/'+img_txt,'w')
         print "file opened"
         for i in range(len(ascii_string)):
             fin.write(ascii_string[i]+'\t')
@@ -373,8 +387,9 @@ def get_data(stop): #can also pass stop and will have same result!
     fights = dict()
     items = dict()
     descs = dict()
+    d_ct=0
 
-    for pl in stop.place:
+    for pl in stop[0].place:
         nomen = pl.attrs["nomen"]
         dirs = pl.attrs["dir"]
         fight = pl.attrs["fight"]
@@ -382,15 +397,15 @@ def get_data(stop): #can also pass stop and will have same result!
         places[dirs] = pl
         fights[nomen] = fight
 
-    for itm in stop.item:
+    for itm in stop[0].item:
         nomen = itm.attrs["nomen"]
         fight = itm.attrs["fight"]
         items[nomen] = itm
         fights[nomen] = fight
 
-    for d in stop.desc:
-        d_ct = int(d.attrs["descnum"])
+    for d in stop[0].desc:
         descs[d_ct] = d.value
+        d_ct+=1
 
     return places, items, fights, descs
 
@@ -523,7 +538,5 @@ one_word_cmds = {"n" : "describe n","s" : "describe s","e" : "describe e","w" : 
                  "score":"score board",
                  "commands":"commands",
                  }
-
-
 
 main()
