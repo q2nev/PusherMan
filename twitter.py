@@ -1,5 +1,3 @@
-
-
 import os
 from TwitterSearch import *
 import string
@@ -15,10 +13,13 @@ def keywords(name):
             tweet.append(word)
     except:
         tweet.append(name)
-
     return tweet
 
-def recent_tweets(term,amt): #takes in term and
+def recent_tweets(term,amt):
+    '''
+    tso: TwitterSearchOrder instance
+
+    '''
     try:
         tso = TwitterSearchOrder() # create a TwitterSearchOrder object
         tso.setKeywords(term) # let's define all words we would like to have a look for
@@ -53,4 +54,3 @@ def recent_tweets(term,amt): #takes in term and
     except TwitterSearchException as e: # take care of all those ugly errors if there are some
         #print(e)
         print "Over-exerting Twittter!! Come back in a few, you bad, bad warrior."
-

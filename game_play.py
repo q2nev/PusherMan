@@ -9,6 +9,8 @@ import pygame.mixer as mix
 import string
 import Q2API.xml.mk_class as MK
 import sys
+logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
+
 sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/Twitter_Warriors')
 
 stops = dict()
@@ -25,7 +27,7 @@ battles = dict()
 g_map = None
 hashes = 20
 ats = 20
-logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
+
 def load_game(game_file):
     '''
     this function opens a player that has a saved game

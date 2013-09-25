@@ -26,7 +26,7 @@ def clean_node_name(node_name):
 class desc2_q2class(Q2API.xml.base_xml.XMLNode):
     def __init__(self, attrs):
         self.level = 4
-        self.path = [None, u'game', u'stop', u'item']
+        self.path = [None, u'game', u'stop', u'place']
         Q2API.xml.base_xml.XMLNode.__init__(self, "desc2", attrs, None, [])
 
 class im_q2class(Q2API.xml.base_xml.XMLNode):
@@ -58,6 +58,13 @@ class place_q2class(Q2API.xml.base_xml.XMLNode):
         self.desc = []
         Q2API.xml.base_xml.XMLNode.__init__(self, "place", attrs, None, [])
 
+class rapper_q2class(Q2API.xml.base_xml.XMLNode):
+    def __init__(self, attrs):
+        self.level = 3
+        self.path = [None, u'game', u'stop']
+        self.desc = []
+        Q2API.xml.base_xml.XMLNode.__init__(self, "rapper", attrs, None, [])
+
 class player_q2class(Q2API.xml.base_xml.XMLNode):
     def __init__(self, attrs):
         self.level = 2
@@ -78,6 +85,7 @@ class stop_q2class(Q2API.xml.base_xml.XMLNode):
         self.path = [None, u'game']
         self.desc2 = []
         self.item = []
+        self.rapper = []
         self.place = []
         self.desc = []
         Q2API.xml.base_xml.XMLNode.__init__(self, "stop", attrs, None, [])
@@ -116,6 +124,9 @@ class NodeHandler(xml.sax.handler.ContentHandler):
 
         elif name == "item":
             self.obj_depth.append(item_q2class(p_attrs))
+
+        elif name == "rapper":
+            self.obj_depth.append(rapper_q2class(p_attrs))
 
         elif name == "stop":
             self.obj_depth.append(stop_q2class(p_attrs))
@@ -162,6 +173,12 @@ class NodeHandler(xml.sax.handler.ContentHandler):
 
         elif name == "item":
             self.obj_depth[-2].item.append(self.obj_depth[-1]) #  make this object a child of the next object up...
+            self.obj_depth[-2].children.append(self.obj_depth[-1]) #  put a reference in the children list as well
+            self.obj_depth.pop() # remove this node from the list, processing is complete
+            self.char_buffer = []
+
+        elif name == "rapper":
+            self.obj_depth[-2].rapper.append(self.obj_depth[-1]) #  make this object a child of the next object up...
             self.obj_depth[-2].children.append(self.obj_depth[-1]) #  put a reference in the children list as well
             self.obj_depth.pop() # remove this node from the list, processing is complete
             self.char_buffer = []

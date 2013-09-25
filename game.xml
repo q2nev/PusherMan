@@ -1,28 +1,58 @@
 <game>
     <player stop="parkchester" hashes="20" ats="20" finds="{}">
+        <item boss_kw="cell" finds="true">10</item>
         <item boss_kw="pocket sand" finds="false">pocket sand</item>
         <item boss_kw="chicken" finds="false">chicken</item>
     </player>
     <stop nomen="intro" sd="good_ass_intro.ogg" im="chance-the-rapper.jpg">
-        <desc nomen="intro">
-                                Pusher Man
+        <desc nomen="intro" descnum="1">
+ *******                  **                            ****     ****
+/**////**                /**                            /**/**   **/**
+/**   /** **   **  ******/**       *****  ******        /**//** ** /**  ******   *******
+/******* /**  /** **//// /******  **///**//**//*        /** //***  /** //////** //**///**
+/**////  /**  /**//***** /**///**/******* /** /         /**  //*   /**  *******  /**  /**
+/**      /**  /** /////**/**  /**/**////  /**           /**   /    /** **////**  /**  /**
+/**      //****** ****** /**  /**//******/***           /**        /**//******** ***  /**
+//        ////// //////  //   //  ////// ///            //         //  //////// ///   //
 
-
-              You have recently been forced into being a drug mule.
-
-
-            For every person you come across in the
-
-
-            To learn more about game play type "how" and press enter.
-            For now, I'll assume you've played this before!
-            Start the game (start) or load (load) a previous game?
+                  By Nevin Watkins and the Q2 Project R Crew
         </desc>
-        <desc2 nomen="intro">
+        <desc nomen="intro" descnum="2">
+            You have recently been forced into being a drug mule
 
-        </desc2>
+        by the youngest gang in your neighborhood: the Domenech Brothers.
 
-        <place nomen="start" dir="s" link="parkchester" fight="false" im="" sd="">
+            To learn more about game play type at any point type "how" and press enter.
+
+            For more info type enter at any point to reveal
+
+                If you've saved your game previously, you can "load" your game.
+
+                            Otherwise type "start"!
+
+            Start the game (start) or load (load) a previous game?
+
+
+        </desc>
+        <desc nomen="intro" descnum="3">
+            In order to work your way up the ranks, you have to make it to
+
+                        Brooklyn on the 4,5,6 train unscathed.
+
+          Along the way, you'll meet some characters who will challenge your wit,
+
+            try to steal your reputation and stash, but fear not!
+
+                            You're a mean muggin' thug.
+
+            And with all your hashes (or hashtags) and reputation in place.
+        </desc>
+    </stop>
+    <stop nomen="start">
+        <place nomen="subway" link="parkchester">
+
+        </place>
+        <place nomen="start" dir="s" link="start" fight="false" im="" sd="">
             <desc nomen="next" dir="s">
                 Get on down on the train! We have a journey to make!
             </desc>
@@ -30,7 +60,6 @@
 
             </desc2>
         </place>
-
         <item nomen="how to" dir="how to" link="" fight="false" im="" sd="">
             <desc nomen="how to" dir="how to" link="" false="">
                 Welcome to this sweet-ass game!
@@ -59,15 +88,16 @@
             </desc>
             <desc2></desc2>
         </item>
-        <item nomen="call" dir="skyward" link="" fight="false" im="" sd="">
-            <desc nomen="call" dir="skyward" link="" fight="false" im="" sd="">
+        <item nomen="call" dir="sky" link="" fight="false" im="" sd="">
+            <desc nomen="call" dir="sky" link="" fight="false" im="" sd="">
                 You've got a cell phone to call the cops or your gang. It could be your lifeline...
             </desc>
             <desc2></desc2>
         </item>
+
     </stop>
 
-    <stop nomen="parkchester" link="local" im="dmx.jpg" sd="">
+    <stop nomen="parkchester" im="dmx.jpg" sd="">
         <desc nomen="parkchester">
             This is our first subway station. Welcome to the Bronx! bitch.
             You can hustle, but you're on the clock!

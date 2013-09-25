@@ -1,4 +1,6 @@
 '''
+This Module turns an image into ascii.
+
 1. Make Dict of Images for each character
 2. Take in Image to Convert
     - take in image piece.
@@ -28,17 +30,19 @@ def char_dict():
     '''
     chars = dict()
     for i in range(32,127):
-        im = Image.open('..//ascii//fonts//'+str(i)+'.png')
+        im = Image.open('images/fonts/'+str(i)+'.png')
         im = im.convert("L")
         chars[i] = im
     return chars
 
 def image_list(file):
+    '''
+    Constructs list of 8px x 12px greyscale pieces from input image
+    (In order from top left to bottom right as you would read a document in most languages)
+    '''
     im = Image.open(file)
-
     im = resize_image(im)
     im = im.convert("L")
-
     im = ImageOps.autocontrast(im)
     im = ImageOps.equalize(im)
 
@@ -48,21 +52,22 @@ def image_list(file):
         xo = 0
         for x in range(im.size[0]/8):
             image_piece = im.crop((xo,yo,8*(x+1),12*(y+1)))
-
             images.append(image_piece)
-
             xo += 8
         yo +=12
     return images
 
 def image_diff(filename):
+    '''
+    image_string: ascii characters of a given line of an image
+    image_lines:
+    '''
     image_string = ""
     image_lines = []
     t = 0
     for im in image_list(filename):
         current_key = 2
         chars = char_dict()
-
         diff_old = 5000
         for key, char_im in chars.iteritems():
             diff_im = ImageChops.difference(im,char_im)
@@ -73,7 +78,6 @@ def image_diff(filename):
             if diff_var < diff_old:
                 diff_old = diff_var
                 current_key = key
-
         image_string += chr(current_key)
         t+=1
         if t == 80: #
@@ -82,5 +86,4 @@ def image_diff(filename):
             image_lines.append(line)
             image_string = ""
             t=0
-
     return image_lines
