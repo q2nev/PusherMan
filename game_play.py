@@ -49,7 +49,7 @@ def main():
         hashes = scenario.attrs['hashes']
         battles[(ats,hashes)] = scenario
 
-    # initalize player
+    # give initial player
     global player
     player = g_map.player[0]
 
@@ -61,27 +61,28 @@ def main():
     while True:
         describe(stop)
         command = raw_input(">")
-        stop = process_command(stop, command)
+        stop = process_command(stop, command) #stop here is a tuple
         logging.info('Command Processed')
         logging.info(str(type(stop))) #make sure that we're passing in variable into loop!
 
-def describe(stop,mutename=False,muteascii=False, mutesound=False, descnum=1):
+def describe(stop,mute_name=False,mute_ascii=False, mute_sound=False, descnum=1):
     '''
     stop: current stop
     mutename: don't print the name of the current station
     muteascii: don't print the ascii
-    mutesound: don't play the song
+    mute_sound: don't play the song
     descnum: current description
     '''
     global desc_ct
-    if mutename == False:
+    if mute_name == False:
         print stop.attrs["nomen"].upper(), "STATION"
         print stop.desc[descnum].value
+        desc_ct+=1
 
-    if muteascii == False:
-        image_to_ascii(stop,mutesound=False)
+    if mute_ascii == False:
+        image_to_ascii(stop,mute_sound=False)
 
-    return stop,mutename,muteascii,mutesound,descnum
+    return stop,mute_name,mute_ascii,mute_sound,descnum
 
 def process_command(stop, command): #can also pass stop!
     '''
@@ -99,12 +100,20 @@ def process_command(stop, command): #can also pass stop!
     places, items, fights, descs = get_data(stop)
     verb, noun = parse(command)
     if verb =="":
-        describe(stop,mutename=True)
+        desc_ct +=1
+        max_desc = descs.values().max()
+        if max_desc > desc_ct:
+            print descs[desc_ct]
+        else:
+            desc_ct=1
+            print descs[desc_ct]
+        return stop,True
     elif verb == "go":
         pl = places.get(noun)
         if pl:
             link = pl.attrs["link"]
             stop = stops[link]
+            return stop
         else:
             print "You can't go there."
 
@@ -265,7 +274,7 @@ def process_command(stop, command): #can also pass stop!
         print "unrecognized command"
     return stop
 
-def image_to_ascii(stop,mutesound):
+def image_to_ascii(stop,mute_sound=False):
     '''
     separate image_to_ascii function to have guessing game.
     image_folder: where the images are stored
@@ -280,7 +289,7 @@ def image_to_ascii(stop,mutesound):
     img= str(stop.attrs["im"]).strip(string.whitespace)
     img_txt = img[:-4]+'.txt'
     logging.info(img_txt)
-    play_music(stop)
+    play_music(stop,mute_sound)
     boss_kw = str(stop.attrs["nomen"]).strip(string.whitespace)
     #shorten this in game_play2
     if img_txt in image_folder:
@@ -297,7 +306,7 @@ def image_to_ascii(stop,mutesound):
 
                 while msvcrt.kbhit():
                     msvcrt.getch()
-                    play_music(stop,False)
+                    play_music(stop,True)
                     print "-----------------------------------------------"
                     print "What's your guess?"
                     boss_guess = raw_input(">>")
@@ -320,7 +329,7 @@ def image_to_ascii(stop,mutesound):
         #except:
         #    print "Problem with current image."
 
-def play_music(stop, start=True):
+def play_music(stop, mute_sound=False):
     #sound_delay = str(stop.attrs["delay"]).strip(string.whitespace)
     mix.init()
     sound_file = str(stop.attrs["sd"]).strip(string.whitespace)
@@ -328,8 +337,8 @@ def play_music(stop, start=True):
         return
     else:
         sounds[sound_file] = True
-        sound = mix.Sound(sound_file)
-        if start:
+        sound = mix.Sound("sounds/"+sound_file)
+        if not mute_sound:
             sound.play()
         else:
             sound.stop()
