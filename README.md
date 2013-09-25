@@ -4,4 +4,7 @@ PusherMan
 Updated game
 
 To Do:
--Make game_play.py into functional
+- Convert to game_play.py to game_play2.py where game_play2 is made with classes
+- Build functionality in game.xml
+
+

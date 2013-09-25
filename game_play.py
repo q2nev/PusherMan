@@ -95,7 +95,8 @@ def process_command(stop, command): #can also pass stop!
     global finds
     global hashes
     global ats
-    places, items, fights = get_data(stop)
+
+    places, items, fights, descs = get_data(stop)
     verb, noun = parse(command)
     if verb =="":
         describe(stop,mutename=True)
@@ -360,6 +361,8 @@ def get_data(stop): #can also pass stop and will have same result!
     places = dict()
     fights = dict()
     items = dict()
+    descs = dict()
+
     for pl in stop.place:
         nomen = pl.attrs["nomen"]
         dirs = pl.attrs["dir"]
@@ -373,6 +376,10 @@ def get_data(stop): #can also pass stop and will have same result!
         fight = itm.attrs["fight"]
         items[nomen] = itm
         fights[nomen] = fight
+
+    for d in stop.desc:
+        d_ct = int(d.attrs["descnum"])
+        descs[d_ct] = d.value
 
     return places, items, fights
 
