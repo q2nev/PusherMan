@@ -7,7 +7,7 @@ def keywords(name):
     name: list of keywords to search for in a tweet
     tweet: list meant to be passed in to term_tweet function
     '''
-    tweet = []
+    tweet = [] #initialize list because keywords must be submitted to API in list.
     try:
         for word in name.split():
             tweet.append(word)

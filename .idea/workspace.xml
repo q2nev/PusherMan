@@ -5,11 +5,12 @@
     <ignored path="PusherMan.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/../RapBattle/strip.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380038777868" ignored="false" />
-    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380122022337" ignored="false" />
+    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380127641590" ignored="false" />
     <file path="/a.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380040219281" ignored="false" />
-    <file path="/game.xml" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380126034075" ignored="false" />
+    <file path="/game.xml" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380127274481" ignored="false" />
     <file path="/ascii.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380125800319" ignored="false" />
-    <file path="/twitter.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380125443238" ignored="false" />
+    <file path="/twitter.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380127745443" ignored="false" />
+    <file path="/README.md" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380127680004" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,10 +30,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="game_play.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="34" selection-start="76" selection-end="76" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="game_play.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game_play.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="16" selection-start="483" selection-end="483" vertical-scroll-proportion="-7.5555553">
+            <state line="75" column="14" selection-start="2271" selection-end="2271" vertical-scroll-proportion="0.5761719">
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -49,17 +59,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bustahymes_6546_thmb41.jpeg" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/images/bustahymes_6546_thmb41.jpeg">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ascii.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ascii.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="91" selection-start="1132" selection-end="1132" vertical-scroll-proportion="0.0">
+            <state line="37" column="21" selection-start="964" selection-end="964" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -68,7 +71,7 @@
       <file leaf-file-name="twitter.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/twitter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="60" selection-start="193" selection-end="193" vertical-scroll-proportion="-4.4074073">
+            <state line="15" column="16" selection-start="414" selection-end="414" vertical-scroll-proportion="-9.444445">
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -76,19 +79,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="game.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="game.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="0" selection-start="2503" selection-end="2503" vertical-scroll-proportion="0.36920223">
+            <state line="94" column="19" selection-start="4211" selection-end="4211" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -104,10 +98,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/twitter.py" />
         <option value="$PROJECT_DIR$/ascii.py" />
-        <option value="$PROJECT_DIR$/game_play.py" />
         <option value="$PROJECT_DIR$/game.xml" />
+        <option value="$PROJECT_DIR$/game_play.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/twitter.py" />
       </list>
     </option>
   </component>
@@ -158,6 +153,34 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="PusherMan" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PusherMan" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PusherMan" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sounds" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PusherMan" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PusherMan" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="save" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -469,27 +492,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/images/bustahymes_6546_thmb41.jpeg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/twitter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="60" selection-start="193" selection-end="193" vertical-scroll-proportion="-4.4074073">
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ascii.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="91" selection-start="1132" selection-end="1132" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/game_play.log">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -497,19 +499,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game_play.py">
+    <entry file="file://$PROJECT_DIR$/game.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="16" selection-start="483" selection-end="483" vertical-scroll-proportion="-7.5555553">
+        <state line="94" column="19" selection-start="4211" selection-end="4211" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ascii.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="21" selection-start="964" selection-end="964" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/save/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/twitter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="16" selection-start="414" selection-end="414" vertical-scroll-proportion="-9.444445">
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game.xml">
+    <entry file="file://$PROJECT_DIR$/sounds/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="0" selection-start="2503" selection-end="2503" vertical-scroll-proportion="0.36920223">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="34" selection-start="76" selection-end="76" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_play.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="14" selection-start="2271" selection-end="2271" vertical-scroll-proportion="0.5761719">
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

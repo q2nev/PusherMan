@@ -90,9 +90,9 @@
         </item>
         <item nomen="call" dir="sky" link="" fight="false" im="" sd="">
             <desc nomen="call" dir="sky" link="" fight="false" im="" sd="">
-                You've got a cell phone to call the cops or your gang. It could be your lifeline...
+                You've got a cell phone to reup your stash if you lose yours,
+                But be careful, it could be your lifeline...
             </desc>
-            <desc2></desc2>
         </item>
 
     </stop>

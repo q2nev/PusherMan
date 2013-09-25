@@ -20,8 +20,6 @@ finds = dict()
 sounds= dict() #keep track of which sounds have been played
 asciis = dict()
 battles = dict()
-#initialize dicts to keep track of stops,
-#  and items by attributes
 
 #initialize hashes and ats
 g_map = None
@@ -34,7 +32,6 @@ def load_game(game_file):
     '''
     logging.info('Found load_game')
     with open(game_file) as f:
-
         xml_file = f.read()
     #call player map here because we are not altering most of the file.
     success, p_map = game.obj_wrapper(xml_file)
@@ -62,6 +59,10 @@ def load_game(game_file):
     return stop
 
 def load_ats_hashes(game_file):
+    '''
+    Loads ats and hashes from player given profile.
+
+    '''
     logging.info('Found load_ats_hashes')
     global ats
     global hashes
@@ -95,11 +96,13 @@ def main():
     for stop in g_map.stop:
         nomen = stop.attrs["nomen"]
         stops[nomen] = stop
-    global battles # info based on the results of a battle
-    for scenario in g_map.scenario: # load scenarios in to dict with ats, hashes
+    # battles is a dict of twitter battle result descriptions
+    global battles
+    for scenario in g_map.scenario: # load scenarios into dict with ats, hashes
         ats = scenario.attrs['ats']
         hashes = scenario.attrs['hashes']
         battles[(ats,hashes)] = scenario
+
     # initalize player
     global player
     player = g_map.player[0]
@@ -107,9 +110,9 @@ def main():
     # give initial stop
     stop = g_map.stop[0]
     logging.info('Entering main() game loop')
+
     # enter game loop
     while True:
-
         describe(stop)
         command = raw_input(">")
         stop = process_command(stop, command)
@@ -347,8 +350,9 @@ def process_command(stop, command): #can also pass stop!
             exit()
         else:
             print "Unrecognized command, I'll just let you keep playing!"
+
     elif verb =="how":
-        print g_map.stop[0].item[0].desc[0].value
+        print g_map.stop[0].item[0].desc[0].value #this could be anywhere in the text
         return stop
 
     elif verb == "exit":
@@ -426,7 +430,7 @@ translate_verb = {"g" : "go","go" : "go","walk" : "go","get" : "go","jump" : "go
                   "t" : "take", "take" : "take","grab" : "take",
                   "l":"describe","look":"describe","describe" : "describe","desc":"describe",
                   "current":"cur","cur":"cur","give":"cur",
-                  "load":"load","start":"start","save":"save",
+                  "load":"load","save":"save",
                   "how":"how","help":"how",
                   "exit":"exit",
                   "score":"score"
