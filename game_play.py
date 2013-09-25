@@ -56,7 +56,10 @@ def main():
 
     # give initial stop
     stop = g_map.stop[0]
-    extras = dict()
+    extras = {
+        'stop_desc':True,
+        'stop_name':True,
+    }
     logging.info('Entering main() game loop')
 
     # enter game loop
@@ -77,25 +80,26 @@ def describe(stop,extras):
     sound: don't play the song
     descnum: current description
     '''
+    global desc_ct
     if len(extras)>0:
         global desc_ct
-        if 'stop_desc' in extras.keys():
-            pass
         if 'stop_name' in extras.keys():
-            pass
+            print stop.attrs["nomen"].upper(), "STATION"
+        if 'stop_desc' in extras.keys():
+            print stop.desc[desc_ct].value
         if 'ascii' in extras.keys():
-            pass
+            image_to_ascii(stop,False)
+        if 'ascii_w_sound' in extras.keys():
+            image_to_ascii(stop,True)
+
         if 'sound' in extras.keys():
-            pass
-        
+            play_music(stop)
+
     else:
         print stop.attrs["nomen"].upper(), "STATION"
-        print stop.desc[0]
+        print stop.desc[0].value
 
-    if desc_ct:
-        print stop.desc[desc_ct].value
-
-    return stop
+    # return stop
 
 def process_command(stop, command): #can also pass stop!
     '''
@@ -112,19 +116,14 @@ def process_command(stop, command): #can also pass stop!
 
     places, items, fights, descs = get_data(stop)
     logging.info(descs)
-    verb, noun = parse(command)
-    if verb =="":
-        max_desc = descs.values().max()
-        if max_desc > desc_ct:
-            print descs[desc_ct]
-        else:
-            desc_ct=1
-            print "You've seen all the descriptions!"
-            print descs[desc_ct]
-        desc_ct +=1
-        return stop,desc_ct
 
-    elif verb == "go":
+    if len(command) ==0:
+        enter_command(stop,command,descs)
+        return stop
+
+    verb, noun = parse(command)
+
+    if verb == "go":
         pl = places.get(noun)
         if pl:
             link = pl.attrs["link"]
@@ -329,7 +328,6 @@ def image_to_ascii(stop,mute_sound=False):
                         print "You guessed right! Here are 5 hashes and ats for your prowess!"
                         hashes += 5
                         ats += 5
-
                         break
     else:
         #try:
@@ -382,14 +380,28 @@ def twitter_data(boss_kw):
                 continue
     return hashes,ats
 
+def enter_command(stop,command,descs):
+    global desc_ct
+    global extras
+    max_desc = max(descs.keys())
+    if max_desc >= desc_ct:
+        desc_ct+=1
+        print descs[desc_ct]
+    else:
+        desc_ct=0
+        print "You've seen all the descriptions!"
+        print descs[desc_ct]
+    extras= {'stop_desc':True}
+    return stop
+
 def get_data(stop): #can also pass stop and will have same result!
     places = dict()
     fights = dict()
     items = dict()
     descs = dict()
-    d_ct=0
+    desc_ct=0
 
-    for pl in stop[0].place:
+    for pl in stop.place:
         nomen = pl.attrs["nomen"]
         dirs = pl.attrs["dir"]
         fight = pl.attrs["fight"]
@@ -397,16 +409,15 @@ def get_data(stop): #can also pass stop and will have same result!
         places[dirs] = pl
         fights[nomen] = fight
 
-    for itm in stop[0].item:
+    for itm in stop.item:
         nomen = itm.attrs["nomen"]
         fight = itm.attrs["fight"]
         items[nomen] = itm
         fights[nomen] = fight
 
-    for d in stop[0].desc:
-        descs[d_ct] = d.value
-        d_ct+=1
-
+    for d in stop.desc:
+        descs[desc_ct] = d.value
+        desc_ct+=1
     return places, items, fights, descs
 
 def load_game(game_file):
@@ -420,7 +431,7 @@ def load_game(game_file):
     #call player map here
     success, p_map = game.obj_wrapper(xml_file)
     if not success:
-        logging.warning('From Q2API - Obj_wrapper failed when loading game')
+        logging.info('From Q2API - Obj_wrapper failed when loading game')
         exit()
     global player #only need player from file
     global stops #grab dict from main file so that we can call current stop from nomen attribute
@@ -538,5 +549,4 @@ one_word_cmds = {"n" : "describe n","s" : "describe s","e" : "describe e","w" : 
                  "score":"score board",
                  "commands":"commands",
                  }
-
 main()

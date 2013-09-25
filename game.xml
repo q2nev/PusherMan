@@ -55,6 +55,9 @@
         </place>
     </stop>
     <stop nomen="start">
+        <desc nomen="start">
+
+        </desc>
         <place nomen="subway" link="parkchester">
 
         </place>
@@ -85,7 +88,7 @@
                 Are you a chump or player?! If you're not a bitch, twitter battle your way to BK.
                 But if you gamble away all your stash, you'll be screwed!
             </desc>
-            <desc descnum="2">
+            <desc >
 
             </desc>
         </item>
