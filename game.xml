@@ -22,11 +22,11 @@
 
         by the youngest gang in your neighborhood: the Domenech Brothers.
 
-  To learn more about game play type at any point type "how" and press enter.
+    To learn more about game play type at any point type "how" and press enter.
 
-       For more info just press enter while being prompted type enter.
+          For more info just press enter while being prompted type enter.
 
-       If you've saved your game previously, you can "load" your game.
+       If you've saved your game previously, you can "load" the previous game.
 
                             Otherwise type "start"!
 
@@ -45,8 +45,8 @@
 
             And with all your hashes (or hashtags) and reputation in place.
         </desc>
-        <place nomen="start" dir="s" link="start" fight="false" im="" sd="">
-            <desc nomen="next" dir="s" >
+        <place nomen="start" dir="s" link="start" fight="false">
+            <desc nomen="start" dir="s" link="start">
                 Get on down on the train! We have a journey to make!
             </desc>
             <desc nomen="start" dir="s" >
@@ -54,14 +54,23 @@
             </desc>
         </place>
     </stop>
-    <stop nomen="start">
+    <stop nomen="start" im="" sd="">
+        <desc nomen="start">
+            You have just left the Domenech gang hideout near Yonkers.
+        </desc>
         <desc nomen="start">
 
         </desc>
         <place nomen="subway" link="parkchester">
+            <desc>
 
+            </desc>
         </place>
+        <place nomen="north" dir="n" link="death">
+            <desc nomen="north" dir="n">
 
+            </desc>
+        </place>
         <item nomen="how to" dir="how to" link="" fight="false" im="" sd="">
             <desc nomen="how to" dir="how to" link="" false="">
                 Welcome to this sweet-ass game!
@@ -88,7 +97,7 @@
                 Are you a chump or player?! If you're not a bitch, twitter battle your way to BK.
                 But if you gamble away all your stash, you'll be screwed!
             </desc>
-            <desc >
+            <desc nomen="how to">
 
             </desc>
         </item>
