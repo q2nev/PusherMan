@@ -14,13 +14,13 @@ logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
 #sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/PusherMan')
 
 stops = dict()
-fights = dict()
-items = dict()
+# fights = dict()
+# items = dict()
+# places = dict()
 finds = dict()
 sounds= dict() # keep track of which sounds have been played
 asciis = dict()
 battles = dict()
-
 #initialize hashes and ats
 g_map = None
 hashes = 20
@@ -43,7 +43,6 @@ def main():
     for stop in g_map.stop:
         nomen = stop.attrs["nomen"]
         stops[nomen] = stop
-
     stop = g_map.stop[0] #inital stop
     # battles is a dict of twitter battle result descriptions
     global battles
@@ -51,18 +50,20 @@ def main():
         ats = scenario.attrs['ats']
         hashes = scenario.attrs['hashes']
         battles[(ats,hashes)] = scenario
-    #initialize player
+    # initialize player
     global player
     player = g_map.player[0]
+    # initialize extras - list of printable items
     global extras
     extras = ['stop_desc','stop_name','sound']
     print extras
     logging.info('Entering main() game loop')
+    os.system('cls')
     # enter game loop
     while True:
-        #os.system('cls')
         describe(stop, extras)
         command = raw_input(">")
+        os.system('cls')
         stop = process_command(stop, command)
         logging.info('Command Processed')
         logging.info(str(type(stop))) #make sure that we're passing in variable into loop!
@@ -88,6 +89,15 @@ def describe(stop,extras):
             image_to_ascii(stop,True)
         if 'sound' in extras:
             play_music(stop)
+        if 'around' in extras:
+            for p in stop.place:
+                    print "\n\t"+"Place description:", str(p.desc[0].value).strip(string.whitespace)
+                    print "\n\t"+"Name for place:", p.attrs.get("nomen")+".", "Direction for place:", p.attrs.get("dir")
+                    print "_________________________________________________________"
+            for i in stop.item:
+                    print "\n\t"+"Item description:", str(i.desc[0].value).strip(string.whitespace)
+                    print "\n\t"+"Name for place:", i.attrs.get("nomen")+".", "Direction for place:", i.attrs.get("dir")
+                    print "__________________________________________________________"
     else:
         print stop.attrs["nomen"].upper(), "STATION"
         print stop.desc[0].value
@@ -121,11 +131,10 @@ def process_command(stop, command): #can also pass stop!
             return go_command(stop,places,noun)
 
         elif verb == "describe":
-            return describe_command(stop,items,places,noun)
+            return describe_command(stop,items,places,fights,noun)
 
         elif verb == "load": #loads game from save directory
-            load_command()
-            return stop
+            return load_command()
 
         elif verb == "score": #score board functionality
             games = os.listdir("../save/")
@@ -333,35 +342,37 @@ def go_command(stop,places,noun):
         extras =['stop_name','stop_desc']
         return stop
     else:
+        extras=["bad_go"]
         print "You can't go there."
         extras =['stop_name','stop_desc']
         return stop
 
-def describe_command(stop,items,places,noun):
-    boss_kw = noun
+def describe_command(stop,items,places,fights, noun):
     pl = places.get(noun)
     itm = items.get(noun)
+    boss_kw = noun
     global extras
 
-    if boss_kw == "around": #functionality to show current landscape.
-        for pl in stop.place:
-            for des in pl.desc:
-                print "\n\t"+"Place description:", str(des.value).strip(string.whitespace)
-                print "\n\t"+"Name for place:", des.attrs["nomen"]
-                print "\n\t"+"direction for place:", des.attrs["dir"]
-                print "_____________________________________"
+    if noun == "around": #functionality to show current landscape.
+        extras = ["around"]
+        # for p in stop.place:
+        #     for des in p.desc:
+        #         print "\n\t"+"Place description:", str(des.value).strip(string.whitespace)
+        #         print "\n\t"+"Name for place:", p.attrs.get("nomen")
+        #         print "\n\t"+"direction for place:", p.attrs.get("dir")
+        #         print "_________________________________________________________"
+        #
+        # for i in stop.item:
+        #     for des in i.desc:
+        #         print "\n\t"+"item description:", str(des.value).strip(string.whitespace)
+        #         print "\n\t"+"Name for item:",i.attrs.get("nomen")
+        #         print "\n\t"+"direction for item:",i.attrs.get("dir")
+        #         print "__________________________________________________________"
 
-        for itm in stop.item:
-            for des in itm.desc:
-                print "\n\t"+"item description:", str(des.value).strip(string.whitespace)
-                print "\n\t"+"Name for item:",des.attrs["nomen"]
-                print "\n\t"+"direction for item:",des.attrs["dir"]
-                print "_____________________________________"
     elif fights.get(boss_kw) == 'true':
         #this loops checks to
         if finds.get(boss_kw,False):
             print "You already Twitter Battled the", boss_kw.upper(),"!"
-
         else:
             hashes, ats = twitter_data(boss_kw)
             print "You now have", hashes,"ounces of hash"
@@ -375,6 +386,8 @@ def describe_command(stop,items,places,noun):
     elif itm:
         print "Grab it!"
         print itm.desc[0].value
+
+    return stop
 
 def load_command():
     games = os.listdir("save")

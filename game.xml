@@ -16,6 +16,8 @@
     //        ////// //////  //   //  ////// ///            //         //  //////// ///   //
 
                   By Nevin Watkins and the Q2 Project R Crew
+
+                            PRESS ENTER TO BEGIN
         </desc>
         <desc nomen="intro" >
             You have recently been forced into being a drug mule
@@ -71,8 +73,8 @@
 
             </desc>
         </place>
-        <item nomen="how to" dir="how to" link="" fight="false" im="" sd="">
-            <desc nomen="how to" dir="how to" link="" false="">
+        <item nomen="how" dir="how" link="" fight="false" im="" sd="">
+            <desc nomen="how" dir="how" link="" false="">
                 Welcome to this sweet-ass game!
                 -For the most part, the command "describe around" will describe the things
                 that you can touch currently in your environment.
