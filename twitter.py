@@ -18,7 +18,6 @@ def keywords(name):
 def recent_tweets(term,amt):
     '''
     tso: TwitterSearchOrder instance
-
     '''
     try:
         tso = TwitterSearchOrder() # create a TwitterSearchOrder object
@@ -26,7 +25,6 @@ def recent_tweets(term,amt):
         tso.setLanguage('en') # we want to see German tweets only
         tso.setCount(7) # please dear Mr Twitter, only give us 7 results per page
         tso.setIncludeEntities(False) # and don't give us all those entity information
-
         # it's about time to create a TwitterSearch object with our secret tokens
         ts = TwitterSearch(
             consumer_key = 'anOyC9WPt8qP82BkKGt34A',
@@ -34,7 +32,6 @@ def recent_tweets(term,amt):
             access_token = '307461472-FZDgkwOuqLnKXYUtUaJzyJYZpFp1Nhy4IrlBURz1',
             access_token_secret = 'hoiFrBIe85VbtyMbYcxrXjbFhqUF4a6Qjolw5qbKXc'
          )
-
         tweet_count = 0
         at_count = 0
         hash_count = 0

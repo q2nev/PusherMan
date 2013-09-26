@@ -1,8 +1,34 @@
 <game>
     <player stop="parkchester" hashes="20" ats="20" finds="{}">
-        <item boss_kw="cell" finds="true">10</item>
-        <item boss_kw="pocket sand" finds="false">pocket sand</item>
-        <item boss_kw="chicken" finds="false">chicken</item>
+        <item boss_kw="how" finds="false">
+            <desc boss_kw="how" finds="false">
+       -"describe around" will describe the things that you can touch currently on your stop.
+       -Otherwise you can ask for your inventory of hash and holler-ats.
+       -Current Stop
+       -Also, you can relay your past Twitter Conquests!
+
+      Game Play:
+        -Earn @s and #s in the shortest amount of time possible.
+
+        -Typing load- allows you to load previous games.
+
+        -Typing save- allows you to save previous games.
+
+        -If you look at someone, you might have to start a twitter battle with them!
+         Here, if you don't choose your call and word wisely they can steal your hash or @s.
+
+         A twitter battle takes a bosses keyword and puts it against yours!
+         The quickest tongue with the most popularity takes the other's
+                holler-ats and hash.
+
+            </desc>
+        </item>
+        <item boss_kw="cell" finds="false">10</item>
+        <item boss_kw="holler_size" finds="false">10</item>
+        <item boss_kw="ticket" finds="false" ></item>
+        <item boss_kw="pocket sand" finds="false"></item>
+        <item boss_kw="chicken" finds="false"></item>
+
     </player>
     <stop nomen="intro" sd="pusherman.ogg" im="chicken.jpg">
         <desc nomen="intro" >
@@ -24,97 +50,89 @@
 
         by the youngest gang in your neighborhood: the Domenech Brothers.
 
-    To learn more about game play type at any point type "how" and press enter.
+        In order to work your way up the ranks, you have to make it to
 
-          For more info just press enter while being prompted type enter.
+   Brooklyn on the 4,5,6 train unscathed and with more hash then you started with.
+        </desc>
+        <desc nomen ="intro">
+            Along the way, you'll meet some characters who will challenge your wit
+
+             and try to steal your reputation (also called holler-ats or @s)
+
+                and stash (also called hashes, hashtags and #s), but fear not!
+
+                You're a mean muggin' thug, and you know the Twittersphere.
+        </desc>
+        <desc>
+            Whenever a person, place or thing decides to give you a glare,
+
+          You must challenge the boss with your own gang call and holler-count.
+
+            Your holler-count is the amount of defeats you have already
+
+        </desc>
+        <desc nomen="intro">
+        Along the subway, you can decide to trade your life of crime for a life as an MC.
+
+            That is the reason the Dom Bros decided to recruit you in the first place.
+
+            You've got fly tunes and you know how to spin.
+
+        </desc>
+        <desc nomen="intro" >
+
+                    If you run into another MC on the tracks,
+
+                You can increase your holler-ats by pressing enter
+
+        And guessing the currently playing MC before your time expires.
+        </desc>
+        <desc nomen="intro">
+                           As far as the basics:
+
+            To learn more about game play type "how" and enter
+
+               For more info on current stop -- type enter.
+
+            To learn more about your surroundings -- type "describe around".
+
+      To challenge or check something out -- type "glare" followed by its name!
 
        If you've saved your game previously, you can "load" the previous game.
 
                             Otherwise type "start"!
 
             Start the game (start) or load (load) a previous game?
-        </desc>
-        <desc nomen="intro" >
-            In order to work your way up the ranks, you have to make it to
 
-                        Brooklyn on the 4,5,6 train unscathed.
-
-          Along the way, you'll meet some characters who will challenge your wit,
-
-            try to steal your reputation and stash, but fear not!
-
-                            You're a mean muggin' thug.
-
-            And with all your hashes (or hashtags) and reputation in place.
         </desc>
         <place nomen="start" dir="s" link="start" fight="false">
             <desc nomen="start" dir="s" link="start">
-                Get on down on the train! We have a journey to make!
-            </desc>
-            <desc nomen="start" dir="s" >
-                The time's clicking!
+                Start the game!!!
             </desc>
         </place>
     </stop>
-    <stop nomen="start" im="" sd="">
+
+    <stop nomen="start" im="" sd="familyaffair.ogg">
         <desc nomen="start">
             You have just left the Domenech gang hideout near Yonkers.
         </desc>
         <desc nomen="start">
-
+            There aren't many options here, so choose wisely!
         </desc>
-        <place nomen="subway" link="parkchester">
+        <place nomen="subway" link="parkchester" lock="ticket">
             <desc>
 
             </desc>
         </place>
         <place nomen="north" dir="n" link="death">
             <desc nomen="north" dir="n">
-
+                Run for your life!
             </desc>
         </place>
-        <item nomen="how" dir="how" link="" fight="false" im="" sd="">
-            <desc nomen="how" dir="how" link="" false="">
-                Welcome to this sweet-ass game!
-                -For the most part, the command "describe around" will describe the things
-                that you can touch currently in your environment.
-                -Otherwise you can ask for your inventory of hash and holler-ats.
-                -Current Stop
-                -Also, you can relay your past Twitter Conquests!
-
-                In your journey to Brooklyn, if you look at someone, you have to start a
-                twitter battle with them!
-
-                A twitter battle takes a bosses keyword and puts it against yours!
-                The quickest tongue with the most popularity takes the other's
-                holler-ats and hash.
-
-                Don't be a chump!
-
-                You are in the Bronx!
-                For the time being, you're a drug mule.
-                You have 20 ounces of hash that you have to get to Brooklyn.
-                Staring at anyone, can start a Twitter battle.
-
-                Are you a chump or player?! If you're not a bitch, twitter battle your way to BK.
-                But if you gamble away all your stash, you'll be screwed!
-            </desc>
-            <desc nomen="how to">
-
-            </desc>
+        <item nomen="ticket" im="" sd="mute">
+            <desc nomen="ticket"> </desc>
         </item>
-        <item nomen="call" dir="sky" link="" fight="false" im="" sd="">
-            <desc nomen="call" dir="sky" link="" fight="false" descnum="1" im="" sd="">
-                You've got a cell phone to reup your stash if you lose yours,
-                But be careful, it could be your lifeline...
-            </desc>
-            <desc descnum="2">
 
-            </desc>
-            <desc descnum="3" nomen="call" dir="sky" link="" fight="false">
-
-            </desc>
-        </item>
     </stop>
 
     <stop nomen="parkchester" im="dmx.jpg" sd="">
@@ -145,7 +163,6 @@
             <desc nomen="express" dir="behind" fight="true">
                 The Express Six Train is here!
             </desc>
-            <desc2></desc2>
         </place>
         <place nomen="outside" dir="up" link="outside" fight="true" im="" sd="">
             <desc nomen="endgame" dir="up" fight="true" >

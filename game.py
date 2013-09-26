@@ -23,17 +23,17 @@ def clean_node_name(node_name):
 
     return clean_name
 
+class desc_q2class(Q2API.xml.base_xml.XMLNode):
+    def __init__(self, attrs):
+        self.level = 4
+        self.path = [None, u'game', u'player', u'item']
+        Q2API.xml.base_xml.XMLNode.__init__(self, "desc", attrs, None, [])
+
 class im_q2class(Q2API.xml.base_xml.XMLNode):
     def __init__(self, attrs):
         self.level = 4
         self.path = [None, u'game', u'stop', u'place']
         Q2API.xml.base_xml.XMLNode.__init__(self, "im", attrs, None, [])
-
-class desc_q2class(Q2API.xml.base_xml.XMLNode):
-    def __init__(self, attrs):
-        self.level = 3
-        self.path = [None, u'game', u'stop']
-        Q2API.xml.base_xml.XMLNode.__init__(self, "desc", attrs, None, [])
 
 class desc2_q2class(Q2API.xml.base_xml.XMLNode):
     def __init__(self, attrs):

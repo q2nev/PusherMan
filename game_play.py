@@ -42,7 +42,8 @@ def main():
     global stops # possible positions
     for stop in g_map.stop:
         nomen = stop.attrs["nomen"]
-        stops[nomen] = stop
+        access = stop.attrs["access"]
+        stops[nomen] = stop,access
     stop = g_map.stop[0] #inital stop
     # battles is a dict of twitter battle result descriptions
     global battles
@@ -59,11 +60,12 @@ def main():
     print extras
     logging.info('Entering main() game loop')
     os.system('cls')
-    # enter game loop
+    # enter main game loop
     while True:
         describe(stop, extras)
         command = raw_input(">")
-        os.system('cls')
+        os.system('cls') #clearing for better user experience
+        #put directly after command so we can print on either side and it looks cohesive.
         stop = process_command(stop, command)
         logging.info('Command Processed')
         logging.info(str(type(stop))) #make sure that we're passing in variable into loop!
@@ -77,6 +79,7 @@ def describe(stop,extras):
     sound: don't play the song
     desc_ct: current description
     '''
+    print extras
     global desc_ct
     if len(extras)>0:
         if 'stop_name' in extras:
@@ -91,135 +94,17 @@ def describe(stop,extras):
             play_music(stop)
         if 'around' in extras:
             for p in stop.place:
-                    print "\n\t"+"Place description:", str(p.desc[0].value).strip(string.whitespace)
                     print "\n\t"+"Name for place:", p.attrs.get("nomen")+".", "Direction for place:", p.attrs.get("dir")
+                    print "\n\t"+"Place description:", str(p.desc[0].value).strip(string.whitespace)
                     print "_________________________________________________________"
             for i in stop.item:
-                    print "\n\t"+"Item description:", str(i.desc[0].value).strip(string.whitespace)
                     print "\n\t"+"Name for place:", i.attrs.get("nomen")+".", "Direction for place:", i.attrs.get("dir")
+                    print "\n\t"+"Item description:", str(i.desc[0].value).strip(string.whitespace)
                     print "__________________________________________________________"
-    else:
-        print stop.attrs["nomen"].upper(), "STATION"
-        print stop.desc[0].value
+    # else:
+        # print stop.attrs["nomen"].upper(), "STATION"
+        # print stop.desc[0].value
     return stop
-
-def process_command(stop, command): #can also pass stop!
-    '''
-    1. Parse Command
-    2. Get Items and places from Command
-    3. Handles Twitter Battle
-    - Twitter Game play : if desc or stop, or item contains name in fight dict.
-    '''
-    global desc_ct
-    global finds
-    global hashes
-    global ats
-    global extras
-    extras = []
-
-    places, items, fights, descs = get_data(stop)
-    logging.info(descs)
-
-    if len(command) == 0:
-        logging.info('Pressed Enter.')
-        enter_command(stop,descs)
-        return stop
-    else:
-        verb, noun = parse(command)
-
-        if verb == "go":
-            return go_command(stop,places,noun)
-
-        elif verb == "describe":
-            return describe_command(stop,items,places,fights,noun)
-
-        elif verb == "load": #loads game from save directory
-            return load_command()
-
-        elif verb == "score": #score board functionality
-            games = os.listdir("../save/")
-            save_count = 0
-            for i, file_name in enumerate(games): #prints the players
-                if file_name[-4:]=='.xml':
-                    try:
-                        print str(i) + "\t" + file_name.split(".")[0]
-                    except:
-                        print "couldn't print game"
-                    try:
-                        print "Ats:",load_ats_hashes(file_name)[0]  + "\t" + "Hashes:",load_ats_hashes(file_name)[1]
-                    except:
-                        print "couldn't find scores"
-                save_count += 1
-            if save_count == 0:
-                print "No saved games!"
-                return stop
-            return stop
-
-        elif verb =="cur":
-            print "Hashes:", hashes
-            print "Ats:",ats
-            return stop
-
-        elif verb=="save":
-            #save_file: name to save file at via raw_input
-            stop_nomen = stop.attrs["nomen"]
-            player.attrs["stop"] = str(stop_nomen)
-
-            player.attrs["hashes"] = hashes
-            player.attrs["ats"] = ats
-
-            for itm in player.item:
-                if itm.attrs["boss_kw"] in finds.keys():
-                    itm.attrs["finds"] = 'true'
-            save_file = raw_input("enter a name for the save file>")
-            game_data = g_map.flatten_self()
-            with open("save\\" + save_file + ".xml", "w+") as f:
-                f.write(game_data)
-                print "game saved!"
-            print "Continue game ? (Y/N) (Pressing N will put exit the game!)"
-            continue_game = raw_input('>>')
-            if continue_game == "Y":
-                return stop
-            elif continue_game == "N":
-                print "OK!"
-                exit()
-            else:
-                print "Unrecognized noun, I'll just let you keep playing!"
-
-        elif verb =="restart":
-            print "Restart game? (Y/N)"
-            restart_game = raw_input('>>')
-            if restart_game == "Y":
-                print "Do you want to save first? (Y/N)"
-                save_first = raw_input('>>')
-                if save_first == 'Y':
-                    return
-                else:
-                    return main()
-            elif restart_game == "N":
-                print "OK!"
-                exit()
-            else:
-                print "Unrecognized command, I'll just let you keep playing!"
-
-        elif verb =="how":
-            print g_map.stop[0].item[0].desc[0].value #this could be anywhere in the text
-
-        elif verb == "exit":
-            print "Do you want to save your game? (Y,N)?"
-            save_file = raw_input('>>')
-            if save_file == "Y":
-                process_command(stop,'save')
-            elif save_file == "N":
-                print "OK!"
-                exit()
-            else:
-                print "What?! (Exit Prompt Error)"
-                process_command(stop,'exit')
-
-        else:
-            print "unrecognized command"
-        return stop
 
 def image_to_ascii(stop,mute_sound=False):
     '''
@@ -286,12 +171,12 @@ def play_music(stop, mute_sound=False):
         else:
             sound.stop()
 
-def twitter_data(boss_kw):
+def twitter_data(stop,boss_kw):
     global hashes
     global ats
     print "It's a glare from", boss_kw
     call_prompt = raw_input("What's your call against this mean muggin?!")
-    play_music('')
+    play_music(stop,mute_sound=True)
     #start twitter game here
     hash_diff, at_diff = battle(boss_kw,call_prompt)
     finds[boss_kw] = hash_diff,at_diff
@@ -312,6 +197,67 @@ def twitter_data(boss_kw):
                 continue
     return hashes,ats
 
+def process_command(stop, command): #can also pass stop!
+    '''
+    1. Parse Command
+    2. Get Items and places from Command
+    3. Handles Twitter Battle
+    - Twitter Game play : if desc or stop, or item contains name in fight dict.
+    '''
+    global desc_ct
+    global finds
+    global hashes
+    global ats
+    global extras
+
+    places, items, fights, descs = get_data(stop)
+    logging.debug("Places:", places, type(places))
+    logging.debug("Items:", items, type(items))
+    logging.debug("Fights:", fights, type(fights))
+    logging.debug("Descs:", descs, type(descs))
+
+    extras = []
+    if len(command) == 0:
+        logging.info('Pressed Enter.')
+        enter_command(stop,descs)
+        return stop
+    else:
+        verb, noun = parse(command)
+        if verb == "go":
+            return go_command(stop,places,noun)
+        elif verb == "describe":
+            return describe_command(stop,items,places,fights,noun)
+        elif verb == "load": #loads game from save directory
+            return load_command(stop)
+        elif verb == "score": #score board functionality
+            return score_command(stop)
+        elif verb =="cur":
+            print "Hashes:", hashes
+            print "Ats:",ats
+            return stop
+        elif verb=="save":
+            return save_command(stop)
+        elif verb =="restart":
+            return restart_command(stop)
+        elif verb =="how":
+            print player.item[0].desc[0].value #goal: callable from anywhere in game.
+            #add to it's relevancy as you go along...
+            return stop
+        elif verb == "exit":
+            print "Do you want to save your game? (Y,N)?"
+            save_file = raw_input('>>')
+            if save_file == "Y":
+                process_command(stop,'save')
+            elif save_file == "N":
+                print "OK!"
+                exit()
+            else:
+                print "What?! (Exit Prompt Error)"
+                process_command(stop,'exit')
+        else:
+            print "Unrecognized command"
+        return stop
+
 def enter_command(stop,descs):
     '''
     via stop, command and descs
@@ -324,7 +270,7 @@ def enter_command(stop,descs):
     if max_desc > desc_ct:
         desc_ct+=1
     elif max_desc == desc_ct: # the end of the descs
-        print "You have reached the end of this info."
+        print "\n\n You have reached the end of this info. Try typing 'describe around' to learn options."
         desc_ct = 0
     else: # the beginning of the descs
         desc_ct=0
@@ -338,7 +284,7 @@ def go_command(stop,places,noun):
     if pl:
         desc_ct = 0
         link = pl.attrs["link"]
-        stop = stops[link]
+        stop = stops[link][0]
         extras =['stop_name','stop_desc']
         return stop
     else:
@@ -346,6 +292,17 @@ def go_command(stop,places,noun):
         print "You can't go there."
         extras =['stop_name','stop_desc']
         return stop
+
+# def get_command(stop,items,noun):
+#     global desc_ct
+#     global extras
+#     global player
+#     for item in stop.item:
+#         if item.attrs.get("nomen") == noun:
+#             player.item.append(item)
+#             current_room.item.remove(item)
+#         print "you get the " + noun
+#         return
 
 def describe_command(stop,items,places,fights, noun):
     pl = places.get(noun)
@@ -389,39 +346,102 @@ def describe_command(stop,items,places,fights, noun):
 
     return stop
 
-def load_command():
+def restart_command(stop):
+    print "Restart game? (Y/N)"
+    restart_game = raw_input('>>')
+    if restart_game == "Y":
+        print "Do you want to save first? (Y/N)"
+        save_first = raw_input('>>')
+        if save_first == 'Y':
+            return save_command()
+        else:
+            return main()
+    elif restart_game == "N":
+        print "OK!"
+        exit()
+    else:
+        print "Unrecognized command, I'll just let you keep playing!"
+
+def save_command(stop):
+    #save_file: name to save file at via raw_input
+    stop_nomen = stop.attrs["nomen"]
+    player.attrs["stop"] = str(stop_nomen)
+
+    player.attrs["hashes"] = hashes
+    player.attrs["ats"] = ats
+
+    for itm in player.item:
+        if itm.attrs["boss_kw"] in finds.keys():
+            itm.attrs["finds"] = 'true'
+    save_file = raw_input("enter a name for the save file>")
+    game_data = g_map.flatten_self()
+    with open("save\\" + save_file + ".xml", "w+") as f:
+        f.write(game_data)
+        print "game saved!"
+    print "Continue game ? (Y/N) (Pressing N will put exit the game!)"
+    continue_game = raw_input('>>')
+    if continue_game == "Y":
+        return stop
+    elif continue_game == "N":
+        print "OK!"
+        exit()
+    else:
+        print "Unrecognized noun, I'll just let you keep playing!"
+
+def score_command(stop):
     games = os.listdir("save")
-    if games:
-        save_count = 0
+    save_count = 0
+    for i, file_name in enumerate(games): #prints the players
+        if file_name[-4:]=='.xml':
+            try:
+                print str(i) + "\t" + file_name.split(".")[0]
+            except:
+                print "couldn't print game"
+            try:
+                print "Ats:",load_ats_hashes(file_name)[0]  + "\t" + "Hashes:",load_ats_hashes(file_name)[1]
+            except:
+                print "couldn't find scores"
+        save_count += 1
+    if save_count == 0:
+        print "No saved games!"
+        return stop
+    return stop
+
+def load_command(stop):
+    games = os.listdir("save")
+    if len(games)>1:
         for i, file_name in enumerate(games): #prints the players to console
             if file_name.split(".")[1]=='.xml':
                 print str(i) + "\t" + file_name.split(".")[0]
-                save_count +=1
 
-        if save_count > 0:
-            print "Choose a game by its number, or type new for new game.\n"
-            choice = raw_input(">>")
-            if choice not in ["N", "n", "new", "NEW"]:
-                try:
-                    game_file = "..\\save\\" + games[int(choice)]
-                except:
-                    print "WHAT?"
-
+        print "Choose a game by its number, or type new for new game.\n"
+        choice = raw_input(">>")
+        if choice not in ["N", "n", "new", "NEW"]:
+            try:
+                game_file = "save\\" + games[int(choice)]
+            except:
+                print "You didn't give a proper number..."
         else:
-            print "Could not find any saved games"
-            game_file = 'game.xml'
+            game_file = "game.xml"
+            return stop
     else:
+        print "\n\t\tCould not find any saved games!"
+        print "\n\t\tType start or exit!"
         game_file = 'game.xml'
+        return stop
+
     return load_game(game_file)
 
 def load_game(game_file):
     '''
-    this function opens a player that has a saved game
+    Input: game_file from load command()
+    Output: stop object from player profile.
+
     '''
     logging.info('Found load_game')
     with open(game_file) as f:
         xml_file = f.read()
-    #call player map here
+    #wrap player map here
     success, p_map = game.obj_wrapper(xml_file)
     if not success:
         logging.info('From Q2API - Obj_wrapper failed when loading game')
@@ -562,7 +582,7 @@ one_word_cmds = {"n" : "describe n","s" : "describe s","e" : "describe e","w" : 
                  "off" :"describe outside",
                  "on":"describe on",
                  "l":"load game","load":"load game",
-                 "current": "describe around","now": "describe around","around":"describe around",
+                 "current": "describe around","now": "describe around","around":"describe around","describe":"describe around",
                  "i":"cur inventory","h":"cur inventory",
                  "rules":"how to","how":"how to","help":"how to",
                  "next": "go start","begin":"go start","start":"go start",
