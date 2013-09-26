@@ -10,7 +10,6 @@ import string
 import Q2logging
 
 logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
-
 #sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/PusherMan')
 
 stops = dict()
@@ -88,6 +87,8 @@ def describe(stop,extras):
             image_to_ascii(stop,False)
         if 'ascii_w_sound' in extras:
             image_to_ascii(stop,True)
+        if 'pause_sound' in extras:
+            mix.pause()
         if 'sound' in extras:
             play_music(stop)
         if 'around' in extras:
@@ -99,12 +100,10 @@ def describe(stop,extras):
                     print "\n\t"+"Name for place:", i.attrs.get("nomen")+".", "Direction for place:", i.attrs.get("dir")
                     print "\n\t"+"Item description:", str(i.desc[0].value).strip(string.whitespace)
                     print "__________________________________________________________"
-    # else:
-        # print stop.attrs["nomen"].upper(), "STATION"
-        # print stop.desc[0].value
+
     return stop
 
-def image_to_ascii(stop,mute_sound=False):
+def image_to_ascii(stop,pause_sound=False):
     '''
     separate image_to_ascii function to have guessing game.
     image_folder: where the images are stored
@@ -119,7 +118,7 @@ def image_to_ascii(stop,mute_sound=False):
     img = str(stop.attrs["im"]).strip(string.whitespace)
     img_txt = img[:-4]+'.txt'
     logging.info(img_txt)
-    play_music(stop,mute_sound)
+    play_music(stop)
     boss_kw = str(stop.attrs["nomen"]).strip(string.whitespace)
     #shorten this in game_play2
     if img_txt in image_folder:
@@ -136,7 +135,7 @@ def image_to_ascii(stop,mute_sound=False):
 
                 while msvcrt.kbhit():
                     msvcrt.getch()
-                    play_music(stop,mute_sound=True)
+                    mix.pause()
                     print "-----------------------------------------------"
                     print "What's your guess?"
                     boss_guess = raw_input(">>")
@@ -145,7 +144,8 @@ def image_to_ascii(stop,mute_sound=False):
                         print "You guessed right! Here are 5 hashes and ats for your prowess!"
                         hashes += 5
                         ats += 5
-                        break
+                    else:
+                        mix.play()
     else:
         ascii_string = ASC.image_diff('images/'+img)
         print type(ascii_string)
@@ -155,26 +155,22 @@ def image_to_ascii(stop,mute_sound=False):
             fin.write(ascii_string[i]+'\t')
         fin.close()
 
-def play_music(stop, mute_sound=False):
+def play_music(stop, pause_sound=True):
     #sound_delay = str(stop.attrs["delay"]).strip(string.whitespace)
+    sound_file = "sounds/"+str(stop.attrs["sd"]).strip(string.whitespace)
     mix.init()
-    sound_file = str(stop.attrs["sd"]).strip(string.whitespace)
-    if sounds.get(sound_file,False) == True:
-        return
+    mix.music.load(sound_file)
+    if pause_sound:
+        mix.music.play()
     else:
-        sounds[sound_file] = True
-        sound = mix.Sound("sounds/"+sound_file)
-        if not mute_sound:
-            sound.play()
-        else:
-            sound.stop()
+        mix.music.pause()
 
 def twitter_data(stop,boss_kw):
     global hashes
     global ats
     print "It's a glare from", boss_kw
     call_prompt = raw_input("What's your call against this mean muggin?!")
-    play_music(stop,mute_sound=True)
+    play_music(stop,pause_sound=True)
     #start twitter game here
     hash_diff, at_diff = battle(boss_kw,call_prompt)
     finds[boss_kw] = hash_diff,at_diff
@@ -278,12 +274,19 @@ def enter_command(stop,descs):
 def go_command(stop,places,noun):
     global desc_ct
     global extras
-    pl = places.get(noun)
-    if pl:
+    pl,access = places.get(noun)
+
+    if pl and finds.get(access) :
         desc_ct = 0
         link = pl.attrs["link"]
-        stop = stops[link][0]
-        extras =['stop_name','stop_desc']
+        stop = stops[link]
+        extras =['stop_name','stop_desc','pause_music']
+        return stop
+    elif not bool(access):
+        desc_ct = 0
+        link = pl.attrs["link"]
+        stop = stops[link]
+        extras =['stop_name','stop_desc','pause_music']
         return stop
     else:
         extras=["bad_go"]
@@ -303,26 +306,13 @@ def get_command(stop,items,noun):
         return
 
 def describe_command(stop,items,places,fights, noun):
-    pl = places.get(noun)
-    itm = items.get(noun)
+    pl,access = places.get(noun)
+    itm,access,ascii,sd = items.get(noun)
     boss_kw = noun
     global extras
 
     if noun == "around": #functionality to show current landscape.
         extras = ["around"]
-        # for p in stop.place:
-        #     for des in p.desc:
-        #         print "\n\t"+"Place description:", str(des.value).strip(string.whitespace)
-        #         print "\n\t"+"Name for place:", p.attrs.get("nomen")
-        #         print "\n\t"+"direction for place:", p.attrs.get("dir")
-        #         print "_________________________________________________________"
-        #
-        # for i in stop.item:
-        #     for des in i.desc:
-        #         print "\n\t"+"item description:", str(des.value).strip(string.whitespace)
-        #         print "\n\t"+"Name for item:",i.attrs.get("nomen")
-        #         print "\n\t"+"direction for item:",i.attrs.get("dir")
-        #         print "__________________________________________________________"
 
     elif fights.get(boss_kw) == 'true':
         #this loops checks to
@@ -341,7 +331,6 @@ def describe_command(stop,items,places,fights, noun):
     elif itm:
         print "Grab it!"
         print itm.desc[0].value
-
     return stop
 
 def restart_command(stop):
@@ -516,6 +505,7 @@ def get_data(stop): #can also pass stop and will have same result!
         fight = pl.attrs.get("fight", "False")
         places[nomen] = pl,access
         places[dirs] = pl,access
+        places["around"] = "a","round" #edge case for places...
         fights[nomen] = fight
 
     for itm in stop.item:
