@@ -19,7 +19,7 @@ stops = dict()
 # places = dict()
 finds = dict()
 sounds= dict() # keep track of which sounds have been played
-asciis = dict()
+#asciis = dict()
 battles = dict()
 #initialize hashes and ats
 g_map = None
@@ -42,8 +42,7 @@ def main():
     global stops # possible positions
     for stop in g_map.stop:
         nomen = stop.attrs["nomen"]
-        access = stop.attrs["access"]
-        stops[nomen] = stop,access
+        stops[nomen] = stop
     stop = g_map.stop[0] #inital stop
     # battles is a dict of twitter battle result descriptions
     global battles
@@ -57,7 +56,6 @@ def main():
     # initialize extras - list of printable items
     global extras
     extras = ['stop_desc','stop_name','sound']
-    print extras
     logging.info('Entering main() game loop')
     os.system('cls')
     # enter main game loop
@@ -293,16 +291,16 @@ def go_command(stop,places,noun):
         extras =['stop_name','stop_desc']
         return stop
 
-# def get_command(stop,items,noun):
-#     global desc_ct
-#     global extras
-#     global player
-#     for item in stop.item:
-#         if item.attrs.get("nomen") == noun:
-#             player.item.append(item)
-#             current_room.item.remove(item)
-#         print "you get the " + noun
-#         return
+def get_command(stop,items,noun):
+    global desc_ct
+    global extras
+    global player
+    for item in stop.item:
+        if item.attrs.get("nomen") == noun and player.item:
+            player.item.append(item)
+            player.children.append(item)
+        print "you get the " + noun
+        return
 
 def describe_command(stop,items,places,fights, noun):
     pl = places.get(noun)
@@ -363,9 +361,12 @@ def restart_command(stop):
         print "Unrecognized command, I'll just let you keep playing!"
 
 def save_command(stop):
-    #save_file: name to save file at via raw_input
     stop_nomen = stop.attrs["nomen"]
     player.attrs["stop"] = str(stop_nomen)
+    player.attrs["hashes"] = hashes
+    player.attrs["ats"]= ats
+    # player.attrs["hollers"]= hollers
+    # player.attrs["lifelines"] =lifelines
 
     player.attrs["hashes"] = hashes
     player.attrs["ats"] = ats
@@ -374,11 +375,11 @@ def save_command(stop):
         if itm.attrs["boss_kw"] in finds.keys():
             itm.attrs["finds"] = 'true'
     save_file = raw_input("enter a name for the save file>")
-    game_data = g_map.flatten_self()
     with open("save\\" + save_file + ".xml", "w+") as f:
-        f.write(game_data)
+        f.write(g_map.flatten_self())
         print "game saved!"
     print "Continue game ? (Y/N) (Pressing N will put exit the game!)"
+
     continue_game = raw_input('>>')
     if continue_game == "Y":
         return stop
@@ -401,6 +402,18 @@ def score_command(stop):
                 print "Ats:",load_ats_hashes(file_name)[0]  + "\t" + "Hashes:",load_ats_hashes(file_name)[1]
             except:
                 print "couldn't find scores"
+            try:
+                print "Items placeholder:"
+            except:
+                pass
+            try:
+                print "Hollers and Lifelines placeholder:"
+            except:
+                pass
+            try:
+                pass
+            except:
+                pass
         save_count += 1
     if save_count == 0:
         print "No saved games!"
@@ -499,15 +512,19 @@ def get_data(stop): #can also pass stop and will have same result!
     for pl in stop.place:
         nomen = pl.attrs["nomen"]
         dirs = pl.attrs.get("dir")
+        access = pl.attrs.get("access")
         fight = pl.attrs.get("fight", "False")
-        places[nomen] = pl
-        places[dirs] = pl
+        places[nomen] = pl,access
+        places[dirs] = pl,access
         fights[nomen] = fight
 
     for itm in stop.item:
         nomen = itm.attrs["nomen"]
+        access = itm.attrs["access"]
+        sd = itm.attrs["sd"]
+        ascii = itm.attrs["im"]
         fight = itm.attrs.get("fight", "False")
-        items[nomen] = itm
+        items[nomen] = itm,access,ascii,sd
         fights[nomen] = fight
 
     for d in stop.desc:

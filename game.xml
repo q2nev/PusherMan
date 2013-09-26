@@ -1,7 +1,7 @@
 <game>
-    <player stop="parkchester" hashes="20" ats="20" finds="{}">
-        <item boss_kw="how" finds="false">
-            <desc boss_kw="how" finds="false">
+    <player stop="parkchester" hashes="20" ats="20" hollers="2" lifelines="10">
+        <item nomen="how" finds="false">
+            <desc nomen="how" finds="false">
        -"describe around" will describe the things that you can touch currently on your stop.
        -Otherwise you can ask for your inventory of hash and holler-ats.
        -Current Stop
@@ -23,14 +23,12 @@
 
             </desc>
         </item>
-        <item boss_kw="cell" finds="false">10</item>
-        <item boss_kw="holler_size" finds="false">10</item>
-        <item boss_kw="ticket" finds="false" ></item>
-        <item boss_kw="pocket sand" finds="false"></item>
-        <item boss_kw="chicken" finds="false"></item>
+        <item nomen="ticket" finds="false" ></item>
+        <item nomen="pocket sand" finds="false"></item>
+        <item nomen="chicken" finds="false"></item>
 
     </player>
-    <stop nomen="intro" sd="pusherman.ogg" im="chicken.jpg">
+    <stop nomen="intro" sd="pusherman.ogg" im="chicken.jpg" access="">
         <desc nomen="intro" >
      *******                  **                            ****     ****
     /**////**                /**                            /**/**   **/**
@@ -105,13 +103,12 @@
             Start the game (start) or load (load) a previous game?
 
         </desc>
-        <place nomen="start" dir="s" link="start" fight="false">
+        <place nomen="start" dir="s" link="start" fight="false" access="">
             <desc nomen="start" dir="s" link="start">
                 Start the game!!!
             </desc>
         </place>
     </stop>
-
     <stop nomen="start" im="" sd="familyaffair.ogg">
         <desc nomen="start">
             You have just left the Domenech gang hideout near Yonkers.
@@ -119,83 +116,83 @@
         <desc nomen="start">
             There aren't many options here, so choose wisely!
         </desc>
-        <place nomen="subway" link="parkchester" lock="ticket">
+        <place nomen="subway" link="parkchester" access="ticket">
             <desc>
 
             </desc>
         </place>
-        <place nomen="north" dir="n" link="death">
+        <place nomen="north" dir="n" link="death" access="">
             <desc nomen="north" dir="n">
                 Run for your life!
             </desc>
         </place>
-        <item nomen="ticket" im="" sd="mute">
+        <item nomen="ticket" im="" sd="" >
             <desc nomen="ticket"> </desc>
         </item>
 
     </stop>
 
-    <stop nomen="parkchester" im="dmx.jpg" sd="">
+    <stop nomen="parkchester" im="dmx.jpg" sd="canudigit.ogg" access="">
         <desc nomen="parkchester">
             This is our first subway station. Welcome to the Bronx! bitch.
             You can hustle, but you're on the clock!
         </desc>
-        <desc2 nomen="parkchester">
+        <desc nomen="parkchester">
 
-        </desc2>
-        <place nomen="tracks" dir="now" link="tracks" fight="true" im="rat.jpg" sd="green_eyes.ogg">
+        </desc>
+        <place nomen="tracks" dir="now" link="tracks" fight="true" im="rat.jpg" sd="green_eyes.ogg" access="">
             <desc nomen="tracks" dir="now" fight="true">
                 It's dangerous down on the tracks. Dead bodies. Rats.
             </desc>
-            <desc2>
+            <desc nomen="" >
 
-            </desc2>
+            </desc>
         </place>
-        <place nomen="local" dir="ahead" link="local" fight="true" im="" sd="">
+        <place nomen="local" dir="ahead" link="local" fight="true" im="" sd="" access="">
             <desc nomen="local" dir="ahead" fight="true">
                 The Local six train is here!
             </desc>
-            <desc2>
+            <desc>
 
-            </desc2>
+            </desc>
         </place>
-        <place nomen="express" dir="behind" link="express"  fight="true" im="" sd="">
+        <place nomen="express" dir="behind" link="express"  fight="true" im="" sd="" access="">
             <desc nomen="express" dir="behind" fight="true">
                 The Express Six Train is here!
             </desc>
         </place>
-        <place nomen="outside" dir="up" link="outside" fight="true" im="" sd="">
+        <place nomen="outside" dir="up" link="outside" fight="true" im="" sd="" access="">
             <desc nomen="endgame" dir="up" fight="true" >
                 Death by driveby.
             </desc>
-            <desc2>
+            <desc>
 
-            </desc2>
+            </desc>
         </place>
-        <place nomen="bum" dir="left" link="bum" fight="true" im="bearded_bum.jpg" sd="">
-            <desc nomen="bum" dir="left" link="bum" fight="true" im="bearded_bum.jpg" sd="">
+        <place nomen="bum" dir="left" link="bum" fight="true" im="bearded_bum.jpg" sd="" access="">
+            <desc nomen="bum" dir="left" link="bum" fight="true" im="bearded_bum.jpg" sd="" access="">
                        There's a smelly bum.
             </desc>
-            <desc2>
+            <desc>
                 Best way to lose your dope is a smelly ass bum.
 
-            </desc2>
+            </desc>
         </place>
-        <item nomen="chicken" dir="down" fight="true" im="" sd="">
+        <item nomen="chicken" dir="down" fight="true" im="" sd="" access="">
             <desc nomen="chicken" dir="down" fight="true">
                 Kennedy's Fried Chicken.
             </desc>
-            <desc2>
+            <desc>
                     Chirp, chirp mother fucker.
                 You think this is food poisoning?
                           Take a bite!
-            </desc2>
+            </desc>
         </item>
-        <item nomen="pigeon" dir="up" fight="true" im="" sd="">
+        <item nomen="pigeon" dir="up" fight="true" im="" sd="" access="">
             <desc nomen="pigeon" dir="up" fight="true" im="" sd="">
                 You see
             </desc>
-            <desc2>
+            <desc>
                 Pigeon- Intro:
                 A pigeon is a girl who be walkin' by
                 My rimmed up blue red loose Spark wit five
@@ -218,178 +215,178 @@
                 Tryin' to holla at me
 
                 You're too slow to know this rapper. So it's time for a Twitter Battle!
-            </desc2>
+            </desc>
 
         </item>
     </stop>
 
-    <stop nomen="outside" link="outside" im="" sd="">
+    <stop nomen="outside" link="outside" im="" sd="" access="">
         <desc nomen="endgame">
                 Death by driveby.
         </desc>
-        <rapper nomen="">
+        <item nomen="" access="">
 
-        </rapper>
+        </item>
     </stop>
 
-    <stop nomen="death" im="grimreaper.jpg" sd="">
-        <desc nomen="death">
+    <stop nomen="death" im="grimreaper.jpg" sd="" access="">
+        <desc nomen="death" access="">
             I don't think I've ever had death taste this good. Oh my god, the fucking chicken!
         </desc>
-        <desc2 nomen="death">
+        <desc nomen="death">
 
-        </desc2>
-        <place nomen="hell" dir="d" fight="true">
-            <desc nomen="hell" dir="d" fight="true">
-
-            </desc>
-        </place>
-        <place nomen="heaven" dir="u" fight="true">
-            <desc nomen="heaven" dir="u" fight="true">
+        </desc>
+        <place nomen="hell" dir="d" fight="true" access="">
+            <desc nomen="hell" dir="d" fight="true" >
 
             </desc>
         </place>
-        <rapper nomen="" im="" sd="">
+        <place nomen="heaven" dir="u" fight="true" access="">
+            <desc nomen="heaven" dir="u" fight="true" >
+
+            </desc>
+        </place>
+        <item nomen="" im="" sd="" access="">
             <desc nomen="">
 
             </desc>
-        </rapper>
+        </item>
     </stop>
 
-    <stop nomen="3av" dir="off" link="express" im="" sd="">
+    <stop nomen="3av" dir="off" link="express" im="" sd="" access="">
         <desc nomen="3av" dir="off">
             You're at the 3rd Avenue Station.
         </desc>
-        <desc2 nomen="3av" dir="off">
+        <desc nomen="3av" dir="off">
             You can get back on the
-        </desc2>
-        <place nomen="tracks" dir="now" link="tracks" fight="true" im="bearded_bum.jpg" sd="green_eyes.ogg">
+        </desc>
+        <place nomen="tracks" dir="now" link="tracks" fight="true" im="bearded_bum.jpg" sd="green_eyes.ogg" access="">
             <desc nomen="tracks" dir="now" fight="true">
                 It's dangerous down on the tracks. Dead bodies. Rats.
             </desc>
-            <desc2>
+            <desc>
                 You can always
-            </desc2>
+            </desc>
         </place>
-        <place nomen="local" dir="ahead" link="local" fight="true" im="" sd="">
+        <place nomen="local" dir="ahead" link="local" fight="true" im="" sd="" access="">
             <desc nomen="local" dir="ahead" fight="true">
                 The Local six train is here!
             </desc>
-            <desc2>
+            <desc>
                 You need at least 20 @s to get back on the train.
 
                 There's a cop on this train! If you have more than 20 hashes he's gonna waste you!
-            </desc2>
+            </desc>
         </place>
-        <place nomen="express" dir="behind" link="express"  fight="true" im="" sd="">
+        <place nomen="express" dir="behind" link="express"  fight="true" im="" sd="" access="">
             <desc nomen="express" dir="behind" fight="true">
                 The Express Six Train is here!
             </desc>
-            <desc2>
+            <desc>
                 You need at least 25 @s to get on the train.
-            </desc2>
+            </desc>
         </place>
-        <rapper nomen="dmx" im="" sd="">
+        <item nomen="dmx" im="" sd="" access="">
             <desc>
 
             </desc>
-        </rapper>
+        </item>
     </stop>
-    <stop nomen="125th St." dir="off" link="express" im="harlem.jpg" territory="latin kings">
-        <desc nomen="125th St." dir="off" link="express" im="harlem.jpg">
+    <stop nomen="125th St" dir="off" link="express" im="harlem.jpg" access="">
+        <desc nomen="125th St" dir="off" link="express" im="harlem.jpg">
 
         </desc>
-        <desc2 nomen="125th St." dir="off" link="express" im="harlem.jpg">
+        <desc nomen="125th St" dir="off" link="express" im="harlem.jpg">
 
-        </desc2>
-        <place nomen="tracks" dir="now" link="tracks" fight="true" im="bearded_bum.jpg" sd="green_eyes.ogg">
+        </desc>
+        <place nomen="tracks" dir="now" link="tracks" fight="true" im="bearded_bum.jpg" sd="green_eyes.ogg" access="">
             <desc nomen="tracks" dir="now" fight="true">
                 It's dangerous down on the tracks. Dead bodies. Rats.
             </desc>
-            <desc2>
+            <desc>
 
-            </desc2>
+            </desc>
         </place>
-        <place nomen="local" dir="ahead" link="local" fight="true" im="" sd="">
+        <place nomen="local" dir="ahead" link="local" fight="true" im="" sd="" access="">
             <desc nomen="local" dir="ahead" fight="true">
                 The Local six train is here!
             </desc>
-            <desc2>
+            <desc>
 
-            </desc2>
+            </desc>
         </place>
-        <place nomen="express" dir="behind" link="express"  fight="true" im="" sd="">
+        <place nomen="express" dir="behind" link="express"  fight="true" im="" sd="" access="">
             <desc nomen="express" dir="behind" fight="true">
                 The Express Six Train is here!
             </desc>
-            <desc2>
+            <desc>
 
-            </desc2>
+            </desc>
         </place>
         <item ></item>
     </stop>
-    <stop nomen="union square" im="needle.jpg" sd="">
+    <stop nomen="union square" im="needle.jpg" sd="" access="">
         <desc nomen="alive">YOU WIN! Hop up in your hipster palace!</desc>
-        <place nomen="outside" dir="u" fight="true">
+        <place nomen="outside" dir="u" fight="true" access="">
             <desc nomen="outside" dir="u" fight="true">
                 Be aware of Needles and Yuppies! Outside of St. Marks they're known to be found. Hoppin' and hollerin'.
                 Up and down and up and down.
                 Speedballs makes the OD baby crown, here in St. Marks. We think we're profound.
             </desc>
         </place>
-        <item nomen="hipster" dir="down" fight="true">
+        <item nomen="hipster" dir="down" fight="true" access="">
             <desc nomen="hipster" dir="down" fight="true">
                 "Like holy shit, what bands do you even know? This iPod is horrendous!"
             </desc>
         </item>
     </stop>
-    <stop nomen="bleeker street" im="" sd="">
-        <desc nomen="125th St." dir="off" link="express" im="harlem.jpg">
+    <stop nomen="bleeker street" im="" sd="" access="">
+        <desc nomen="bleeker street" dir="off" link="express" im="harlem.jpg">
 
         </desc>
-        <desc2 nomen="125th St." dir="off" link="express" im="harlem.jpg">
+        <desc nomen="bleeker street" dir="off" link="express" im="harlem.jpg">
 
-        </desc2>
-        <place nomen="tracks" dir="now" link="tracks" fight="true" im="bearded_bum.jpg" sd="green_eyes.ogg">
+        </desc>
+        <place nomen="tracks" dir="now" link="tracks" fight="true" im="bearded_bum.jpg" sd="green_eyes.ogg" access="">
             <desc nomen="tracks" dir="now" fight="true">
                 It's dangerous down on the tracks. Dead bodies. Rats.
             </desc>
-            <desc2>
+            <desc>
 
-            </desc2>
+            </desc>
         </place>
-        <place nomen="local" dir="a" link="local" fight="true" im="" sd="">
+        <place nomen="local" dir="a" link="local" fight="true" im="" sd="" access="">
             <desc nomen="local" dir="a" fight="true">
                 The Local six train is here!
             </desc>
-            <desc2>
+            <desc>
 
-            </desc2>
+            </desc>
         </place>
-        <place nomen="express" dir="on" link="express"  fight="true" im="" sd="">
+        <place nomen="express" dir="on" link="express"  fight="true" im="" sd="" access="">
             <desc nomen="express" dir="on" fight="true">
                 The Express Six Train is here!
             </desc>
-            <desc2>
+            <desc>
                 If you get off, you gotta fight to get back on!
-            </desc2>
+            </desc>
         </place>
     </stop>
 
-    <stop nomen="wallstreet" im="money.jpg" sd="wall_street.wav">
+    <stop nomen="wallstreet" im="money.jpg" sd="wall_street.wav" access="">
         <desc nomen="">
             Welcome to Wall Street!
         </desc>
-        <place nomen="outside" dir="up" link="worldtradecenter" fight="true">
+        <place nomen="outside" dir="up" link="worldtradecenter" fight="true" access="">
             <desc nomen = "outside" dir="up" fight="true">
                 You lost your soul! How did it come to this?!
             </desc>
         </place>
-        <place nomen="gecko" dir="behind" link="hell" fight="true">
+        <place nomen="gecko" dir="behind" link="hell" fight="true" access="">
             <desc nomen="gecko" fight="true">
             </desc>
         </place>
-        <item nomen="wallet" dir="ground" fight="true">
+        <item nomen="wallet" dir="ground" fight="true" access="">
             <desc nomen="wallet" dir="ground" fight="true">
                 A sweet-ass leather wallet lies here.
             </desc>
@@ -400,24 +397,26 @@
         <desc nomen="williamsburg" fight="true">
 
         </desc>
-        <place nomen="outside brooklyn" fight="true" link="outside brooklyn">
-            <desc nomen="outside brooklyn" fight="true" link="outside brooklyn" >
+        <place nomen="outside brooklyn" fight="true" link="outside brooklyn" access="">
+            <desc nomen="outside brooklyn" fight="true" link="outside brooklyn"  access="">
 
             </desc>
         </place>
-        <place nomen="doc martens" fight="true">
-            <im>docmarten.jpg</im>
+        <place nomen="doc martens" fight="true" access="">
             <desc nomen="doc martens" fight="true">
                 A man claiming to be Doc Marten has "risen from the grave" here to kick the shit out of hipsters wearing his boots.
             </desc>
         </place>
     </stop>
-    <stop nomen="outside brooklyn">
+    <stop nomen="outside brooklyn" access="">
         <desc nomen="outside brooklyn">
 
         </desc>
-        <place nomen="hipsterdom" fight="true" link="hipsterdom">
-            <desc nomen="hipsterdom" fight="true" link="hipsterdom" amt="">
+        <desc nomen="outside brooklyn">
+
+        </desc>
+        <place nomen="hipsterdom" fight="true" link="hipsterdom" access="">
+            <desc nomen="hipsterdom" fight="true" amt="" link="hipsterdom"  access="">
 
             </desc>
         </place>
@@ -426,12 +425,20 @@
         <desc nomen="hipsterdom" fight="true">
 
         </desc>
-        <desc2>
+        <desc>
 
-        </desc2>
-        <place nomen="death">
-            <desc nomen=""></desc>
+        </desc>
+        <place nomen="subway" link="williamsburg">
+            <desc nomen="">
+
+            </desc>
+            <desc>
+
+            </desc>
         </place>
+        <item>
+
+        </item>
     </stop>
     <stop nomen="tracks" link="" fight="true">
         <desc nomen="tracks">
