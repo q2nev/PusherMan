@@ -8,7 +8,7 @@ import logging
 import pygame.mixer as mix
 import string
 import Q2logging
-
+mix.init()
 logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
 #sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/PusherMan')
 
@@ -158,7 +158,7 @@ def image_to_ascii(stop,pause_sound=False):
 def play_music(stop, pause_sound=False):
     #sound_delay = str(stop.attrs["delay"]).strip(string.whitespace)
     sound_file = "sounds/"+str(stop.attrs["sd"]).strip(string.whitespace)
-    mix.init()
+
     mix.music.load(sound_file)
     if not pause_sound:
         mix.music.play()
@@ -274,7 +274,7 @@ def enter_command(stop,descs):
 def go_command(stop,places,noun):
     global desc_ct
     global extras
-    pl,access = places.get(noun)
+    pl,access = places.get(noun,(False,True))
 
     if pl and finds.get(access) :
         desc_ct = 0
@@ -306,7 +306,7 @@ def get_command(stop,items,noun):
         return
 
 def describe_command(stop,items,places,fights, noun):
-    pl,access = places.get(noun,("a","a"))
+    pl,access = places.get(noun,(False,True))
     itm,access,ascii,sd = items.get(noun,("a","a","a","a"))
     boss_kw = noun
     global extras

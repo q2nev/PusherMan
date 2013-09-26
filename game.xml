@@ -28,7 +28,7 @@
         <item nomen="chicken" finds="false" access=""></item>
 
     </player>
-    <stop nomen="intro" sd="pusherman.ogg" im="chicken.jpg" access="">
+    <stop nomen="intro" sd="breakyaneck.ogg" im="chicken.jpg" access="">
         <desc nomen="intro" >
      *******                  **                            ****     ****
     /**////**                /**                            /**/**   **/**
