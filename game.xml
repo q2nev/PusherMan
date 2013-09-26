@@ -23,9 +23,9 @@
 
             </desc>
         </item>
-        <item nomen="ticket" finds="false" ></item>
-        <item nomen="pocket sand" finds="false"></item>
-        <item nomen="chicken" finds="false"></item>
+        <item nomen="ticket" finds="false" access=""></item>
+        <item nomen="pocket sand" finds="false" access=""></item>
+        <item nomen="chicken" finds="false" access=""></item>
 
     </player>
     <stop nomen="intro" sd="pusherman.ogg" im="chicken.jpg" access="">
@@ -126,7 +126,7 @@
                 Run for your life!
             </desc>
         </place>
-        <item nomen="ticket" im="" sd="" >
+        <item nomen="ticket" im="" sd=""  access="">
             <desc nomen="ticket"> </desc>
         </item>
 
@@ -224,7 +224,7 @@
         <desc nomen="endgame">
                 Death by driveby.
         </desc>
-        <item nomen="" access="">
+        <item nomen="" fight="false" access="">
 
         </item>
     </stop>
@@ -323,7 +323,7 @@
 
             </desc>
         </place>
-        <item ></item>
+        <item nomen="nope"  access="" ></item>
     </stop>
     <stop nomen="union square" im="needle.jpg" sd="" access="">
         <desc nomen="alive">YOU WIN! Hop up in your hipster palace!</desc>
@@ -436,7 +436,7 @@
 
             </desc>
         </place>
-        <item>
+        <item nomen="glasses" access="">
 
         </item>
     </stop>
@@ -444,7 +444,7 @@
         <desc nomen="tracks">
             Welcome to the land of the free! You have joined a gang of rebel warriors!
         </desc>
-        <place nomen="" fight="true">
+        <place nomen="" fight="true" access="">
             <desc>
 
             </desc>
@@ -454,17 +454,17 @@
         <desc nomen="express">
             You're on 6 express!
         </desc>
-        <place nomen ="huntspoint" dir= "off" fight="true">
+        <place nomen ="huntspoint" dir= "off" fight="true" access="">
             <desc>
 
             </desc>
         </place>
-        <place nomen = "" dir="" fight="true">
+        <place nomen = "" dir="" fight="true" access="">
             <desc>
 
             </desc>
         </place>
-        <place nomen = "" dir="" fight ="true">
+        <place nomen = "" dir="" fight ="true" access="">
             <desc>
 
             </desc>
@@ -475,12 +475,12 @@
         <desc nomen="huntspoint" link="">
 
         </desc>
-        <place nomen="chicken" dir="ground" fight="true">
+        <place nomen="chicken" dir="ground" fight="true" access="">
             <desc>
 
             </desc>
         </place>
-        <place nomen="express2">
+        <place nomen="express2" fight="false" access="">
             <desc>
 
             </desc>
@@ -490,32 +490,34 @@
         <desc nomen="3av" link="">
 
         </desc>
-        <place nomen="express3" >
+        <place nomen="express3"  access="">
 
         </place>
+        <item  access="">
+
+        </item>
     </stop>
     <stop nomen="express2" fight="true">
         <desc nomen="express2" link="">
 
         </desc>
-        <place nomen="" link="" >
+        <place nomen="pilgrim" link=""  access="">
             <desc>
 
             </desc>
         </place>
-        <place>
+        <place nomen="sweaty man" access="">
             <desc>
 
             </desc>
         </place>
-
-
+        <item access=""></item>
     </stop>
     <stop nomen ="local">
         <desc>
             You die of paranoia.
         </desc>
-        <place nomen="tracks" dir="up" fight="false" link="death">
+        <place nomen="tracks" dir="up" fight="false" link="death" access="">
             <desc nomen="tracks" dir="up">
 
             </desc>
@@ -525,7 +527,7 @@
         <desc nomen="" link="">
 
         </desc>
-        <place nomen="" dir="" fight="true">
+        <place nomen="" dir="" fight="true" access="">
             <desc nomen="" dir="" fight="true">
 
             </desc>

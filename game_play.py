@@ -88,7 +88,7 @@ def describe(stop,extras):
         if 'ascii_w_sound' in extras:
             image_to_ascii(stop,True)
         if 'pause_sound' in extras:
-            mix.pause()
+            play_music(stop,True)
         if 'sound' in extras:
             play_music(stop)
         if 'around' in extras:
@@ -135,7 +135,7 @@ def image_to_ascii(stop,pause_sound=False):
 
                 while msvcrt.kbhit():
                     msvcrt.getch()
-                    mix.pause()
+                    play_music(stop,True)
                     print "-----------------------------------------------"
                     print "What's your guess?"
                     boss_guess = raw_input(">>")
@@ -155,12 +155,12 @@ def image_to_ascii(stop,pause_sound=False):
             fin.write(ascii_string[i]+'\t')
         fin.close()
 
-def play_music(stop, pause_sound=True):
+def play_music(stop, pause_sound=False):
     #sound_delay = str(stop.attrs["delay"]).strip(string.whitespace)
     sound_file = "sounds/"+str(stop.attrs["sd"]).strip(string.whitespace)
     mix.init()
     mix.music.load(sound_file)
-    if pause_sound:
+    if not pause_sound:
         mix.music.play()
     else:
         mix.music.pause()
@@ -306,11 +306,10 @@ def get_command(stop,items,noun):
         return
 
 def describe_command(stop,items,places,fights, noun):
-    pl,access = places.get(noun)
-    itm,access,ascii,sd = items.get(noun)
+    pl,access = places.get(noun,("a","a"))
+    itm,access,ascii,sd = items.get(noun,("a","a","a","a"))
     boss_kw = noun
     global extras
-
     if noun == "around": #functionality to show current landscape.
         extras = ["around"]
 
@@ -505,7 +504,6 @@ def get_data(stop): #can also pass stop and will have same result!
         fight = pl.attrs.get("fight", "False")
         places[nomen] = pl,access
         places[dirs] = pl,access
-        places["around"] = "a","round" #edge case for places...
         fights[nomen] = fight
 
     for itm in stop.item:
