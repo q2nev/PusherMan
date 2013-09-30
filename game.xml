@@ -24,7 +24,7 @@
             </desc>
         </item>
     </player>
-    <stop nomen="intro" sd="" im="chicken.jpg" access="">
+    <stop nomen="intro" sd="canudigit.ogg" im="chicken.jpg" access="">
         <desc nomen="intro" >
      *******                  **                            ****     ****
     /**////**                /**                            /**/**   **/**
@@ -105,7 +105,7 @@
             </desc>
         </place>
     </stop>
-    <stop nomen="start" im="" sd="familyaffair.ogg">
+    <stop nomen="start" im="chicken.jpg" sd="familyaffair.ogg" >
         <desc nomen="start">
             You have just left the Domenech gang hideout near Yonkers.
         </desc>
@@ -113,11 +113,12 @@
             There aren't many options here, so choose wisely!
         </desc>
         <place nomen="subway" link="parkchester" access="ticket">
-            <desc>
+            <desc nomen="subway">
                 You need a ticket to get on the subway!!
             </desc>
+            
         </place>
-        <place nomen="kiosk" dir="w" link="parkchester" access="">
+        <place nomen="kiosk" dir="w" link="kiosk" access="">
             <desc>
 
             </desc>
@@ -130,6 +131,20 @@
         <item nomen="ticket" dir="" im="" sd=""  access="">
             <desc nomen="ticket">You know this ticket is the real deal?</desc>
         </item>
+    </stop>
+    <stop nomen="kiosk">
+        <place nomen="ticket" access="3,1" link="parkchester">
+
+        </place>
+        <item nomen="attendant" fights="true" followers="3">
+            <desc nomen="attendant" fights="true" followers="3">
+                The Kiosk Attendant wants you to hurry up!
+            </desc>
+            <desc nomen="attendant" fights="true" followers="3">
+
+            </desc>
+        </item>
+
     </stop>
 
     <stop nomen="parkchester" im="dmx.jpg" sd="canudigit.ogg" access="">
@@ -323,7 +338,17 @@
 
             </desc>
         </place>
-        <item nomen="nope"  access="" ></item>
+        <item nomen="westchester">
+            <desc nomen="westchester" desc_type="intro">
+                There is a business-man from Westchester. He has a long overcoat
+            </desc>
+            <desc nomen="westchester" ></desc>
+
+        </item>
+        <item nomen="nope"  access="swim-move">
+            <desc nomen=""></desc>
+
+        </item>
     </stop>
     <stop nomen="union square" im="needle.jpg" sd="" access="">
         <desc nomen="alive">YOU WIN! Hop up in your hipster palace!</desc>
