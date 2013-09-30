@@ -7,16 +7,19 @@ import time
 import logging
 import pygame.mixer as mix
 import string
+import sys
 import Q2logging
+from hipsterdom import *
 
 mix.init()
 logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
-#sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/PusherMan')
+sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/PusherMan')
 
+challenges = dict()
 stops = dict()
 finds = dict()
 sounds= dict() # keep track of which sounds have been played
-
+fights= dict()
 battles = dict()
 #initialize hashes and ats
 g_map = None
@@ -134,17 +137,15 @@ def image_to_ascii(stop,pause_sound=False, guess_name=False):
 def play_music(stop, pause_sound=False):
     global current_sound
 
-
     try:
         sound_file = "sounds/"+str(stop.attrs["sd"]).strip(string.whitespace)
-        current_sound.pause()
-        current_sound = mix.Sound()
-        mix.music.load(sound_file)
-        logging.info('music loaded')
         if not pause_sound:
-            mix.music.play()
+            mix.pause()
+            current_sound = mix.Sound(sound_file)
+            logging.info('music loaded')
+            current_sound.play()
         else:
-            mix.music.pause()
+            mix.pause()
     except:
         print "No music found"
 
@@ -220,6 +221,14 @@ def process_command(stop, command): #can also pass stop!
         elif verb =="cur":
             print "Hashes:", hashes
             print "Ats:",ats
+            for item in g_map.player.item:
+                print item.attrs["nomen"]
+                try:
+                    print "Uses:"
+                    for use in item.usage:
+                        print use.attrs["nomen"]
+                except:
+                    print "No uses..."
             return stop
         elif verb=="save":
             return save_command(stop)
@@ -337,6 +346,8 @@ def describe_command(stop,items,places,fights, noun):
     itm,access,ascii,sd = items.get(noun,("a","a","a","a"))
     boss_kw = noun
     global extras
+    global hashes
+    global ats
     if noun == "around": #functionality to show current landscape.
         extras = ["around"]
 
@@ -344,6 +355,15 @@ def describe_command(stop,items,places,fights, noun):
         #this loops checks to
         if finds.get(boss_kw,False):
             print "You already Twitter Battled the", boss_kw.upper(),"!"
+        else:
+            hashes, ats = twitter_data(boss_kw)
+            print "You now have", hashes,"ounces of hash"
+            print "And",ats, "holler-ats!"
+            finds[boss_kw] = hashes,ats
+    elif challenges.get(boss_kw) =='true':
+        print "Found challenging character"
+        if finds.get(boss_kw,False):
+            print "You already challenged the ",boss_kw.upper(),"!"
         else:
             hashes, ats = twitter_data(boss_kw)
             print "You now have", hashes,"ounces of hash"
@@ -517,10 +537,14 @@ def load_ats_hashes(game_file):
     return ats,hashes
 
 def get_data(stop): #can also pass stop and will have same result!
+    '''
+    Constructs lots of dicts
+    '''
     places = dict()
     fights = dict()
     items = dict()
     descs = dict()
+    challenges= dict()
     desc_ct=0
 
     for pl in stop.place:
@@ -537,14 +561,16 @@ def get_data(stop): #can also pass stop and will have same result!
         access = itm.attrs["access"]
         sd = itm.attrs["sd"]
         ascii = itm.attrs["im"]
+        chall = itm.attrs.get("challenge","False")
         fight = itm.attrs.get("fight", "False")
         items[nomen] = itm,access,ascii,sd
         fights[nomen] = fight
+        challenges[nomen]=chall
 
     for d in stop.desc:
         descs[desc_ct] = d.value
         desc_ct+=1
-    return places, items, fights, descs
+    return places, items, fights, descs, challenges
 
 def parse(cmd):
     cmd = one_word_cmds.get(cmd, cmd)

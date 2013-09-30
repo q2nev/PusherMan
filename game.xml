@@ -23,13 +23,18 @@
 
             </desc>
         </item>
-        <item nomen="gat">
-            <desc nomen="use">
-                <usage nomen="show" amt="">
-                    Waving your gun around can generally scare off a bitch.
-                </usage>
-                <usage nomen="" amt=""></usage>
-            </desc>
+        <item>
+            <usage nomen="show" amt="5">
+                Waving your gun around can generally scare off a bitch.
+            </usage>
+            <usage nomen="shoot" amt="5">
+                Bullets flyin', babies cryin. You sighin. Just another day in the hood G!
+            </usage>
+        </item>
+        <item nomen="swim-move" >
+            <usage>
+
+            </usage>
         </item>
     </player>
     <stop nomen="intro" sd="canudigit.ogg" im="chicken.jpg" access="">
@@ -124,7 +129,6 @@
             <desc nomen="subway">
                 You need a ticket to get on the subway!!
             </desc>
-
         </place>
         <place nomen="kiosk" dir="w" link="kiosk" fights="" access="">
             <desc>
@@ -140,6 +144,9 @@
             <desc nomen="ticket" challenges="true" fights="true" >You know this ticket is the real deal?</desc>
             <desc nomen="ticket" challenges="true" fights="true">
                 There's an old lady reaching for the ticket too!
+            </desc>
+            <desc nomen="use" challenges="false" fights="true">
+
             </desc>
         </item>
     </stop>
@@ -314,6 +321,14 @@
                 You need at least 25 @s to get on the train.
             </desc>
         </place>
+        <item nomen="pimp" dir="corner" fights="true">
+            <desc>
+                There's a man the looks a lot like a pimp in
+            </desc>
+            <desc>
+
+            </desc>
+        </item>
         <item nomen="dmx" im="" sd="" access="">
             <desc>
 

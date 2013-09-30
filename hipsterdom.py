@@ -7,21 +7,21 @@ import ascii as ASC
 
 import pygame.mixer as mix
 import game
-logging.basicConfig(filename='hipsterdom.log')
-hashes = 20
-ats = 20
-mix.init()
-with open("game.xml") as f:
-    xml_file = f.read()
-success, g_map = game.obj_wrapper(xml_file) #turn into python object via Q2API
-if not success:
-    logging.debug('obj_wrapper failed in main() before stops')
-    print "no object"
-    exit()
+# logging.basicConfig(filename='hipsterdom.log')
+# hashes = 20
+# ats = 20
+# mix.init()
+# with open("game.xml") as f:
+#     xml_file = f.read()
+# success, g_map = game.obj_wrapper(xml_file) #turn into python object via Q2API
+# if not success:
+#     logging.debug('obj_wrapper failed in main() before stops')
+#     print "no object"
+#     exit()
+#
+# stop = g_map.stop[1]
 
-stop = g_map.stop[1]
-
-def image_to_ascii(stop,pause_sound=False):
+def ascii_challenge(stop,pause_sound=False):
     '''
     separate image_to_ascii function to have guessing game.
     image_folder: where the images are stored
@@ -42,7 +42,7 @@ def image_to_ascii(stop,pause_sound=False):
     img = str(stop.attrs["im"]).strip(string.whitespace)
     img_txt = img[:-4]+'.txt'
     logging.debug("Image Text:",img_txt) #log image text for debugging
-    play_music(stop)
+    play_ascii(stop)
     boss_kw = str(stop.attrs["nomen"]).strip(string.whitespace)
 
 
@@ -50,7 +50,6 @@ def image_to_ascii(stop,pause_sound=False):
         with open('images/'+img_txt) as f:
             lines = f.read()
             print "Guess ascii by pressing enter!"
-
 
             for l in lines.split('\t'):
 
@@ -73,9 +72,9 @@ def image_to_ascii(stop,pause_sound=False):
                         print "You guessed right! Here are 5 hashes and ats for your prowess!"
                         hashes += 5
                         ats += 5
-                        return stop
+                        return hashes, ats
                     else:
-                        play_music(stop,False)
+                        play_ascii(stop,False)
     else:
         print "Converting jpg to txt!"
         ascii_string = ASC.image_diff('images/'+img)
@@ -85,10 +84,10 @@ def image_to_ascii(stop,pause_sound=False):
         for i in range(len(ascii_string)):
             fin.write(ascii_string[i]+'\t')
         fin.close()
+    return hashes,ats
 
-def play_music(stop, pause_sound=False):
+def play_ascii(stop, pause_sound=False):
     global current_sound
-
 
     try:
         sound_file = "sounds/"+str(stop.attrs["sd"]).strip(string.whitespace)
@@ -101,9 +100,5 @@ def play_music(stop, pause_sound=False):
         else:
             current_sound.stop()
     except:
-
         print "No music found"
 
-image_to_ascii(stop,True)
-print "Hashes:",hashes
-print "Ats:",ats
