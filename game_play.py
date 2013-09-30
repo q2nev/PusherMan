@@ -269,6 +269,8 @@ def go_command(stop,places,noun):
     '''
     global desc_ct
     global extras
+    global hashes
+    global ats
     try:
         pl,access = places.get(noun)
     except:
@@ -288,7 +290,24 @@ def go_command(stop,places,noun):
         stop = stops[link]
         extras =['stop_name','stop_desc','pause_music']
         return stop
+    elif pl and access.split(',')[2].strip(string.whitespace)=="cost":
+        #four-tuple here to describe the cost of an item
+        print "Do you want to pay for this?",access.split(',')[3].strip(string.whitespace), "Y or N?"
+        pay_cost = raw_input('>>')
+        if pay_cost == 'Y':
 
+            hash_cost= access.split(',')[1].strip(string.whitespace)
+            ats_cost = access.split(',')[0].strip(string.whitespace)
+            hashes -= hash_cost
+            ats -= ats_cost
+
+            finds[access.split(',')[3].strip(string.whitespace)]= True
+
+            link = pl.attrs["link"]
+            stop = stops[link]
+        elif pay_cost == 'N':
+            return stop
+        return stop
     else:
         extras=["bad_go"]
         print "You can't go there."

@@ -23,10 +23,17 @@ def clean_node_name(node_name):
 
     return clean_name
 
+class usage_q2class(Q2API.xml.base_xml.XMLNode):
+    def __init__(self, attrs):
+        self.level = 5
+        self.path = [None, u'game', u'player', u'item', u'desc']
+        Q2API.xml.base_xml.XMLNode.__init__(self, "usage", attrs, None, [])
+
 class desc_q2class(Q2API.xml.base_xml.XMLNode):
     def __init__(self, attrs):
         self.level = 4
         self.path = [None, u'game', u'player', u'item']
+        self.usage = []
         Q2API.xml.base_xml.XMLNode.__init__(self, "desc", attrs, None, [])
 
 class item_q2class(Q2API.xml.base_xml.XMLNode):
@@ -110,6 +117,9 @@ class NodeHandler(xml.sax.handler.ContentHandler):
         elif name == "place":
             self.obj_depth.append(place_q2class(p_attrs))
 
+        elif name == "usage":
+            self.obj_depth.append(usage_q2class(p_attrs))
+
         elif name == "desc":
             self.obj_depth.append(desc_q2class(p_attrs))
 
@@ -158,6 +168,12 @@ class NodeHandler(xml.sax.handler.ContentHandler):
 
         elif name == "place":
             self.obj_depth[-2].place.append(self.obj_depth[-1]) #  make this object a child of the next object up...
+            self.obj_depth[-2].children.append(self.obj_depth[-1]) #  put a reference in the children list as well
+            self.obj_depth.pop() # remove this node from the list, processing is complete
+            self.char_buffer = []
+
+        elif name == "usage":
+            self.obj_depth[-2].usage.append(self.obj_depth[-1]) #  make this object a child of the next object up...
             self.obj_depth[-2].children.append(self.obj_depth[-1]) #  put a reference in the children list as well
             self.obj_depth.pop() # remove this node from the list, processing is complete
             self.char_buffer = []
