@@ -157,21 +157,31 @@ def image_to_ascii(stop,pause_sound=False):
 
 def play_music(stop, pause_sound=False):
     #sound_delay = str(stop.attrs["delay"]).strip(string.whitespace)
-    sound_file = "sounds/"+str(stop.attrs["sd"]).strip(string.whitespace)
+    try:
+        sound_file = "sounds/"+str(stop.attrs["sd"]).strip(string.whitespace)
 
-    mix.music.load(sound_file)
-    if not pause_sound:
-        mix.music.play()
-    else:
-        mix.music.pause()
+        mix.music.load(sound_file)
+        logging.info('music loaded')
+        if not pause_sound:
+            mix.music.play()
+        else:
+            mix.music.pause()
+    except:
+        print "no music found"
 
 def twitter_data(stop,boss_kw):
+    '''
+    call_prompt: users input keyword
+    hash_diff: difference in hashtags for a RT boss
+    ats_diff: difference in ats for a RT boss
+    hashes: currently tabulated hashes
+    ats: currently tabulated hashes
+    '''
     global hashes
     global ats
     print "It's a glare from", boss_kw
     call_prompt = raw_input("What's your call against this mean muggin?!")
-    play_music(stop,pause_sound=True)
-    #start twitter game here
+
     hash_diff, at_diff = battle(boss_kw,call_prompt)
     finds[boss_kw] = hash_diff,at_diff
     #maybe use get function here to define
@@ -276,13 +286,16 @@ def go_command(stop,places,noun):
     global extras
     pl,access = places.get(noun,(False,True))
 
-    if pl and finds.get(access) :
+    if pl and finds.get(access):
+        print "found finds"
         desc_ct = 0
         link = pl.attrs["link"]
         stop = stops[link]
         extras =['stop_name','stop_desc','pause_music']
         return stop
-    elif not bool(access):
+    elif pl: # I still don't think this is right....
+        print access
+        print type('access')
         desc_ct = 0
         link = pl.attrs["link"]
         stop = stops[link]
@@ -299,11 +312,12 @@ def get_command(stop,items,noun):
     global extras
     global player
     for item in stop.item:
-        if item.attrs.get("nomen") == noun and player.item:
+        if item.attrs.get("nomen") == noun and finds.get("nomen",False):
             player.item.append(item)
             player.children.append(item)
+
         print "you get the " + noun
-        return
+    return
 
 def describe_command(stop,items,places,fights, noun):
     pl,access = places.get(noun,(False,True))
@@ -327,9 +341,10 @@ def describe_command(stop,items,places,fights, noun):
         print "Not everybody's trying to hustle a hustler!"
         print pl.desc[0].value
 
-    elif itm:
+    elif itm and not bool(itm): #checks to make sure it's not a string as well...
         print "Grab it!"
         print itm.desc[0].value
+        finds[boss_kw]
     return stop
 
 def restart_command(stop):

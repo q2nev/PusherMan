@@ -1,5 +1,5 @@
 <game>
-    <player stop="parkchester" hashes="20" ats="20" hollers="2" lifelines="10">
+    <player stop="start" hashes="20" ats="20" hollers="2" lifelines="10">
         <item nomen="how" finds="false">
             <desc nomen="how" finds="false">
        -"describe around" will describe the things that you can touch currently on your stop.
@@ -23,12 +23,8 @@
 
             </desc>
         </item>
-        <item nomen="ticket" finds="false" access=""></item>
-        <item nomen="pocket sand" finds="false" access=""></item>
-        <item nomen="chicken" finds="false" access=""></item>
-
     </player>
-    <stop nomen="intro" sd="breakyaneck.ogg" im="chicken.jpg" access="">
+    <stop nomen="intro" sd="" im="chicken.jpg" access="">
         <desc nomen="intro" >
      *******                  **                            ****     ****
     /**////**                /**                            /**/**   **/**
@@ -126,10 +122,9 @@
                 Run for your life!
             </desc>
         </place>
-        <item nomen="ticket" im="" sd=""  access="">
-            <desc nomen="ticket"> </desc>
+        <item nomen="ticket" dir="" im="" sd=""  access="">
+            <desc nomen="ticket">You know this ticket is the real deal?</desc>
         </item>
-
     </stop>
 
     <stop nomen="parkchester" im="dmx.jpg" sd="canudigit.ogg" access="">
