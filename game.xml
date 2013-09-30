@@ -116,7 +116,7 @@
             <desc nomen="subway">
                 You need a ticket to get on the subway!!
             </desc>
-            
+
         </place>
         <place nomen="kiosk" dir="w" link="kiosk" access="">
             <desc>
@@ -128,8 +128,11 @@
                 Run for your life!
             </desc>
         </place>
-        <item nomen="ticket" dir="" im="" sd=""  access="">
-            <desc nomen="ticket">You know this ticket is the real deal?</desc>
+        <item nomen="ticket" dir="" im="" sd=""  access="" fights="true" followers="1">
+            <desc nomen="ticket" challenges="true" fights="true" >You know this ticket is the real deal?</desc>
+            <desc nomen="ticket" challenges="true" fights="true">
+                There's an old lady reaching for the ticket too!
+            </desc>
         </item>
     </stop>
     <stop nomen="kiosk">
@@ -143,6 +146,7 @@
             <desc nomen="attendant" fights="true" followers="3">
 
             </desc>
+
         </item>
 
     </stop>

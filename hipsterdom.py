@@ -31,6 +31,7 @@ def image_to_ascii(stop,pause_sound=False):
     '''
     global hashes
     global ats
+    global current_sound
 
     logging.debug('image_to_ascii function entered.')
 
@@ -59,19 +60,22 @@ def image_to_ascii(stop,pause_sound=False):
                 print l
 
                 while msvcrt.kbhit():
+                    current_sound.stop()
                     msvcrt.getch()
-                    play_music(stop,True)
+
                     print "-----------------------------------------------"
                     print "What's your guess?"
-                    print type(boss_kw)
-                    boss_guess = raw_input(">>")
+                    print boss_kw
 
+                    boss_guess = raw_input(">>")
                     if boss_guess == boss_kw:
+                        current_sound.play()
                         print "You guessed right! Here are 5 hashes and ats for your prowess!"
                         hashes += 5
                         ats += 5
+                        return stop
                     else:
-                        mix.music.play()
+                        play_music(stop,False)
     else:
         print "Converting jpg to txt!"
         ascii_string = ASC.image_diff('images/'+img)
@@ -83,17 +87,21 @@ def image_to_ascii(stop,pause_sound=False):
         fin.close()
 
 def play_music(stop, pause_sound=False):
-    #sound_delay = str(stop.attrs["delay"]).strip(string.whitespace)
+    global current_sound
+
+
     try:
         sound_file = "sounds/"+str(stop.attrs["sd"]).strip(string.whitespace)
         logging.info("Soundfile:", sound_file)
-        mix.music.load(sound_file)
+        current_sound = mix.Sound(sound_file)
+        # mix.music.load(sound_file)
         logging.info('music loaded')
         if not pause_sound:
-            mix.music.play()
+            current_sound.play()
         else:
-            mix.music.pause()
+            current_sound.stop()
     except:
+
         print "No music found"
 
 image_to_ascii(stop,True)

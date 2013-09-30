@@ -109,8 +109,6 @@ def image_to_ascii(stop,pause_sound=False, guess_name=False):
     img: string from stop.attrs
     img_txt: possible text string that would've already been generated
     '''
-    global hashes
-    global ats
     image_folder = os.listdir('images/')
     logging.debug('Image folder found.')
     img = str(stop.attrs["im"]).strip(string.whitespace)
@@ -122,9 +120,7 @@ def image_to_ascii(stop,pause_sound=False, guess_name=False):
             lines = f.read()
             print "Guess ascii by pressing enter!"
             for l in lines.split('\t'):
-                while not msvcrt.kbhit():
-                    time.sleep(.2)
-                    break
+                time.sleep(1.5)
                 print l
     else:
         ascii_string = ASC.image_diff('images/'+img)
