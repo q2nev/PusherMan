@@ -13,16 +13,16 @@ from hipsterdom import *
 
 mix.init()
 logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
-sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/PusherMan')
 
-challenges = dict()
 stops = dict()
+challenges = dict()
 finds = dict()
 sounds= dict() # keep track of which sounds have been played
 fights= dict()
-battles = dict()
-#initialize hashes and ats
+
 g_map = None
+global followers
+followers = 10
 hashes = 20
 ats = 20
 desc_ct = 0
@@ -38,18 +38,12 @@ def main():
         logging.warning('obj_wrapper failed in main() before stops')
         print "no object"
         exit()
-    # construct global dicts: stops and battles
+    # construct global dicts: stops
     global stops # possible positions
     for stop in g_map.stop:
         nomen = stop.attrs["nomen"]
         stops[nomen] = stop
     stop = g_map.stop[0] #inital stop
-    # battles is a dict of twitter battle result descriptions
-    global battles
-    for scenario in g_map.scenario: # load scenarios into dict with ats, hashes
-        ats = scenario.attrs['ats']
-        hashes = scenario.attrs['hashes']
-        battles[(ats,hashes)] = scenario
     # initialize player
     global player
     player = g_map.player[0]
@@ -79,7 +73,7 @@ def describe(stop,extras):
     '''
     logging.info("Current Extras",extras)
     global desc_ct
-    if len(extras)>0:
+    if extras:
         if 'stop_name' in extras:
             print stop.attrs["nomen"].upper(), "STATION"
 
@@ -102,6 +96,9 @@ def describe(stop,extras):
                     print "\n\t"+"Name for item:", i.attrs.get("nomen")+".", "Direction for place:", i.attrs.get("dir")
                     print "\n\t"+"Item description:", str(i.desc[0].value).strip(string.whitespace)
                     print "__________________________________________________________"
+        if 'results' in extras:
+            print "After that game you have",hashes, "Hashes, and",ats,"Ats."
+            print "You also have", followers,"Followers."
     return stop
 
 def image_to_ascii(stop,pause_sound=False, guess_name=False):
@@ -136,7 +133,6 @@ def image_to_ascii(stop,pause_sound=False, guess_name=False):
 
 def play_music(stop, pause_sound=False):
     global current_sound
-
     try:
         sound_file = "sounds/"+str(stop.attrs["sd"]).strip(string.whitespace)
         if not pause_sound:
@@ -149,7 +145,7 @@ def play_music(stop, pause_sound=False):
     except:
         print "No music found"
 
-def twitter_data(stop,boss_kw):
+def twitter_data(noun):
     '''
     call_prompt: users input keyword
     hash_diff: difference in hashtags for a RT boss
@@ -159,12 +155,12 @@ def twitter_data(stop,boss_kw):
     '''
     global hashes
     global ats
-    print "It's a glare from", boss_kw
+
+    print "It's a glare from",
     call_prompt = raw_input("What's your call against this mean muggin?!")
 
-    hash_diff, at_diff = battle(boss_kw,call_prompt)
-    finds[boss_kw] = hash_diff,at_diff
-    #maybe use get function here to define
+    hash_diff, at_diff = battle(call_prompt)
+
     hashes += hash_diff
     ats += at_diff
     if hashes <0 or ats<0: #breaks if either returns zero
@@ -195,12 +191,7 @@ def process_command(stop, command): #can also pass stop!
     global extras
     global logging
 
-    places, items, fights, descs = get_data(stop)
-    logging.debug("Places:", places, type(places))
-    logging.debug("Items:", items, type(items))
-    logging.debug("Fights:", fights, type(fights))
-    logging.debug("Descs:", descs, type(descs))
-
+    descs = descs_dict(stop)
     extras = []
     if len(command) == 0:
         logging.info('Pressed Enter.')
@@ -209,11 +200,11 @@ def process_command(stop, command): #can also pass stop!
     else:
         verb, noun = parse(command)
         if verb == "go":
-            return go_command(stop,places,noun)
+            return go_command(stop,noun)
         elif verb == "describe":
-            return describe_command(stop,items,places,fights,noun)
+            return describe_command(stop,player,noun)
         elif verb== "take":
-            return take_command(stop,items,fights,noun)
+            return take_command(stop,noun)
         elif verb == "load": #loads game from save directory
             return load_command(stop)
         elif verb == "score": #score board functionality
@@ -265,14 +256,15 @@ def enter_command(stop,descs):
     if max_desc > desc_ct:
         desc_ct+=1
     elif max_desc == desc_ct: # the end of the descs
-        print "\n\n You have reached the end of this info. Try typing 'describe around' to learn options."
+        print "\n\n You have reached the end of this info. \n\n"
+        print "Try typing 'describe around' to learn more options."
         desc_ct = 0
     else: # the beginning of the descs
         desc_ct=0
     extras = ['stop_desc']
     return stop
 
-def go_command(stop,places,noun):
+def go_command(stop,noun):
     '''
     places: dictionary of the form: places[noun]: pl object, acess string
     '''
@@ -280,43 +272,40 @@ def go_command(stop,places,noun):
     global extras
     global hashes
     global ats
-    try:
-        pl,access = places.get(noun)
-    except:
-        print "Not a place!"
 
-    if access == "":
-        desc_ct = 0
-        link = pl.attrs["link"]
-        stop = stops[link]
-        extras =['stop_name','stop_desc','pause_music']
-        return stop
-
-    elif pl and finds[access]== True:
-        print "found finds"
-        desc_ct = 0
-        link = pl.attrs["link"]
-        stop = stops[link]
-        extras =['stop_name','stop_desc','pause_music']
-        return stop
-    elif pl and access.split(',')[2].strip(string.whitespace)=="cost":
-        #four-tuple here to describe the cost of an item
-        print "Do you want to pay for this?",access.split(',')[3].strip(string.whitespace), "Y or N?"
-        pay_cost = raw_input('>>')
-        if pay_cost == 'Y':
-
-            hash_cost= access.split(',')[1].strip(string.whitespace)
-            ats_cost = access.split(',')[0].strip(string.whitespace)
-            hashes -= hash_cost
-            ats -= ats_cost
-
-            finds[access.split(',')[3].strip(string.whitespace)]= True
+    for pl in stop.place:
+        if noun in stop.place.get("nomen"):
+            access = player.attrs["access"]
+            if access in player.item.attrs.get('nomen') and access:
+                print 'Use your',access,'?'
+                access_q = raw_input('>>')
+                if access_q.lower() == "y":
+                    extras =['stop_name','stop_desc','pause_music']
+                    desc_ct=0
+                else:
+                    print "well then you can't go there."
+            elif access == "":
+                    desc_ct = 0
+                    extras =['stop_name','stop_desc','pause_music']
+            elif access[0] == "cost":
+                hashes_cost= access[1]
+                ats_cost = access[2]
+                print "Do you want to pay for this?"
+                print hashes_cost,"Hashes"
+                print ats_cost,"Ats"
+                pay_cost = raw_input('>>')
+                if pay_cost.lower() == 'y':
+                    hashes -= hashes_cost
+                    ats -= ats_cost
+                else:
+                    print "Well then I guess you'll just have to find another way!"
+                    return stop
 
             link = pl.attrs["link"]
             stop = stops[link]
-        elif pay_cost == 'N':
             return stop
-        return stop
+        else:
+            print "This is no place."
     else:
         extras=["bad_go"]
         print "You can't go there."
@@ -333,52 +322,56 @@ def take_command(stop,items,fights,noun):
                 if finds.get(noun):
                     player.item.append(item)
                     player.children.append(item)
-                    finds[noun]=True
-
+                    stop.item.remove(item)
+                    stop.children.remove(item)
+                    finds[noun]="True"
             print "You get the " + noun
         return stop
     except:
         print "This item does not exist at this stop!"
         return stop
 
-def describe_command(stop,items,places,fights, noun):
-    pl,access = places.get(noun,(False,True))
-    itm,access,ascii,sd = items.get(noun,("a","a","a","a"))
-    boss_kw = noun
+def describe_command(stop, player, noun):
+    # itm,access,ascii,sd = items.get(noun,("","","",""))
     global extras
     global hashes
     global ats
     if noun == "around": #functionality to show current landscape.
-        extras = ["around"]
+            extras = ["around"]
+    elif True:
+        for itm in stop.item:
+            if itm.attrs["nomen"] == noun:
+                boss= itm.attrs.get("kw")
+                if itm.attrs["fights"]:
+                    hashes, ats = twitter_data(boss)
+                    extras= ["hashes", "ats", "battle_results"]
+                    print "You now have", hashes,"ounces of hash"
+                    print "And",ats, "holler-ats!"
 
-    elif fights.get(boss_kw) == 'true':
-        #this loops checks to
-        if finds.get(boss_kw,False):
-            print "You already Twitter Battled the", boss_kw.upper(),"!"
-        else:
-            hashes, ats = twitter_data(boss_kw)
-            print "You now have", hashes,"ounces of hash"
-            print "And",ats, "holler-ats!"
-            finds[boss_kw] = hashes,ats
-    elif challenges.get(boss_kw) =='true':
-        print "Found challenging character"
-        if finds.get(boss_kw,False):
-            print "You already challenged the ",boss_kw.upper(),"!"
-        else:
-            hashes, ats = twitter_data(boss_kw)
-            print "You now have", hashes,"ounces of hash"
-            print "And",ats, "holler-ats!"
-            finds[boss_kw] = hashes,ats
-    elif pl:
-        print "Not everybody's trying to hustle a hustler!"
-        print pl.desc[0].value
+                    player.item.append(itm)
+                    player.children.append(itm)
+                    stop.item.remove(itm)
+                    stop.children.remove(itm)
 
-    elif itm and not bool(itm): #checks to make sure it's not a string as well...
-        print "Grab it!"
-        print itm.desc[0].value
+                if itm.attrs["challenges"]:
+                    extras=["ascii_game"]
+
+        for itm in player.item:
+            if noun == itm.attrs.get("nomen"):
+                print "You already Twitter Battled the", noun
+
+            elif itm : #checks to make sure it's not a string as well...
+                print "Grab it!"
+                print itm.desc[0].value
+
+        for pl in stop.place:
+            if pl.attrs.get("nomen")==noun:
+                extras= ['describe_place', 'describe_access']
+    else:
+        print "Where?"
     return stop
 
-def restart_command(stop):
+def restart_command():
     print "Restart game? (Y/N)"
     restart_game = raw_input('>>')
     if restart_game == "Y":
@@ -399,21 +392,13 @@ def save_command(stop):
     player.attrs["stop"] = str(stop_nomen)
     player.attrs["hashes"] = hashes
     player.attrs["ats"]= ats
-    # player.attrs["hollers"]= hollers
-    # player.attrs["lifelines"] =lifelines
+    player.attrs["followers"] = followers
 
-    player.attrs["hashes"] = hashes
-    player.attrs["ats"] = ats
-
-    for itm in player.item:
-        if itm.attrs["boss_kw"] in finds.keys():
-            itm.attrs["finds"] = 'true'
     save_file = raw_input("enter a name for the save file>")
     with open("save\\" + save_file + ".xml", "w+") as f:
         f.write(g_map.flatten_self())
         print "game saved!"
     print "Continue game ? (Y/N) (Pressing N will put exit the game!)"
-
     continue_game = raw_input('>>')
     if continue_game == "Y":
         return stop
@@ -536,41 +521,12 @@ def load_ats_hashes(game_file):
     logging.info('Leaving load_ats_hashes')
     return ats,hashes
 
-def get_data(stop): #can also pass stop and will have same result!
-    '''
-    Constructs lots of dicts
-    '''
-    places = dict()
-    fights = dict()
-    items = dict()
-    descs = dict()
-    challenges= dict()
-    desc_ct=0
-
-    for pl in stop.place:
-        nomen = pl.attrs["nomen"]
-        dirs = pl.attrs.get("dir")
-        access = pl.attrs.get("access")
-        fight = pl.attrs.get("fight", "False")
-        places[nomen] = pl,access
-        places[dirs] = pl,access
-        fights[nomen] = fight
-
-    for itm in stop.item:
-        nomen = itm.attrs["nomen"]
-        access = itm.attrs["access"]
-        sd = itm.attrs["sd"]
-        ascii = itm.attrs["im"]
-        chall = itm.attrs.get("challenge","False")
-        fight = itm.attrs.get("fight", "False")
-        items[nomen] = itm,access,ascii,sd
-        fights[nomen] = fight
-        challenges[nomen]=chall
-
+def descs_dict(stop): #can also pass stop and will have same result!
+    descs= dict()
     for d in stop.desc:
         descs[desc_ct] = d.value
         desc_ct+=1
-    return places, items, fights, descs, challenges
+    return descs
 
 def parse(cmd):
     cmd = one_word_cmds.get(cmd, cmd)
@@ -608,7 +564,10 @@ def battle(boss_kw, call_prompt):
         hashes_winner = 'equal'
     else:
         hashes_winner = 'boss'
-    print battles[(ats_winner,hashes_winner)].desc[0].value
+    for scen in g_map.scenario:
+        if scen.attrs.get('hashes') and scen.attrs.get('ats'):
+            print scen.value
+
     return hashes_diff, ats_diff
 
 translate_verb = {"g" : "go","go" : "go","walk" : "go","jump" : "go",

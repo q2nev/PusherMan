@@ -5,14 +5,16 @@
     <ignored path="PusherMan.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/../RapBattle/strip.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380038777868" ignored="false" />
-    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380570251182" ignored="false" />
+    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380583562855" ignored="false" />
     <file path="/a.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380040219281" ignored="false" />
-    <file path="/game.xml" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380568620040" ignored="false" />
+    <file path="/game.xml" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380578886322" ignored="false" />
     <file path="/ascii.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380125800319" ignored="false" />
     <file path="/twitter.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380127745443" ignored="false" />
     <file path="/README.md" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380132451589" ignored="false" />
     <file path="/game_play2.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380154401829" ignored="false" />
     <file path="/hipsterdom.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380570194378" ignored="false" />
+    <file path="/thread_practice.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380578413844" ignored="false" />
+    <file path="/music.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380574131922" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +37,7 @@
       <file leaf-file-name="game_play.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game_play.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="148" column="11" selection-start="5145" selection-end="5145" vertical-scroll-proportion="2.6491227">
+            <state line="21" column="0" selection-start="405" selection-end="405" vertical-scroll-proportion="0.45132744">
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -43,13 +45,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hipsterdom.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hipsterdom.py">
+      <file leaf-file-name="commands.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/commands.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="83" column="42" selection-start="2546" selection-end="2546" vertical-scroll-proportion="0.0">
+            <state line="34" column="25" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#14#0" expanded="true" />
+                <element signature="e#0#16#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="game.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/game.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="111" column="67" selection-start="4371" selection-end="4379" vertical-scroll-proportion="-5.6666665">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="music.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/music.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="12" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -63,11 +83,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/game.xml">
+      <file leaf-file-name="thread_practice.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/thread_practice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="38" selection-start="735" selection-end="735" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="47" column="18" selection-start="1155" selection-end="1155" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -77,6 +99,17 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="14" column="26" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hipsterdom.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hipsterdom.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="71" column="29" selection-start="2048" selection-end="2048" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -96,8 +129,11 @@
         <option value="$PROJECT_DIR$/game_play2.py" />
         <option value="$PROJECT_DIR$/twitter.py" />
         <option value="$PROJECT_DIR$/ascii.py" />
-        <option value="$PROJECT_DIR$/game.xml" />
         <option value="$PROJECT_DIR$/hipsterdom.py" />
+        <option value="$PROJECT_DIR$/music.py" />
+        <option value="$PROJECT_DIR$/commands.py" />
+        <option value="$PROJECT_DIR$/thread_practice.py" />
+        <option value="$PROJECT_DIR$/game.xml" />
         <option value="$PROJECT_DIR$/game_play.py" />
       </list>
     </option>
@@ -218,12 +254,31 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nwatkins\PycharmProjects\PusherMan\images" />
       <recent name="C:\Users\nwatkins\PycharmProjects\PusherMan\sounds" />
       <recent name="C:\Users\nwatkins\PycharmProjects\PusherMan\images\fonts" />
-      <recent name="C:\Users\nwatkins\PycharmProjects\PusherMan\images" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.hipsterdom">
+  <component name="RunManager" selected="Python.thread_practice">
+    <configuration default="false" name="thread_practice" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="PusherMan" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/thread_practice.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -358,12 +413,18 @@
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.game_play" />
       <item index="1" class="java.lang.String" itemvalue="Python.ascii" />
       <item index="2" class="java.lang.String" itemvalue="Python.twitter" />
       <item index="3" class="java.lang.String" itemvalue="Python.hipsterdom" />
+      <item index="4" class="java.lang.String" itemvalue="Python.thread_practice" />
     </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Python.thread_practice" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="TaskManager">
@@ -387,7 +448,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995272" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3286052" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286052" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -456,22 +517,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="216" column="85" selection-start="8037" selection-end="8037" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -506,13 +555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/twitter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="26" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -527,13 +569,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="38" selection-start="735" selection-end="735" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ascii.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="22" selection-start="66" selection-end="66" vertical-scroll-proportion="0.0">
@@ -541,18 +576,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/music.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="12" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commands.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="25" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/hipsterdom.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="42" selection-start="2546" selection-end="2546" vertical-scroll-proportion="0.0">
+        <state line="71" column="29" selection-start="2048" selection-end="2048" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/twitter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="26" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thread_practice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="18" selection-start="1155" selection-end="1155" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="67" selection-start="4371" selection-end="4379" vertical-scroll-proportion="-5.6666665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/game_play.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="11" selection-start="5145" selection-end="5145" vertical-scroll-proportion="2.6491227">
+        <state line="21" column="0" selection-start="405" selection-end="405" vertical-scroll-proportion="0.45132744">
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

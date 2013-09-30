@@ -19,7 +19,7 @@
 
          A twitter battle takes a bosses keyword and puts it against yours!
          The quickest tongue with the most popularity takes the other's
-                holler-ats and hash.
+         holler-ats and hash.
 
             </desc>
         </item>
@@ -50,9 +50,17 @@
 
                   By Nevin Watkins and the Q2 Project R Crew
 
-                            PRESS ENTER TO BEGIN
+                          PRESS ENTER to LEARN MORE.
+
+                          Type START to begin game.
+
+                      Type LOAD to load previous games.
+
+                       Type HELP or HOW for more info!
         </desc>
         <desc nomen="intro" >
+            Having a rough, young life in the heart of the Bronx.
+
             You have recently been forced into being a drug mule
 
         by the youngest gang in your neighborhood: the Domenech Brothers.
@@ -130,12 +138,12 @@
                 You need a ticket to get on the subway!!
             </desc>
         </place>
-        <place nomen="kiosk" dir="w" link="kiosk" fights="" access="">
+        <place nomen="kiosk" dir="w" link="kiosk" fights="" challenge="" access="">
             <desc>
-
+                You can buy a ticket here...
             </desc>
         </place>
-        <place nomen="north" dir="n" link="death" access="">
+        <place nomen="north" dir="n" link="death" access="" fights="" challenge="">
             <desc nomen="north" dir="n">
                 Run for your life!
             </desc>
@@ -586,59 +594,65 @@
             </desc>
         </place>
     </stop>
+
     <scenario ats="boss" hashes="boss" sd="">
-        <desc ats="boss" hashes="boss" sd="">
+
             They smoked you out! And you couldn't fight!
             You lose some of your stash! And your ats!
-        </desc>
+
     </scenario>
     <scenario ats="boss" hashes="equal" sd="">
-        <desc ats="boss" hashes="equal" sd="">
+
             They're packing the same hashes!
+            And they definitely hollered more than you could
             Run brother, run!!
-        </desc>
+            You're getting a little hoarse!
+
     </scenario>
     <scenario ats="boss" hashes="player" sd="">
-        <desc ats="boss" hashes="player" sd="">
+
             You smoked them out!
-        </desc>
+            But they had more hollerin!
+            It happens to the best of us!
+            Time to find some new turf!
+
     </scenario>
     <scenario ats="equal" hashes="boss" sd="">
-        <desc ats="equal" hashes="boss" sd="">
+
             They smoked you out! And grabbed some of your hash!
             You drawed on holler-ats!
             So your crew can't help you out!
             You better move on, because this sucker is all hashed up.
-        </desc>
+
     </scenario>
     <scenario ats="equal" hashes="equal" sd="">
-        <desc ats="equal" hashes="equal" sd="">
+
             It's a draw!
             Somethings are better left unsaid, player.
             You best dry your eyes.
-        </desc>
+
     </scenario>
     <scenario ats="equal" hashes="player" sd="">
-        <desc ats="equal" hashes="player">
+
             You smoked them out and grabbed some of their hash!
             We're rich bitch!
-        </desc>
+
     </scenario>
     <scenario ats="player" hashes="boss" sd="">
-        <desc ats="player" hashes="boss" sd="">
+
             You out hollered them. You mad tweeter, you!
             But they did smoke you out and nab some of your stash!
-        </desc>
+
     </scenario>
     <scenario ats="player" hashes="equal" sd="">
-        <desc ats="player" hashes="equal" sd="">
+
             You sly mother. You beat that turkey!
             And gained some followers from his crew!
             Holler at it baby!!
-        </desc>
+
     </scenario>
     <scenario ats="player" hashes="player" sd="">
-        <desc ats="player" hashes="player" sd="">
+
             You hollered so hard that you added some holler to your crew!
             Feel that beat get loose in you!
             Trap the mean and throw the noose.
@@ -647,7 +661,7 @@
 
             You popped them so hard you grabbed some hash too!
             Holler! Holler!
-        </desc>
+
     </scenario>
 
 </game>
