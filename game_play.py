@@ -13,12 +13,9 @@ logging.basicConfig(filename='game_play.log',logging=logging.DEBUG)
 #sys.path.insert(0,'C:/Users/nwatkins/PycharmProjects/PusherMan')
 
 stops = dict()
-# fights = dict()
-# items = dict()
-# places = dict()
 finds = dict()
 sounds= dict() # keep track of which sounds have been played
-#asciis = dict()
+
 battles = dict()
 #initialize hashes and ats
 g_map = None
@@ -76,11 +73,12 @@ def describe(stop,extras):
     sound: don't play the song
     desc_ct: current description
     '''
-    print extras
+    logging.info("Current Extras",extras)
     global desc_ct
     if len(extras)>0:
         if 'stop_name' in extras:
             print stop.attrs["nomen"].upper(), "STATION"
+
         if 'stop_desc' in extras:
             print stop.desc[desc_ct].value
         if 'ascii' in extras:
@@ -97,16 +95,16 @@ def describe(stop,extras):
                     print "\n\t"+"Place description:", str(p.desc[0].value).strip(string.whitespace)
                     print "_________________________________________________________"
             for i in stop.item:
-                    print "\n\t"+"Name for place:", i.attrs.get("nomen")+".", "Direction for place:", i.attrs.get("dir")
+                    print "\n\t"+"Name for item:", i.attrs.get("nomen")+".", "Direction for place:", i.attrs.get("dir")
                     print "\n\t"+"Item description:", str(i.desc[0].value).strip(string.whitespace)
                     print "__________________________________________________________"
-
     return stop
 
 def image_to_ascii(stop,pause_sound=False):
     '''
     separate image_to_ascii function to have guessing game.
     image_folder: where the images are stored
+    (All images need to have 3-letter formats a.k.a. .jpegs won't work)
     img: string from stop.attrs
     img_txt: possible text string that would've already been generated
     '''
@@ -117,7 +115,7 @@ def image_to_ascii(stop,pause_sound=False):
     logging.debug('Image folder found.')
     img = str(stop.attrs["im"]).strip(string.whitespace)
     img_txt = img[:-4]+'.txt'
-    logging.info(img_txt)
+    logging.info(img_txt) #log image text for debugging
     play_music(stop)
     boss_kw = str(stop.attrs["nomen"]).strip(string.whitespace)
     #shorten this in game_play2
@@ -156,7 +154,6 @@ def image_to_ascii(stop,pause_sound=False):
         fin.close()
 
 def play_music(stop, pause_sound=False):
-    #sound_delay = str(stop.attrs["delay"]).strip(string.whitespace)
     try:
         sound_file = "sounds/"+str(stop.attrs["sd"]).strip(string.whitespace)
 
@@ -167,7 +164,7 @@ def play_music(stop, pause_sound=False):
         else:
             mix.music.pause()
     except:
-        print "no music found"
+        print "No music found"
 
 def twitter_data(stop,boss_kw):
     '''
@@ -213,6 +210,7 @@ def process_command(stop, command): #can also pass stop!
     global hashes
     global ats
     global extras
+    global logging
 
     places, items, fights, descs = get_data(stop)
     logging.debug("Places:", places, type(places))
@@ -231,6 +229,8 @@ def process_command(stop, command): #can also pass stop!
             return go_command(stop,places,noun)
         elif verb == "describe":
             return describe_command(stop,items,places,fights,noun)
+        elif verb== "take":
+            return take_command(stop,items,fights,noun)
         elif verb == "load": #loads game from save directory
             return load_command(stop)
         elif verb == "score": #score board functionality
@@ -282,42 +282,54 @@ def enter_command(stop,descs):
     return stop
 
 def go_command(stop,places,noun):
+    '''
+    places: dictionary of the form: places[noun]: pl object, acess string
+    '''
     global desc_ct
     global extras
-    pl,access = places.get(noun,(False,True))
+    try:
+        pl,access = places.get(noun)
+    except:
+        print "Not a place!"
 
-    if pl and finds.get(access):
+    if access == "":
+        desc_ct = 0
+        link = pl.attrs["link"]
+        stop = stops[link]
+        extras =['stop_name','stop_desc','pause_music']
+        return stop
+
+    elif pl and finds[access]== True:
         print "found finds"
         desc_ct = 0
         link = pl.attrs["link"]
         stop = stops[link]
         extras =['stop_name','stop_desc','pause_music']
         return stop
-    elif pl: # I still don't think this is right....
-        print access
-        print type('access')
-        desc_ct = 0
-        link = pl.attrs["link"]
-        stop = stops[link]
-        extras =['stop_name','stop_desc','pause_music']
-        return stop
+
     else:
         extras=["bad_go"]
         print "You can't go there."
         extras =['stop_name','stop_desc']
         return stop
 
-def get_command(stop,items,noun):
+def take_command(stop,items,fights,noun):
     global desc_ct
     global extras
     global player
-    for item in stop.item:
-        if item.attrs.get("nomen") == noun and finds.get("nomen",False):
-            player.item.append(item)
-            player.children.append(item)
+    try:
+        for item in stop.item:
+            if item.attrs.get("nomen") == noun:
+                if finds.get(noun):
+                    player.item.append(item)
+                    player.children.append(item)
+                    finds[noun]=True
 
-        print "you get the " + noun
-    return
+            print "You get the " + noun
+        return stop
+    except:
+        print "This item does not exist at this stop!"
+        return stop
 
 def describe_command(stop,items,places,fights, noun):
     pl,access = places.get(noun,(False,True))
@@ -336,7 +348,6 @@ def describe_command(stop,items,places,fights, noun):
             print "You now have", hashes,"ounces of hash"
             print "And",ats, "holler-ats!"
             finds[boss_kw] = hashes,ats
-
     elif pl:
         print "Not everybody's trying to hustle a hustler!"
         print pl.desc[0].value
@@ -344,7 +355,6 @@ def describe_command(stop,items,places,fights, noun):
     elif itm and not bool(itm): #checks to make sure it's not a string as well...
         print "Grab it!"
         print itm.desc[0].value
-        finds[boss_kw]
     return stop
 
 def restart_command(stop):
@@ -574,8 +584,8 @@ def battle(boss_kw, call_prompt):
     print battles[(ats_winner,hashes_winner)].desc[0].value
     return hashes_diff, ats_diff
 
-translate_verb = {"g" : "go","go" : "go","walk" : "go","get" : "go","jump" : "go",
-                  "t" : "take", "take" : "take","grab" : "take",
+translate_verb = {"g" : "go","go" : "go","walk" : "go","jump" : "go",
+                  "t" : "take", "take" : "take","grab" : "take","get":"take",
                   "l":"describe","look":"describe","describe" : "describe","desc":"describe",
                   "current":"cur","cur":"cur","give":"cur",
                   "load":"load","save":"save",

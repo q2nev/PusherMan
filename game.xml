@@ -114,6 +114,11 @@
         </desc>
         <place nomen="subway" link="parkchester" access="ticket">
             <desc>
+                You need a ticket to get on the subway!!
+            </desc>
+        </place>
+        <place nomen="kiosk" dir="w" link="parkchester" access="">
+            <desc>
 
             </desc>
         </place>

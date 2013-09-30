@@ -45,7 +45,6 @@ def image_list(file):
     im = im.convert("L")
     im = ImageOps.autocontrast(im)
     im = ImageOps.equalize(im)
-
     images = []
     yo = 0
     for y in range(im.size[1]/12):
