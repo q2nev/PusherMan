@@ -24,6 +24,9 @@
             </desc>
         </item>
         <item nomen="gat">
+            <desc>
+                
+            </desc>
             <usage nomen="show" amt="5">
                 Waving your gun around can generally scare off a bitch.
             </usage>
@@ -149,11 +152,10 @@
             </desc>
         </place>
         <item nomen="ticket" dir="" im="" sd=""  access="" kw="nasty" fights="true" followers="1">
-            <desc nomen="ticket" challenges="true" fights="true" >You know this ticket is the real deal?</desc>
-            <desc nomen="ticket" challenges="true" fights="true">
+            <desc nomen="ticket" challenge="true" fights="true">
                 There's an old lady reaching for the ticket too!
             </desc>
-            <desc nomen="use" challenges="false" fights="true">
+            <desc nomen="use" challenge="false" fights="true">
 
             </desc>
         </item>

@@ -302,7 +302,6 @@ def go_command(stop,noun):
     global extras
     global hashes
     global ats
-
     for pl in stop.place:
         if noun in pl.attrs.get("nomen"):
             access = pl.attrs["access"]
@@ -320,23 +319,12 @@ def go_command(stop,noun):
                     else:
                         print "Well, then you can't go there."
                         return stop
-
             elif access == "": #if there is no access key in the xml then leave it and let them go.
                     desc_ct = 0
                     extras =['stop_name','stop_desc','pause_music']
-            elif access[0] == "cost":
-                hashes_cost= access[1]
-                ats_cost = access[2]
-                print "Do you want to pay for this?"
-                print hashes_cost,"Hashes"
-                print ats_cost,"Ats"
-                pay_cost = raw_input('>>')
-                if pay_cost.lower() == 'y':
-                    hashes -= hashes_cost
-                    ats -= ats_cost
-                else:
-                    print "Well then I guess you'll just have to find another way!"
-                    return stop
+            else:
+                print "Well then I guess you'll just have to find another way!"
+                return stop
 
             link = pl.attrs["link"]
             stop = stops[link]
@@ -355,13 +343,27 @@ def take_command(stop,items,fights,noun):
     global player
     try:
         for item in stop.item:
+            access = item.attrs["access"]
             if item.attrs.get("nomen") == noun:
-                if finds.get(noun):
-                    player.item.append(item)
-                    player.children.append(item)
-                    stop.item.remove(item)
-                    stop.children.remove(item)
-                    finds[noun]="True"
+                if access[0]=="cost" or access=="":
+
+                    hashes_cost= access[1]
+                    ats_cost = access[2]
+                    print "Do you want to pay for this?"
+                    print hashes_cost,"Hashes"
+                    print ats_cost,"Ats"
+                    pay_cost = raw_input('>>')
+                    if pay_cost.lower() == 'y':
+                        hashes -= hashes_cost
+                        ats -= ats_cost
+                        player.item.append(item)
+                        player.children.append(item)
+                        stop.item.remove(item)
+                        stop.children.remove(item)
+                        finds[noun]="True"
+                    else:
+                        print "Well that's ok?"
+
             print "You get the " + noun
         return stop
     except:
@@ -411,11 +413,11 @@ def describe_command(stop, player, noun):
 
 def restart_command():
     print "Restart game? (Y/N)"
-    restart_game = raw_input('>>')
-    if restart_game == "Y":
+    restart_game = raw_input('>>').lower()
+    if restart_game == "y":
         print "Do you want to save first? (Y/N)"
-        save_first = raw_input('>>')
-        if save_first == 'Y':
+        save_first = raw_input('>>').lower()
+        if save_first == 'y':
             return save_command()
         else:
             return main()
