@@ -61,7 +61,6 @@ class scenario_q2class(Q2API.xml.base_xml.XMLNode):
     def __init__(self, attrs):
         self.level = 2
         self.path = [None, u'game']
-        self.desc = []
         Q2API.xml.base_xml.XMLNode.__init__(self, "scenario", attrs, None, [])
 
 class stop_q2class(Q2API.xml.base_xml.XMLNode):
