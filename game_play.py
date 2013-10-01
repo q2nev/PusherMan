@@ -156,9 +156,9 @@ def twitter_data(stop,noun):
     '''
     global hashes
     global ats
-    print "It's a glare from",
+    print "It's a glare from",noun
     call_prompt = raw_input("What's your call against this mean muggin?!")
-    hash_diff, at_diff = TW.twitter_battle(call_prompt,noun)
+    hash_diff, at_diff = twitter_battle(call_prompt,noun)
     hashes += hash_diff
     ats += at_diff
     if hashes <0 or ats<0: #breaks if either returns zero
@@ -174,6 +174,37 @@ def twitter_data(stop,noun):
                 print "Unknown command"
                 continue
     return hashes,ats #returns to
+
+def twitter_battle(call_prompt, boss): # add on followers and amt later
+    '''
+    Input: boss (boss kw) and prompt (player kw)
+    Output: hashes_diff, ats_diff
+    '''
+    boss_ats = TW.recent_tweets([boss],2)[1]
+    boss_hashes = TW.recent_tweets([boss],2)[2]
+    player_ats = TW.recent_tweets([call_prompt],3)[1]
+    player_hashes = TW.recent_tweets([call_prompt],3)[2]
+    ats_diff = player_ats - boss_ats
+    hashes_diff = player_hashes - boss_hashes
+    print "Hash from battle:", hashes_diff
+    print "Holler-Ats from battle:",ats_diff
+    if ats_diff > 0:
+        ats_winner = 'player'
+    elif ats_diff == 0:
+        ats_winner = 'equal'
+    else:
+        ats_winner = 'boss'
+    if hashes_diff >0:
+        hashes_winner = 'player'
+    elif hashes_diff ==0:
+        hashes_winner = 'equal'
+    else:
+        hashes_winner = 'boss'
+    #add in check for followers here.
+    for scen in g_map.scenario:
+        if scen.attrs.get('hashes') == hashes_winner and scen.attrs.get('ats')==ats_winner:
+            print scen.value
+    return hashes_diff, ats_diff #returns to twitter_data
 
 def process_command(stop, command): #can also pass stop!
     '''
@@ -270,7 +301,7 @@ def go_command(stop,noun):
 
     for pl in stop.place:
         if noun in pl.attrs.get("nomen"):
-            access = stop.attrs["access"]
+            access = pl.attrs["access"]
             if access:
                 for itm in player.item:
                     if itm.attrs('nomen')==access:
@@ -356,8 +387,9 @@ def describe_command(stop, player, noun):
                 stop.item.remove(itm)
                 stop.children.remove(itm)
 
-            if itm.attrs["challenges"]:
+            elif itm.attrs["challenge"]:
                 extras=["ascii_game"]
+                return stop
 
     for itm in player.item:
         if noun == itm.attrs.get("nomen"):

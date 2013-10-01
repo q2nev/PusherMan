@@ -138,17 +138,17 @@
                 You need a ticket to get on the subway!!
             </desc>
         </place>
-        <place nomen="kiosk" dir="w" link="kiosk" fights="" challenge="" access="">
+        <place nomen="kiosk" dir="w" link="kiosk" kw="" fights="" challenge="" access="">
             <desc>
                 You can buy a ticket here...
             </desc>
         </place>
-        <place nomen="north" dir="n" link="death" access="" fights="" challenge="">
+        <place nomen="north" dir="n" link="death" kw="" access="" fights="" challenge="">
             <desc nomen="north" dir="n">
                 Run for your life!
             </desc>
         </place>
-        <item nomen="ticket" dir="" im="" sd=""  access="" fights="true" followers="1">
+        <item nomen="ticket" dir="" im="" sd=""  access="" kw="nasty" fights="true" followers="1">
             <desc nomen="ticket" challenges="true" fights="true" >You know this ticket is the real deal?</desc>
             <desc nomen="ticket" challenges="true" fights="true">
                 There's an old lady reaching for the ticket too!
@@ -164,7 +164,7 @@
                 If you buy a ticket
             </desc>
         </place>
-        <item nomen="attendant" fights="true" followers="3">
+        <item nomen="attendant" kw="train" fights="true" followers="3">
             <desc nomen="attendant" fights="true" followers="3">
                 The Kiosk Attendant wants you to hurry up!
             </desc>
@@ -172,7 +172,14 @@
 
             </desc>
         </item>
+        <item nomen="old lady" challenge="true" im="Walt_small.jpg" sd="break_ya_neck.ogg">
+            <desc nomen="old lady" challenge="true" fights="">
+                There's a crotchedy old lady behind you that's waiting for her ticket.
+            </desc>
+            <desc>
 
+            </desc>
+        </item>
     </stop>
 
     <stop nomen="parkchester" im="dmx.jpg" sd="canudigit.ogg" access="">

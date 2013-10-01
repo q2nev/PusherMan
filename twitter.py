@@ -56,33 +56,3 @@ def retweets(): #returns ats and hashes of most recent retweet
     tweets, ats, hashes= recent_tweets(['RT'], 1)
     return tweets, ats, hashes
 
-def twitter_battle(call_prompt, boss): # add on followers and amt later
-    '''
-    Input: boss (boss kw) and prompt (player kw)
-    Output: hashes_diff, ats_diff
-    '''
-    boss_ats = recent_tweets([boss],1)[1]
-    boss_hashes = recent_tweets([boss],1)[2]
-    player_ats = recent_tweets([call_prompt],1)[1]
-    player_hashes = recent_tweets([call_prompt],1)[2]
-    ats_diff = player_ats - boss_ats
-    hashes_diff = player_hashes - boss_hashes
-    print "Hash from battle:", hashes_diff
-    print "Holler-Ats from battle:",ats_diff
-    if ats_diff > 0:
-        ats_winner = 'player'
-    elif ats_diff == 0:
-        ats_winner = 'equal'
-    else:
-        ats_winner = 'boss'
-    if hashes_diff >0:
-        hashes_winner = 'player'
-    elif hashes_diff ==0:
-        hashes_winner = 'equal'
-    else:
-        hashes_winner = 'boss'
-    #add in check for followers here.
-    for scen in g_map.scenario:
-        if scen.attrs.get('hashes') and scen.attrs.get('ats'):
-            print scen.value
-    return hashes_diff, ats_diff #returns to twitter_data

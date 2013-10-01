@@ -1,0 +1,357 @@
+<game><UNKNOWN_OBJECT_TYPE>([&lt;game.player_q2class object at 0x02BC99B0&gt;, &lt;game.stop_q2class object at 0x02BC9D70&gt;, &lt;game.stop_q2class object at 0x02BC9E90&gt;, &lt;game.stop_q2class object at 0x02BC9FF0&gt;, &lt;game.stop_q2class object at 0x02BDA230&gt;, &lt;game.stop_q2class object at 0x02BDA590&gt;, &lt;game.stop_q2class object at 0x02BDA650&gt;, &lt;game.stop_q2class object at 0x02BDA790&gt;, &lt;game.stop_q2class object at 0x02BDAA30&gt;, &lt;game.stop_q2class object at 0x02BDAD50&gt;, &lt;game.stop_q2class object at 0x02BDAE30&gt;, &lt;game.stop_q2class object at 0x02BEA0B0&gt;, &lt;game.stop_q2class object at 0x02BEA1F0&gt;, &lt;game.stop_q2class object at 0x02BEA2D0&gt;, &lt;game.stop_q2class object at 0x02BEA370&gt;, &lt;game.stop_q2class object at 0x02BEA4F0&gt;, &lt;game.stop_q2class object at 0x02BEA550&gt;, &lt;game.stop_q2class object at 0x02BEA6B0&gt;, &lt;game.stop_q2class object at 0x02BEA7B0&gt;, &lt;game.stop_q2class object at 0x02BEA870&gt;, &lt;game.stop_q2class object at 0x02BEA990&gt;, &lt;game.stop_q2class object at 0x02BEA9F0&gt;, &lt;game.scenario_q2class object at 0x02BEAA90&gt;, &lt;game.scenario_q2class object at 0x02BEAAF0&gt;, &lt;game.scenario_q2class object at 0x02BEAB10&gt;, &lt;game.scenario_q2class object at 0x02BEAB30&gt;, &lt;game.scenario_q2class object at 0x02BEAB50&gt;, &lt;game.scenario_q2class object at 0x02BEAB70&gt;, &lt;game.scenario_q2class object at 0x02BEAB90&gt;, &lt;game.scenario_q2class object at 0x02BEABB0&gt;, &lt;game.scenario_q2class object at 0x02BEABD0&gt;], (&lt;type 'exceptions.Exception'&gt;, AttributeError("'int' object has no attribute 'replace'",)))</UNKNOWN_OBJECT_TYPE><stop access="" nomen="intro" im="chicken.jpg" sd="canudigit.ogg"><desc nomen="intro">
+     *******                  **                            ****     ****
+    /**////**                /**                            /**/**   **/**
+    /**   /** **   **  ******/**       *****  ******        /**//** ** /**  ******   *******
+    /******* /**  /** **//// /******  **///**//**//*        /** //***  /** //////** //**///**
+    /**////  /**  /**//***** /**///**/******* /** /         /**  //*   /**  *******  /**  /**
+    /**      /**  /** /////**/**  /**/**////  /**           /**   /    /** **////**  /**  /**
+    /**      //****** ****** /**  /**//******/***           /**        /**//******** ***  /**
+    //        ////// //////  //   //  ////// ///            //         //  //////// ///   //
+
+                  By Nevin Watkins and the Q2 Project R Crew
+
+                          PRESS ENTER to LEARN MORE.
+
+                          Type START to begin game.
+
+                      Type LOAD to load previous games.
+
+                       Type HELP or HOW for more info!
+        </desc><desc nomen="intro">
+            Having a rough, young life in the heart of the Bronx.
+
+            You have recently been forced into being a drug mule
+
+        by the youngest gang in your neighborhood: the Domenech Brothers.
+
+        In order to work your way up the ranks, you have to make it to
+
+   Brooklyn on the 4,5,6 train unscathed and with more hash then you started with.
+        </desc><desc nomen="intro">
+            Along the way, you'll meet some characters who will challenge your wit
+
+             and try to steal your reputation (also called holler-ats or @s)
+
+                and stash (also called hashes, hashtags and #s), but fear not!
+
+                You're a mean muggin' thug, and you know the Twittersphere.
+        </desc><desc>
+            Whenever a person, place or thing decides to give you a glare,
+
+          You must challenge the boss with your own gang call and holler-count.
+
+            Your holler-count is the amount of defeats you have already
+
+        </desc><desc nomen="intro">
+        Along the subway, you can decide to trade your life of crime for a life as an MC.
+
+            That is the reason the Dom Bros decided to recruit you in the first place.
+
+            You've got fly tunes and you know how to spin.
+
+        </desc><desc nomen="intro">
+
+                    If you run into another MC on the tracks,
+
+                You can increase your holler-ats by pressing enter
+
+        And guessing the currently playing MC before your time expires.
+        </desc><desc nomen="intro">
+                           As far as the basics:
+
+            To learn more about game play type "how" and enter
+
+               For more info on current stop -- type enter.
+
+            To learn more about your surroundings -- type "describe around".
+
+      To challenge or check something out -- type "glare" followed by its name!
+
+       If you've saved your game previously, you can "load" the previous game.
+
+                            Otherwise type "start"!
+
+            Start the game (start) or load (load) a previous game?
+
+        </desc><place access="" nomen="start" link="start" dir="s" fight="false"><desc nomen="start" link="start" dir="s">
+                Start the game!!!
+            </desc></place></stop><stop nomen="start" im="chicken.jpg" sd="familyaffair.ogg"><desc nomen="start">
+            You have just left the Domenech gang hideout near Yonkers.
+        </desc><desc nomen="start">
+            There aren't many options here, so choose wisely!
+        </desc><place access="ticket" nomen="subway" link="parkchester"><desc nomen="subway">
+                You need a ticket to get on the subway!!
+            </desc></place><place nomen="kiosk" challenge="" fights="" access="" link="kiosk" kw="" dir="w"><desc>
+                You can buy a ticket here...
+            </desc></place><place nomen="north" challenge="" fights="" access="" link="death" kw="" dir="n"><desc nomen="north" dir="n">
+                Run for your life!
+            </desc></place></stop><stop nomen="kiosk"><place access="3,1" nomen="ticket" link="parkchester"><desc nomen="">
+                If you buy a ticket
+            </desc></place><item kw="train" nomen="attendant" fights="true" followers="3"><desc nomen="attendant" fights="true" followers="3">
+                The Kiosk Attendant wants you to hurry up!
+            </desc><desc nomen="attendant" fights="true" followers="3">
+
+            </desc></item><item nomen="old lady" im="Walt_small.jpg" challenge="true" sd="break_ya_neck.ogg"><desc nomen="old lady" fights="" challenge="true">
+                There's a crotchedy old lady behind you that's waiting for her ticket.
+            </desc><desc>
+
+            </desc></item></stop><stop access="" nomen="parkchester" im="dmx.jpg" sd="canudigit.ogg"><desc nomen="parkchester">
+            This is our first subway station. Welcome to the Bronx! bitch.
+            You can hustle, but you're on the clock!
+        </desc><desc nomen="parkchester">
+
+        </desc><place nomen="tracks" fight="true" access="" link="tracks" im="rat.jpg" dir="now" sd="green_eyes.ogg"><desc nomen="tracks" dir="now" fight="true">
+                It's dangerous down on the tracks. Dead bodies. Rats.
+            </desc><desc nomen="">
+
+            </desc></place><place nomen="local" fight="true" access="" link="local" im="" dir="ahead" sd=""><desc nomen="local" dir="ahead" fight="true">
+                The Local six train is here!
+            </desc><desc>
+
+            </desc></place><place nomen="express" fight="true" access="" link="express" im="" dir="behind" sd=""><desc nomen="express" dir="behind" fight="true">
+                The Express Six Train is here!
+            </desc></place><place nomen="outside" fight="true" access="" link="outside" im="" dir="up" sd=""><desc nomen="endgame" dir="up" fight="true">
+                Death by driveby.
+            </desc><desc>
+
+            </desc></place><place nomen="bum" fight="true" access="" link="bum" im="bearded_bum.jpg" dir="left" sd=""><desc nomen="bum" fight="true" access="" link="bum" im="bearded_bum.jpg" dir="left" sd="">
+                       There's a smelly bum.
+            </desc><desc>
+                Best way to lose your dope is a smelly ass bum.
+
+            </desc></place><item nomen="chicken" fight="true" access="" im="" dir="down" sd=""><desc nomen="chicken" dir="down" fight="true">
+                Kennedy's Fried Chicken.
+            </desc><desc>
+                    Chirp, chirp mother fucker.
+                You think this is food poisoning?
+                          Take a bite!
+            </desc></item><item nomen="pigeon" fight="true" access="" im="" dir="up" sd=""><desc nomen="pigeon" fight="true" im="" dir="up" sd="">
+                You see
+            </desc><desc>
+                Pigeon- Intro:
+                A pigeon is a girl who be walkin' by
+                My rimmed up blue red loose Spark wit five
+                Her feet hurt so you know she wanna ride
+                But she frontin' like she can't say hi, what?
+
+                Uh oh, y'all chicks ain't gettin' nada
+                Uh oh, ya' pussy ain't worth the Ramada
+                Uh oh, anyway ya' friend looks hotta
+                Uh oh, game is somethin' we got a lotta
+
+                Uh oh, 'cuz I don't want no pigeons
+                Dem be dem girls who gets no dubz from me
+                Playin' the bar dumb broke with her best friend's coat
+                Tryin' to holla at me
+
+                I don't want no pigeons
+                Dem be dem girls who gets no dubz from me
+                Playin' the bar dumb broke with her best friend's coat
+                Tryin' to holla at me
+
+                You're too slow to know this rapper. So it's time for a Twitter Battle!
+            </desc></item></stop><stop access="" link="outside" nomen="outside" im="" sd=""><desc nomen="endgame">
+                Death by driveby.
+        </desc><item access="" nomen="" fight="false">
+
+        </item></stop><stop access="" nomen="death" im="grimreaper.jpg" sd=""><desc access="" nomen="death">
+            I don't think I've ever had death taste this good. Oh my god, the fucking chicken!
+        </desc><desc nomen="death">
+
+        </desc><place access="" nomen="hell" dir="d" fight="true"><desc nomen="hell" dir="d" fight="true">
+
+            </desc></place><place access="" nomen="heaven" dir="u" fight="true"><desc nomen="heaven" dir="u" fight="true">
+
+            </desc></place><item access="" nomen="" im="" sd=""><desc nomen="">
+
+            </desc></item></stop><stop nomen="3av" access="" link="express" im="" dir="off" sd=""><desc nomen="3av" dir="off">
+            You're at the 3rd Avenue Station.
+        </desc><desc nomen="3av" dir="off">
+            You can get back on the
+        </desc><place nomen="tracks" fight="true" access="" link="tracks" im="bearded_bum.jpg" dir="now" sd="green_eyes.ogg"><desc nomen="tracks" dir="now" fight="true">
+                It's dangerous down on the tracks. Dead bodies. Rats.
+            </desc><desc>
+                You can always
+            </desc></place><place nomen="local" fight="true" access="" link="local" im="" dir="ahead" sd=""><desc nomen="local" dir="ahead" fight="true">
+                The Local six train is here!
+            </desc><desc>
+                You need at least 20 @s to get back on the train.
+
+                There's a cop on this train! If you have more than 20 hashes he's gonna waste you!
+            </desc></place><place nomen="express" fight="true" access="" link="express" im="" dir="behind" sd=""><desc nomen="express" dir="behind" fight="true">
+                The Express Six Train is here!
+            </desc><desc>
+                You need at least 25 @s to get on the train.
+            </desc></place><item nomen="pimp" fights="true" dir="corner"><desc>
+                There's a man the looks a lot like a pimp in
+            </desc><desc>
+
+            </desc></item><item access="" nomen="dmx" im="" sd=""><desc>
+
+            </desc></item></stop><stop access="" link="express" nomen="125th St" im="harlem.jpg" dir="off"><desc link="express" nomen="125th St" im="harlem.jpg" dir="off">
+
+        </desc><desc link="express" nomen="125th St" im="harlem.jpg" dir="off">
+
+        </desc><place nomen="tracks" fight="true" access="" link="tracks" im="bearded_bum.jpg" dir="now" sd="green_eyes.ogg"><desc nomen="tracks" dir="now" fight="true">
+                It's dangerous down on the tracks. Dead bodies. Rats.
+            </desc><desc>
+
+            </desc></place><place nomen="local" fight="true" access="" link="local" im="" dir="ahead" sd=""><desc nomen="local" dir="ahead" fight="true">
+                The Local six train is here!
+            </desc><desc>
+
+            </desc></place><place nomen="express" fight="true" access="" link="express" im="" dir="behind" sd=""><desc nomen="express" dir="behind" fight="true">
+                The Express Six Train is here!
+            </desc><desc>
+
+            </desc></place><item nomen="westchester"><desc nomen="westchester" desc_type="intro">
+                There is a business-man from Westchester. He has a long overcoat
+            </desc><desc nomen="westchester"></desc></item><item access="swim-move" nomen="nope"><desc nomen=""></desc></item></stop><stop access="" nomen="union square" im="needle.jpg" sd=""><desc nomen="alive">YOU WIN! Hop up in your hipster palace!</desc><place access="" nomen="outside" dir="u" fight="true"><desc nomen="outside" dir="u" fight="true">
+                Be aware of Needles and Yuppies! Outside of St. Marks they're known to be found. Hoppin' and hollerin'.
+                Up and down and up and down.
+                Speedballs makes the OD baby crown, here in St. Marks. We think we're profound.
+            </desc></place><item access="" nomen="hipster" dir="down" fight="true"><desc nomen="hipster" dir="down" fight="true">
+                "Like holy shit, what bands do you even know? This iPod is horrendous!"
+            </desc></item></stop><stop access="" nomen="bleeker street" im="" sd=""><desc link="express" nomen="bleeker street" im="harlem.jpg" dir="off">
+
+        </desc><desc link="express" nomen="bleeker street" im="harlem.jpg" dir="off">
+
+        </desc><place nomen="tracks" fight="true" access="" link="tracks" im="bearded_bum.jpg" dir="now" sd="green_eyes.ogg"><desc nomen="tracks" dir="now" fight="true">
+                It's dangerous down on the tracks. Dead bodies. Rats.
+            </desc><desc>
+
+            </desc></place><place nomen="local" fight="true" access="" link="local" im="" dir="a" sd=""><desc nomen="local" dir="a" fight="true">
+                The Local six train is here!
+            </desc><desc>
+
+            </desc></place><place nomen="express" fight="true" access="" link="express" im="" dir="on" sd=""><desc nomen="express" dir="on" fight="true">
+                The Express Six Train is here!
+            </desc><desc>
+                If you get off, you gotta fight to get back on!
+            </desc></place></stop><stop access="" nomen="wallstreet" im="money.jpg" sd="wall_street.wav"><desc nomen="">
+            Welcome to Wall Street!
+        </desc><place access="" nomen="outside" link="worldtradecenter" dir="up" fight="true"><desc nomen="outside" dir="up" fight="true">
+                You lost your soul! How did it come to this?!
+            </desc></place><place access="" nomen="gecko" link="hell" dir="behind" fight="true"><desc nomen="gecko" fight="true">
+            </desc></place><item access="" nomen="wallet" dir="ground" fight="true"><desc nomen="wallet" dir="ground" fight="true">
+                A sweet-ass leather wallet lies here.
+            </desc></item></stop><stop nomen="williamsburg" link="hipsterdom" fight="true"><desc nomen="williamsburg" fight="true">
+
+        </desc><place access="" nomen="outside brooklyn" link="outside brooklyn" fight="true"><desc access="" nomen="outside brooklyn" link="outside brooklyn" fight="true">
+
+            </desc></place><place access="" nomen="doc martens" fight="true"><desc nomen="doc martens" fight="true">
+                A man claiming to be Doc Marten has "risen from the grave" here to kick the shit out of hipsters wearing his boots.
+            </desc></place></stop><stop access="" nomen="outside brooklyn"><desc nomen="outside brooklyn">
+
+        </desc><desc nomen="outside brooklyn">
+
+        </desc><place access="" nomen="hipsterdom" link="hipsterdom" fight="true"><desc access="" nomen="hipsterdom" link="hipsterdom" amt="" fight="true">
+
+            </desc></place></stop><stop nomen="hipsterdom" fight="true"><desc nomen="hipsterdom" fight="true">
+
+        </desc><desc>
+
+        </desc><place nomen="subway" link="williamsburg"><desc nomen="">
+
+            </desc><desc>
+
+            </desc></place><item access="" nomen="glasses">
+
+        </item></stop><stop nomen="tracks" link="" fight="true"><desc nomen="tracks">
+            Welcome to the land of the free! You have joined a gang of rebel warriors!
+        </desc><place access="" nomen="" fight="true"><desc>
+
+            </desc></place></stop><stop nomen="express" fight="true"><desc nomen="express">
+            You're on 6 express!
+        </desc><place access="" nomen="huntspoint" dir="off" fight="true"><desc>
+
+            </desc></place><place access="" nomen="" dir="" fight="true"><desc>
+
+            </desc></place><place access="" nomen="" dir="" fight="true"><desc>
+
+            </desc></place></stop><stop nomen="huntspoint" fight="true"><desc nomen="huntspoint" link="">
+
+        </desc><place access="" nomen="chicken" dir="ground" fight="true"><desc>
+
+            </desc></place><place access="" nomen="express2" fight="false"><desc>
+
+            </desc></place></stop><stop nomen="3av" fight="true"><desc nomen="3av" link="">
+
+        </desc><place access="" nomen="express3">
+
+        </place><item access="">
+
+        </item></stop><stop nomen="express2" fight="true"><desc nomen="express2" link="">
+
+        </desc><place access="" nomen="pilgrim" link=""><desc>
+
+            </desc></place><place access="" nomen="sweaty man"><desc>
+
+            </desc></place><item access=""></item></stop><stop nomen="local"><desc>
+            You die of paranoia.
+        </desc><place access="" nomen="tracks" link="death" dir="up" fight="false"><desc nomen="tracks" dir="up">
+
+            </desc></place></stop><stop nomen="" link=""><desc nomen="" link="">
+
+        </desc><place access="" nomen="" dir="" fight="true"><desc nomen="" dir="" fight="true">
+
+            </desc></place></stop><scenario hashes="boss" ats="boss" sd="">
+
+            They smoked you out! And you couldn't fight!
+            You lose some of your stash! And your ats!
+
+    </scenario><scenario hashes="equal" ats="boss" sd="">
+
+            They're packing the same hashes!
+            And they definitely hollered more than you could
+            Run brother, run!!
+            You're getting a little hoarse!
+
+    </scenario><scenario hashes="player" ats="boss" sd="">
+
+            You smoked them out!
+            But they had more hollerin!
+            It happens to the best of us!
+            Time to find some new turf!
+
+    </scenario><scenario hashes="boss" ats="equal" sd="">
+
+            They smoked you out! And grabbed some of your hash!
+            You drawed on holler-ats!
+            So your crew can't help you out!
+            You better move on, because this sucker is all hashed up.
+
+    </scenario><scenario hashes="equal" ats="equal" sd="">
+
+            It's a draw!
+            Somethings are better left unsaid, player.
+            You best dry your eyes.
+
+    </scenario><scenario hashes="player" ats="equal" sd="">
+
+            You smoked them out and grabbed some of their hash!
+            We're rich bitch!
+
+    </scenario><scenario hashes="boss" ats="player" sd="">
+
+            You out hollered them. You mad tweeter, you!
+            But they did smoke you out and nab some of your stash!
+
+    </scenario><scenario hashes="equal" ats="player" sd="">
+
+            You sly mother. You beat that turkey!
+            And gained some followers from his crew!
+            Holler at it baby!!
+
+    </scenario><scenario hashes="player" ats="player" sd="">
+
+            You hollered so hard that you added some holler to your crew!
+            Feel that beat get loose in you!
+            Trap the mean and throw the noose.
+            Thuggin' ain't nothin but a fist thrown loose.
+            Pimpin' ain't nothin but a nut in refuse.
+
+            You popped them so hard you grabbed some hash too!
+            Holler! Holler!
+
+    </scenario></game>
