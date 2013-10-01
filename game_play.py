@@ -23,7 +23,7 @@ fights= dict()
 g_map = None
 global followers
 followers = 10
-hashes = 20
+rhymes = 20
 ats = 20
 desc_ct = 0
 
@@ -100,7 +100,7 @@ def describe(stop,extras):
                     print "\n\t"+"Item description:", str(i.desc[0].value).strip(string.whitespace)
                     print "__________________________________________________________"
         if 'results' in extras:
-            print "After that game you have",hashes, "Hashes, and",ats,"Ats."
+            print "After that game you have",rhymes, "rhymes, and",ats,"Ats."
             print "You also have", followers,"Followers."
         if 'unknown' in extras:
             print "We don't know what you're talkin' about."
@@ -153,19 +153,19 @@ def play_music(stop, pause_sound=False):
 def twitter_data(stop,noun):
     '''
     call_prompt: users input keyword
-    hash_diff: difference in hashtags for a RT boss
+    rhyme_diff: difference in rhymes for a RT boss
     ats_diff: difference in ats for a RT boss
-    hashes: currently tabulated hashes
-    ats: currently tabulated hashes
+    rhymes: currently tabulated rhymes
+    ats: currently tabulated rhymes
     '''
-    global hashes
+    global rhymes
     global ats
     print "It's a glare from",noun
     call_prompt = raw_input("What's your call against this mean muggin?!")
-    hash_diff, at_diff = twitter_battle(call_prompt,noun)
-    hashes += hash_diff
+    rhyme_diff, at_diff = twitter_battle(call_prompt,noun)
+    rhymes += rhyme_diff
     ats += at_diff
-    if hashes <0 or ats<0: #breaks if either returns zero
+    if rhymes <0 or ats<0: #breaks if either returns zero
         print "You're as dead as a doornail."
         print "Would you like to restart?"
         restart = raw_input(">>")
@@ -177,20 +177,20 @@ def twitter_data(stop,noun):
             else:
                 print "Unknown command"
                 continue
-    return hashes,ats #returns to
+    return rhymes,ats #returns to
 
 def twitter_battle(call_prompt, boss): # add on followers and amt later
     '''
     Input: boss (boss kw) and prompt (player kw)
-    Output: hashes_diff, ats_diff
+    Output: rhymes_diff, ats_diff
     '''
     boss_ats = TW.recent_tweets([boss],2)[1]
-    boss_hashes = TW.recent_tweets([boss],2)[2]
+    boss_rhymes = TW.recent_tweets([boss],2)[2]
     player_ats = TW.recent_tweets([call_prompt],3)[1]
-    player_hashes = TW.recent_tweets([call_prompt],3)[2]
+    player_rhymes = TW.recent_tweets([call_prompt],3)[2]
     ats_diff = player_ats - boss_ats
-    hashes_diff = player_hashes - boss_hashes
-    print "Hash from battle:", hashes_diff
+    rhymes_diff = player_rhymes - boss_rhymes
+    print "Rhyme-Count from battle:", rhymes_diff
     print "Holler-Ats from battle:",ats_diff
     if ats_diff > 0:
         ats_winner = 'player'
@@ -198,17 +198,17 @@ def twitter_battle(call_prompt, boss): # add on followers and amt later
         ats_winner = 'equal'
     else:
         ats_winner = 'boss'
-    if hashes_diff >0:
-        hashes_winner = 'player'
-    elif hashes_diff ==0:
-        hashes_winner = 'equal'
+    if rhymes_diff >0:
+        rhymes_winner = 'player'
+    elif rhymes_diff ==0:
+        rhymes_winner = 'equal'
     else:
-        hashes_winner = 'boss'
+        rhymes_winner = 'boss'
     #add in check for followers here.
     for scen in g_map.scenario:
-        if scen.attrs.get('hashes') == hashes_winner and scen.attrs.get('ats')==ats_winner:
+        if scen.attrs.get('rhymes') == rhymes_winner and scen.attrs.get('ats')==ats_winner:
             print scen.value
-    return hashes_diff, ats_diff #returns to twitter_data
+    return rhymes_diff, ats_diff #returns to twitter_data
 
 def process_command(stop, command): #can also pass stop!
     '''
@@ -219,7 +219,7 @@ def process_command(stop, command): #can also pass stop!
     '''
     global desc_ct
     global finds
-    global hashes
+    global rhymes
     global ats
     global extras
     global logging
@@ -243,13 +243,13 @@ def process_command(stop, command): #can also pass stop!
         elif verb == "score": #score board functionality
             return score_command(stop)
         elif verb =="cur":
-            print "Hashes:", hashes
+            print "rhymes:", rhymes
             print "Ats:",ats
-            for item in g_map.player.item:
-                print item.attrs["nomen"]
+            for itm in g_map.player[0].item:
+                print itm.attrs["nomen"]
                 try:
                     print "Uses:"
-                    for use in item.usage:
+                    for use in itm.usage:
                         print use.attrs["nomen"]
                 except:
                     print "No uses..."
@@ -300,7 +300,7 @@ def enter_command(stop,descs):
 def go_command(stop,noun):
     global desc_ct
     global extras
-    global hashes
+    global rhymes
     global ats
     for pl in stop.place:
         if noun in pl.attrs.get("nomen"):
@@ -337,7 +337,7 @@ def go_command(stop,noun):
         extras =['stop_name','stop_desc']
         return stop
 
-def take_command(stop,items,fights,noun):
+def take_command(stop,noun):
     global desc_ct
     global extras
     global player
@@ -347,14 +347,14 @@ def take_command(stop,items,fights,noun):
             if item.attrs.get("nomen") == noun:
                 if access[0]=="cost" or access=="":
 
-                    hashes_cost= access[1]
+                    rhymes_cost= access[1]
                     ats_cost = access[2]
                     print "Do you want to pay for this?"
-                    print hashes_cost,"Hashes"
+                    print rhymes_cost,"rhymes"
                     print ats_cost,"Ats"
                     pay_cost = raw_input('>>')
                     if pay_cost.lower() == 'y':
-                        hashes -= hashes_cost
+                        rhymes -= rhymes_cost
                         ats -= ats_cost
                         player.item.append(item)
                         player.children.append(item)
@@ -373,7 +373,7 @@ def take_command(stop,items,fights,noun):
 def describe_command(stop, player, noun):
     # itm,access,ascii,sd = items.get(noun,("","","",""))
     global extras
-    global hashes
+    global rhymes
     global ats
     if noun == "around": #functionality to show current landscape.
         extras = ["around"]
@@ -383,10 +383,10 @@ def describe_command(stop, player, noun):
         if itm.attrs["nomen"] == noun:
             boss= itm.attrs.get("kw")
             if itm.attrs["fights"]:
-                hashes, ats = twitter_data(stop,boss)
-                extras= ["hashes", "ats", "battle_results"]
-                print "You now have", hashes,"ounces of hash"
-                print "And",ats, "holler-ats!"
+                rhymes, ats = twitter_data(stop,boss)
+                extras= ["rhymes", "ats", "battle_results"]
+                print "You now have", rhymes,"rhymes in your rep!"
+                print "And",ats, "holler-ats from the crowd!"
 
                 player.item.append(itm)
                 player.children.append(itm)
@@ -430,7 +430,7 @@ def restart_command():
 def save_command(stop):
     stop_nomen = stop.attrs["nomen"]
     player.attrs["stop"] = str(stop_nomen)
-    player.attrs["hashes"] = hashes
+    player.attrs["rhymes"] = rhymes
     player.attrs["ats"]= ats
     player.attrs["followers"] = followers
 
@@ -458,7 +458,7 @@ def score_command(stop):
             except:
                 print "couldn't print game"
             try:
-                print "Ats:",load_ats_hashes(file_name)[0]  + "\t" + "Hashes:",load_ats_hashes(file_name)[1]
+                print "Ats:",load_ats_rhymes(file_name)[0]  + "\t" + "rhymes:",load_ats_rhymes(file_name)[1]
             except:
                 print "couldn't find scores"
             try:
@@ -533,21 +533,21 @@ def load_game(game_file):
             boss_kw = itm.attrs["boss_kw"]
             logging.info('User has item:'+boss_kw)
             ats = str(itm.value).split(',')[0].strip() #returns ats from unicode
-            hashes = str(itm.value).split(',')[1].strip() #returns hashes from unicode
-            finds[boss_kw] = ats,hashes
+            rhymes = str(itm.value).split(',')[1].strip() #returns rhymes from unicode
+            finds[boss_kw] = ats,rhymes
         else:
             logging.info('No item found')
     logging.info('Leaving load_game')
     return stop
 
-def load_ats_hashes(game_file):
+def load_ats_rhymes(game_file):
     '''
-    Loads ats and hashes from player given profile.
+    Loads ats and rhymes from player given profile.
 
     '''
-    logging.info('Found load_ats_hashes')
+    logging.info('Found load_ats_rhymes')
     global ats
-    global hashes
+    global rhymes
     with open('save/'+game_file) as f:
         xml_file = f.read()
 
@@ -559,9 +559,9 @@ def load_ats_hashes(game_file):
     global player #only need player from file
     player = p_map.player[0]
     ats = player.attrs["ats"] #grab stop from player's xml file and return for game play
-    hashes = player.attrs["hashes"]
-    logging.info('Leaving load_ats_hashes')
-    return ats,hashes
+    rhymes = player.attrs["rhymes"]
+    logging.info('Leaving load_ats_rhymes')
+    return ats,rhymes
 
 def descs_dict(stop): #can also pass place and will have same result
     descs = dict()

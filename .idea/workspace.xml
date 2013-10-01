@@ -5,9 +5,9 @@
     <ignored path="PusherMan.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/../RapBattle/strip.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380038777868" ignored="false" />
-    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380652969395" ignored="false" />
+    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380665328095" ignored="false" />
     <file path="/a.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380040219281" ignored="false" />
-    <file path="/game.xml" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380651749069" ignored="false" />
+    <file path="/game.xml" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380665855897" ignored="false" />
     <file path="/ascii.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380125800319" ignored="false" />
     <file path="/twitter.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380640398171" ignored="false" />
     <file path="/README.md" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380132451589" ignored="false" />
@@ -15,7 +15,7 @@
     <file path="/hipsterdom.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380570194378" ignored="false" />
     <file path="/thread_practice.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380578413844" ignored="false" />
     <file path="/music.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380574131922" ignored="false" />
-    <file path="/moving_ascii.xml" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380651201351" ignored="false" />
+    <file path="/moving_ascii.xml" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380665034510" ignored="false" />
     <file path="/badassci.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380643108769" ignored="false" />
     <file path="/ascii_animation.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380649970369" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,8 +40,10 @@
       <file leaf-file-name="game_play.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game_play.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="13" selection-start="66" selection-end="66" vertical-scroll-proportion="-1.8888888">
-              <folding />
+            <state line="364" column="47" selection-start="12476" selection-end="12476" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,7 +51,7 @@
       <file leaf-file-name="game.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="158" column="0" selection-start="6156" selection-end="6156" vertical-scroll-proportion="0.30925927">
+            <state line="94" column="12" selection-start="4100" selection-end="4100" vertical-scroll-proportion="0.83129585">
               <folding />
             </state>
           </provider>
@@ -58,8 +60,10 @@
       <file leaf-file-name="moving_ascii.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/moving_ascii.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="510" column="93" selection-start="29817" selection-end="29817" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="540" column="36" selection-start="31810" selection-end="31810" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="tag#im#0;tag#ascii#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -153,8 +157,8 @@
         <option value="$PROJECT_DIR$/badassci.py" />
         <option value="$PROJECT_DIR$/ascii_animation.py" />
         <option value="$PROJECT_DIR$/moving_ascii.xml" />
-        <option value="$PROJECT_DIR$/game.xml" />
         <option value="$PROJECT_DIR$/game_play.py" />
+        <option value="$PROJECT_DIR$/game.xml" />
       </list>
     </option>
   </component>
@@ -468,7 +472,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3995272" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3286052" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286052" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -544,7 +548,9 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="220" selection-end="220" vertical-scroll-proportion="0.0" />
+        <state line="12" column="0" selection-start="220" selection-end="220" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Q2logging.py">
@@ -622,13 +628,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/moving_ascii.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="510" column="93" selection-start="29817" selection-end="29817" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/badassci.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="14" selection-start="111" selection-end="111" vertical-scroll-proportion="0.0">
@@ -638,16 +637,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/moving_ascii.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="540" column="36" selection-start="31810" selection-end="31810" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="tag#im#0;tag#ascii#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/game_play.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="66" selection-end="66" vertical-scroll-proportion="-1.8888888">
-          <folding />
+        <state line="364" column="47" selection-start="12476" selection-end="12476" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/game.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="0" selection-start="6156" selection-end="6156" vertical-scroll-proportion="0.30925927">
+        <state line="94" column="12" selection-start="4100" selection-end="4100" vertical-scroll-proportion="0.83129585">
           <folding />
         </state>
       </provider>

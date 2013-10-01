@@ -40,37 +40,59 @@
             </usage>
         </item>
     </player>
-    <stop nomen="intro" sd="canudigit.ogg" im="chicken.jpg" access="">
+    <stop nomen="intro" sd="familyaffair.ogg" im="chicken.jpg" access="">
         <desc nomen="intro" >
-     *******                  **                            ****     ****
-    /**////**                /**                            /**/**   **/**
-    /**   /** **   **  ******/**       *****  ******        /**//** ** /**  ******   *******
-    /******* /**  /** **//// /******  **///**//**//*        /** //***  /** //////** //**///**
-    /**////  /**  /**//***** /**///**/******* /** /         /**  //*   /**  *******  /**  /**
-    /**      /**  /** /////**/**  /**/**////  /**           /**   /    /** **////**  /**  /**
-    /**      //****** ****** /**  /**//******/***           /**        /**//******** ***  /**
-    //        ////// //////  //   //  ////// ///            //         //  //////// ///   //
+ ****     ****   **  **     **      ****     ****       **       ******** **********  ********  *******
+/**/**   **/**  /** //**   **      /**/**   **/**      ****     **////// /////**///  /**/////  /**////**
+/**//** ** /**  /**  //** **       /**//** ** /**     **//**   /**           /**     /**       /**   /**
+/** //***  /**  /**   //***        /** //***  /**    **  //**  /*********    /**     /*******  /*******
+/**  //*   /**  /**    **/**       /**  //*   /**    ********* ////////**    /**     /**////   /**///**
+/**   /    /**  /**    ** //**     /**   /    /**   /**//////**       /**    /**     /**       /**  //**
+/**        /**  /**   **   //**    /**        /**  /**       /** ********    /**     /******** /**   //**
+//         //   //   //      //    //         //   //        //  ////////     //     ////////   //     //
 
-                  By Nevin Watkins and the Q2 Project R Crew
 
-                          PRESS ENTER to LEARN MORE.
 
-                          Type START to begin game.
+                                                    ___
+                          ___        /  /\         /__/|          ___
+                         /  /\      /  /:/_       |  |:|         /  /\
+                        /  /:/     /  /:/ /\      |  |:|        /  /:/
+                       /  /:/     /  /:/ /:/_   __|__|:|       /  /:/
+                      /  /::\    /__/:/ /:/ /\ /__/::::\____  /  /::\
+                     /__/:/\:\   \  \:\/:/ /:/    ~\~~\::::/ /__/:/\:\
+                     \__\/  \:\   \  \::/ /:/      |~~|:|~~  \__\/  \:\
+                          \  \:\   \  \:\/:/       |  |:|         \  \:\
+                           \__\/    \  \::/        |  |:|          \__\/
+                                     \__\/         |__|/
 
-                      Type LOAD to load previous games.
 
-                       Type HELP or HOW for more info!
+
+                          By Nevin Watkins and the Q2 Project R Crew
+
+                                  PRESS ENTER to LEARN MORE.
+
+                                  Type START to begin game.
+
+                              Type LOAD to load previous games.
+
+                               Type HELP or HOW for more info!
         </desc>
         <desc nomen="intro" >
-            Having a rough, young life in the heart of the Bronx.
 
-            You have recently been forced into being a drug mule
+                Having a rough, young life in the heart of the Bronx.
 
-        by the youngest gang in your neighborhood: the Domenech Brothers.
+            All you've ever wanted for yourself is to make it as the hottest.
 
-        In order to work your way up the ranks, you have to make it to
+                            MOST BADASS MC OF ALL TIME.
 
-   Brooklyn on the 4,5,6 train unscathed and with more hash then you started with.
+                You have recently been forced into being a drug mule
+
+            by the youngest gang in your neighborhood: the Domenech Brothers.
+
+            In order to work your way up the ranks, you have to make it to
+
+       Brooklyn on the 4,5,6 train unscathed and with more hash then you started with.
+            
         </desc>
         <desc nomen ="intro">
             Along the way, you'll meet some characters who will challenge your wit
@@ -163,7 +185,7 @@
     <stop nomen="kiosk">
         <place nomen="ticket" access="3,1" link="parkchester">
             <desc nomen="" >
-                If you buy a ticket
+                If you buy a ticket at the kiosk, you've got yourself on the train.
             </desc>
         </place>
         <item nomen="attendant" kw="train" fights="true" followers="3">
