@@ -77,6 +77,8 @@ def describe(stop,extras):
     if extras:
         if 'stop_name' in extras:
             print stop.attrs["nomen"].upper(), "STATION"
+        if 'badascii' in extras:
+            nomen = extras['badascii']
 
         if 'stop_desc' in extras:
             print stop.desc[desc_ct].value
@@ -100,6 +102,8 @@ def describe(stop,extras):
         if 'results' in extras:
             print "After that game you have",hashes, "Hashes, and",ats,"Ats."
             print "You also have", followers,"Followers."
+        if 'unknown' in extras:
+            print "We don't know what you're talkin' about."
     return stop
 
 def image_to_ascii(stop,pause_sound=False, guess_name=False):
@@ -386,6 +390,7 @@ def describe_command(stop, player, noun):
                 player.children.append(itm)
                 stop.item.remove(itm)
                 stop.children.remove(itm)
+                return stop
 
             elif itm.attrs["challenge"]:
                 extras=["ascii_game"]
@@ -401,7 +406,7 @@ def describe_command(stop, player, noun):
         if pl.attrs.get("nomen")==noun:
             extras= ['describe_place', 'describe_access']
             return stop
-    print "Where?"
+    extras = ['unknown']
     return stop
 
 def restart_command():

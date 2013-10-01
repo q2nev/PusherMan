@@ -23,7 +23,7 @@
 
             </desc>
         </item>
-        <item>
+        <item nomen="gat">
             <usage nomen="show" amt="5">
                 Waving your gun around can generally scare off a bitch.
             </usage>
@@ -579,7 +579,7 @@
 
             </desc>
         </place>
-        <item access=""></item>
+        <item nomen="ak" access=""></item>
     </stop>
     <stop nomen ="local">
         <desc>
