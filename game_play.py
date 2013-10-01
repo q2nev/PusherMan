@@ -43,6 +43,7 @@ def main():
     for stop in g_map.stop:
         nomen = stop.attrs["nomen"]
         stops[nomen] = stop
+
     stop = g_map.stop[0] #inital stop
     # initialize player
     global player
@@ -145,7 +146,7 @@ def play_music(stop, pause_sound=False):
     except:
         print "No music found"
 
-def twitter_data(noun):
+def twitter_data(stop,noun):
     '''
     call_prompt: users input keyword
     hash_diff: difference in hashtags for a RT boss
@@ -155,12 +156,9 @@ def twitter_data(noun):
     '''
     global hashes
     global ats
-
     print "It's a glare from",
     call_prompt = raw_input("What's your call against this mean muggin?!")
-
-    hash_diff, at_diff = battle(call_prompt)
-
+    hash_diff, at_diff = battle(call_prompt,noun)
     hashes += hash_diff
     ats += at_diff
     if hashes <0 or ats<0: #breaks if either returns zero
@@ -175,7 +173,38 @@ def twitter_data(noun):
             else:
                 print "Unknown command"
                 continue
-    return hashes,ats
+    return hashes,ats #returns to
+
+def battle(call_prompt,followers, boss,amt):
+    '''
+    Input: boss (boss kw) and prompt (player kw)
+    Output: hashes_diff, ats_diff
+    '''
+    boss_ats = TW.recent_tweets([boss],1)[1]
+    boss_hashes = TW.recent_tweets([boss],1)[2]
+    player_ats = TW.recent_tweets([call_prompt],1)[1]
+    player_hashes = TW.recent_tweets([call_prompt],1)[2]
+    ats_diff = player_ats - boss_ats
+    hashes_diff = player_hashes - boss_hashes
+    print "Hash from battle:", hashes_diff
+    print "Holler-Ats from battle:",ats_diff
+    if ats_diff > 0:
+        ats_winner = 'player'
+    elif ats_diff == 0:
+        ats_winner = 'equal'
+    else:
+        ats_winner = 'boss'
+    if hashes_diff >0:
+        hashes_winner = 'player'
+    elif hashes_diff ==0:
+        hashes_winner = 'equal'
+    else:
+        hashes_winner = 'boss'
+    #add in check for followers here.
+    for scen in g_map.scenario:
+        if scen.attrs.get('hashes') and scen.attrs.get('ats'):
+            print scen.value
+    return hashes_diff, ats_diff #returns to twitter_data
 
 def process_command(stop, command): #can also pass stop!
     '''
@@ -265,26 +294,30 @@ def enter_command(stop,descs):
     return stop
 
 def go_command(stop,noun):
-    '''
-    places: dictionary of the form: places[noun]: pl object, acess string
-    '''
     global desc_ct
     global extras
     global hashes
     global ats
 
     for pl in stop.place:
-        if noun in stop.place.get("nomen"):
-            access = player.attrs["access"]
-            if access in player.item.attrs.get('nomen') and access:
-                print 'Use your',access,'?'
-                access_q = raw_input('>>')
-                if access_q.lower() == "y":
-                    extras =['stop_name','stop_desc','pause_music']
-                    desc_ct=0
-                else:
-                    print "well then you can't go there."
-            elif access == "":
+        if noun in pl.attrs.get("nomen"):
+            access = stop.attrs["access"]
+            if access:
+                for itm in player.item:
+                    if itm.attrs('nomen')==access:
+                        print 'You have a',access, 'To gain access to this stop use it? Use your',access,'?'
+                        access_q = raw_input('>>')
+                        if access_q.lower() == "y":
+                            extras =['stop_name','stop_desc','pause_music']
+                            desc_ct=0
+                        else:
+                            print "Well, then you can't go there."
+                            return stop
+                    else:
+                        print "Well, then you can't go there."
+                        return stop
+
+            elif access == "": #if there is no access key in the xml then leave it and let them go.
                     desc_ct = 0
                     extras =['stop_name','stop_desc','pause_music']
             elif access[0] == "cost":
@@ -343,7 +376,7 @@ def describe_command(stop, player, noun):
             if itm.attrs["nomen"] == noun:
                 boss= itm.attrs.get("kw")
                 if itm.attrs["fights"]:
-                    hashes, ats = twitter_data(boss)
+                    hashes, ats = twitter_data(stop,boss)
                     extras= ["hashes", "ats", "battle_results"]
                     print "You now have", hashes,"ounces of hash"
                     print "And",ats, "holler-ats!"
@@ -506,7 +539,7 @@ def load_ats_hashes(game_file):
     logging.info('Found load_ats_hashes')
     global ats
     global hashes
-    with open('../save/'+game_file) as f:
+    with open('save/'+game_file) as f:
         xml_file = f.read()
 
     success, p_map = game.obj_wrapper(xml_file)
@@ -521,8 +554,9 @@ def load_ats_hashes(game_file):
     logging.info('Leaving load_ats_hashes')
     return ats,hashes
 
-def descs_dict(stop): #can also pass stop and will have same result!
-    descs= dict()
+def descs_dict(stop): #can also pass place and will have same result
+    descs = dict()
+    desc_ct = 0
     for d in stop.desc:
         descs[desc_ct] = d.value
         desc_ct+=1
@@ -538,37 +572,7 @@ def parse(cmd):
     noun = translate_noun.get(noun, noun)
     return verb, noun
 
-def battle(boss_kw, call_prompt):
-    '''
-    Input: boss_kw and prompt for 'call' or 'gang call'
-    Output: hashes_diff, ats_diff
-    '''
-    boss_ats = TW.retweets()[1]
-    boss_hashes = TW.retweets()[2]
-    player_ats = TW.recent_tweets([call_prompt],1)[1]
-    player_hashes = TW.recent_tweets([call_prompt],1)[2]
-    ats_diff = player_ats - boss_ats
-    hashes_diff = player_hashes - boss_hashes
-    print "Hash from battle:", hashes_diff
-    print "Holler-Ats from battle:",ats_diff
-    if ats_diff > 0:
-        ats_winner = 'player'
-    elif ats_diff == 0:
-        ats_winner = 'equal'
-    else:
-        ats_winner = 'boss'
 
-    if hashes_diff >0:
-        hashes_winner = 'player'
-    elif hashes_diff ==0:
-        hashes_winner = 'equal'
-    else:
-        hashes_winner = 'boss'
-    for scen in g_map.scenario:
-        if scen.attrs.get('hashes') and scen.attrs.get('ats'):
-            print scen.value
-
-    return hashes_diff, ats_diff
 
 translate_verb = {"g" : "go","go" : "go","walk" : "go","jump" : "go",
                   "t" : "take", "take" : "take","grab" : "take","get":"take",

@@ -5,7 +5,7 @@
     <ignored path="PusherMan.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/../RapBattle/strip.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380038777868" ignored="false" />
-    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380583562855" ignored="false" />
+    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380638078741" ignored="false" />
     <file path="/a.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380040219281" ignored="false" />
     <file path="/game.xml" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380578886322" ignored="false" />
     <file path="/ascii.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380125800319" ignored="false" />
@@ -37,9 +37,10 @@
       <file leaf-file-name="game_play.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game_play.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="14" selection-start="450" selection-end="450" vertical-scroll-proportion="0.083129585">
+            <state line="154" column="35" selection-start="5217" selection-end="5217" vertical-scroll-proportion="0.30088496">
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#9761#11668#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -254,7 +255,7 @@
       <recent name="C:\Users\nwatkins\PycharmProjects\PusherMan\images\fonts" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.thread_practice">
+  <component name="RunManager" selected="Python.game_play">
     <configuration default="false" name="thread_practice" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -409,11 +410,11 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.thread_practice" />
-      <item index="1" class="java.lang.String" itemvalue="Python.game_play" />
-      <item index="2" class="java.lang.String" itemvalue="Python.ascii" />
-      <item index="3" class="java.lang.String" itemvalue="Python.twitter" />
-      <item index="4" class="java.lang.String" itemvalue="Python.hipsterdom" />
+      <item index="0" class="java.lang.String" itemvalue="Python.game_play" />
+      <item index="1" class="java.lang.String" itemvalue="Python.ascii" />
+      <item index="2" class="java.lang.String" itemvalue="Python.twitter" />
+      <item index="3" class="java.lang.String" itemvalue="Python.hipsterdom" />
+      <item index="4" class="java.lang.String" itemvalue="Python.thread_practice" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -607,9 +608,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/game_play.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="14" selection-start="450" selection-end="450" vertical-scroll-proportion="0.083129585">
+        <state line="154" column="35" selection-start="5217" selection-end="5217" vertical-scroll-proportion="0.30088496">
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#9761#11668#0" expanded="false" />
           </folding>
         </state>
       </provider>
