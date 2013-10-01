@@ -158,7 +158,7 @@ def twitter_data(stop,noun):
     global ats
     print "It's a glare from",
     call_prompt = raw_input("What's your call against this mean muggin?!")
-    hash_diff, at_diff = battle(call_prompt,noun)
+    hash_diff, at_diff = TW.twitter_battle(call_prompt,noun)
     hashes += hash_diff
     ats += at_diff
     if hashes <0 or ats<0: #breaks if either returns zero
@@ -174,37 +174,6 @@ def twitter_data(stop,noun):
                 print "Unknown command"
                 continue
     return hashes,ats #returns to
-
-def battle(call_prompt,followers, boss,amt):
-    '''
-    Input: boss (boss kw) and prompt (player kw)
-    Output: hashes_diff, ats_diff
-    '''
-    boss_ats = TW.recent_tweets([boss],1)[1]
-    boss_hashes = TW.recent_tweets([boss],1)[2]
-    player_ats = TW.recent_tweets([call_prompt],1)[1]
-    player_hashes = TW.recent_tweets([call_prompt],1)[2]
-    ats_diff = player_ats - boss_ats
-    hashes_diff = player_hashes - boss_hashes
-    print "Hash from battle:", hashes_diff
-    print "Holler-Ats from battle:",ats_diff
-    if ats_diff > 0:
-        ats_winner = 'player'
-    elif ats_diff == 0:
-        ats_winner = 'equal'
-    else:
-        ats_winner = 'boss'
-    if hashes_diff >0:
-        hashes_winner = 'player'
-    elif hashes_diff ==0:
-        hashes_winner = 'equal'
-    else:
-        hashes_winner = 'boss'
-    #add in check for followers here.
-    for scen in g_map.scenario:
-        if scen.attrs.get('hashes') and scen.attrs.get('ats'):
-            print scen.value
-    return hashes_diff, ats_diff #returns to twitter_data
 
 def process_command(stop, command): #can also pass stop!
     '''
@@ -370,38 +339,37 @@ def describe_command(stop, player, noun):
     global hashes
     global ats
     if noun == "around": #functionality to show current landscape.
-            extras = ["around"]
-    elif True:
-        for itm in stop.item:
-            if itm.attrs["nomen"] == noun:
-                boss= itm.attrs.get("kw")
-                if itm.attrs["fights"]:
-                    hashes, ats = twitter_data(stop,boss)
-                    extras= ["hashes", "ats", "battle_results"]
-                    print "You now have", hashes,"ounces of hash"
-                    print "And",ats, "holler-ats!"
+        extras = ["around"]
+        return stop
 
-                    player.item.append(itm)
-                    player.children.append(itm)
-                    stop.item.remove(itm)
-                    stop.children.remove(itm)
+    for itm in stop.item:
+        if itm.attrs["nomen"] == noun:
+            boss= itm.attrs.get("kw")
+            if itm.attrs["fights"]:
+                hashes, ats = twitter_data(stop,boss)
+                extras= ["hashes", "ats", "battle_results"]
+                print "You now have", hashes,"ounces of hash"
+                print "And",ats, "holler-ats!"
 
-                if itm.attrs["challenges"]:
-                    extras=["ascii_game"]
+                player.item.append(itm)
+                player.children.append(itm)
+                stop.item.remove(itm)
+                stop.children.remove(itm)
 
-        for itm in player.item:
-            if noun == itm.attrs.get("nomen"):
-                print "You already Twitter Battled the", noun
+            if itm.attrs["challenges"]:
+                extras=["ascii_game"]
 
-            elif itm : #checks to make sure it's not a string as well...
-                print "Grab it!"
-                print itm.desc[0].value
+    for itm in player.item:
+        if noun == itm.attrs.get("nomen"):
+            print "You already Twitter Battled the", noun
+        extras = ['describe_place','describe_access']
+        return stop
 
-        for pl in stop.place:
-            if pl.attrs.get("nomen")==noun:
-                extras= ['describe_place', 'describe_access']
-    else:
-        print "Where?"
+    for pl in stop.place:
+        if pl.attrs.get("nomen")==noun:
+            extras= ['describe_place', 'describe_access']
+            return stop
+    print "Where?"
     return stop
 
 def restart_command():
@@ -486,13 +454,15 @@ def load_command(stop):
                 game_file = "save\\" + games[int(choice)]
             except:
                 print "You didn't give a proper number..."
+                game_file = 'game.xml'
         else:
-            game_file = "game.xml"
             return stop
+            #game_file = "game.xml"
+
     else:
         print "\n\t\tCould not find any saved games!"
         print "\n\t\tType start or exit!"
-        game_file = 'game.xml'
+        #game_file = 'game.xml'
         return stop
 
     return load_game(game_file)

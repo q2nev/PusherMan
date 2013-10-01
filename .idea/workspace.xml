@@ -5,11 +5,11 @@
     <ignored path="PusherMan.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/../RapBattle/strip.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380038777868" ignored="false" />
-    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380638078741" ignored="false" />
+    <file path="/game_play.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380639519910" ignored="false" />
     <file path="/a.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380040219281" ignored="false" />
     <file path="/game.xml" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380578886322" ignored="false" />
     <file path="/ascii.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380125800319" ignored="false" />
-    <file path="/twitter.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380127745443" ignored="false" />
+    <file path="/twitter.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380638267915" ignored="false" />
     <file path="/README.md" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380132451589" ignored="false" />
     <file path="/game_play2.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380154401829" ignored="false" />
     <file path="/hipsterdom.py" changelist="f3c6d34b-e1ce-424a-875b-adb44141189f" time="1380570194378" ignored="false" />
@@ -37,10 +37,10 @@
       <file leaf-file-name="game_play.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game_play.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="154" column="35" selection-start="5217" selection-end="5217" vertical-scroll-proportion="0.30088496">
+            <state line="352" column="0" selection-start="11865" selection-end="11865" vertical-scroll-proportion="2.3312263">
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#9761#11668#0" expanded="false" />
+                <element signature="e#8735#10642#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -94,8 +94,10 @@
       <file leaf-file-name="twitter.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/twitter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="26" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="57" column="0" selection-start="2213" selection-end="2213" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#449#2067#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,13 +124,13 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/game_play.log" />
         <option value="$PROJECT_DIR$/game_play2.py" />
-        <option value="$PROJECT_DIR$/twitter.py" />
         <option value="$PROJECT_DIR$/ascii.py" />
         <option value="$PROJECT_DIR$/hipsterdom.py" />
         <option value="$PROJECT_DIR$/music.py" />
         <option value="$PROJECT_DIR$/commands.py" />
         <option value="$PROJECT_DIR$/thread_practice.py" />
         <option value="$PROJECT_DIR$/game.xml" />
+        <option value="$PROJECT_DIR$/twitter.py" />
         <option value="$PROJECT_DIR$/game_play.py" />
       </list>
     </option>
@@ -513,7 +515,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -571,13 +573,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/commands.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="25" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hipsterdom.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="71" column="29" selection-start="2048" selection-end="2048" vertical-scroll-proportion="0.0">
@@ -585,16 +580,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/twitter.py">
+    <entry file="file://$PROJECT_DIR$/thread_practice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="26" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0">
+        <state line="47" column="18" selection-start="1155" selection-end="1155" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/thread_practice.py">
+    <entry file="file://$PROJECT_DIR$/twitter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="18" selection-start="1155" selection-end="1155" vertical-scroll-proportion="0.0">
+        <state line="57" column="0" selection-start="2213" selection-end="2213" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#449#2067#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commands.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="25" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -608,10 +612,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/game_play.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="154" column="35" selection-start="5217" selection-end="5217" vertical-scroll-proportion="0.30088496">
+        <state line="352" column="0" selection-start="11865" selection-end="11865" vertical-scroll-proportion="2.3312263">
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#9761#11668#0" expanded="false" />
+            <element signature="e#8735#10642#0" expanded="false" />
           </folding>
         </state>
       </provider>
